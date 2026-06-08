@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { BusinessCard } from '@/components/BusinessCard';
 import { CategoryCard } from '@/components/CategoryCard';
+import { EmptyState } from '@/components/EmptyState';
 import { fetchCategories, searchBusinesses } from '@/lib/catalog';
 
 // Page entièrement publique, dont le contenu dépend de l'API : on ne met pas
@@ -118,6 +119,3 @@ function SectionHeader({
   );
 }
 
-function EmptyState({ message }: { message: string }) {
-  return <p className="rounded-xl border border-dashed border-zinc-300 p-8 text-center text-zinc-500">{message}</p>;
-}

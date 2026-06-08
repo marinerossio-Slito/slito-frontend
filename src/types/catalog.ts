@@ -10,6 +10,12 @@
  * `(float)` et arrive donc en JSON comme un nombre. Les deux représentations
  * coexistent réellement dans l'API ; on les type donc différemment ici plutôt
  * que d'arrondir les angles.
+ *
+ * `faq` et `workingHours` sont des colonnes `json` côté Doctrine (donc des
+ * formes libres en théorie) : leur structure réelle ici a été vérifiée dans
+ * `slito-backend/src/DataFixtures/AppFixtures.php` (`randomFaq` →
+ * `{ question, answer }[]`, `randomWorkingHours` → un jour en français vers
+ * un créneau `[ouverture, fermeture]` ou `null`).
  */
 
 export interface ArtisanCategory {
@@ -19,6 +25,12 @@ export interface ArtisanCategory {
   slug: string;
 }
 
+/** Paire question/réponse de la FAQ d'une prestation (cf. `randomFaq` des fixtures). */
+export interface ServiceFaqEntry {
+  question: string;
+  answer: string;
+}
+
 export interface Service {
   id: number;
   name: string;
@@ -26,9 +38,18 @@ export interface Service {
   duration: number;
   /** Montant décimal sérialisé en chaîne par Doctrine (ex. "45.00"). */
   price: string;
-  location: string | null;
-  faq: string[] | null;
+  /** Valeur de l'enum `Location` (`HOME` ou `WORKSHOP`), ou `null` si non renseignée. */
+  location: 'HOME' | 'WORKSHOP' | null;
+  faq: ServiceFaqEntry[] | null;
 }
+
+/**
+ * Horaires d'ouverture d'une entreprise : un jour (clé en français, ex.
+ * "lundi") associé soit à un créneau `[ouverture, fermeture]` (ex.
+ * `["09:00", "18:00"]`), soit à `null` si fermé ce jour-là.
+ * Cf. `AppFixtures::randomWorkingHours`.
+ */
+export type WorkingHours = Record<string, [string, string] | null>;
 
 /**
  * Forme commune renvoyée par `GET /api/search` (résumé) et incluse dans le
@@ -53,7 +74,7 @@ export interface BusinessDetail extends BusinessSummary {
   website: string | null;
   paymentMethods: string[] | null;
   contactNumber: string | null;
-  workingHours: Record<string, string> | null;
+  workingHours: WorkingHours | null;
   replyDelay: string | null;
   services: Service[];
 }

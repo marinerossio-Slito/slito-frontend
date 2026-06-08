@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { RatingBadge } from '@/components/RatingBadge';
+import { formatPrice } from '@/lib/format';
 import type { BusinessSummary } from '@/types/catalog';
 
 /**
@@ -34,23 +36,4 @@ export function BusinessCard({ business }: { business: BusinessSummary }) {
       </div>
     </Link>
   );
-}
-
-function RatingBadge({ averageRating, reviewsCount }: { averageRating: number | null; reviewsCount: number }) {
-  if (averageRating === null) {
-    return <span className="text-zinc-400">Pas encore d&apos;avis</span>;
-  }
-
-  return (
-    <span>
-      <span className="font-semibold text-zinc-900">★ {averageRating.toFixed(1)}</span>{' '}
-      <span className="text-zinc-400">
-        ({reviewsCount} avis{reviewsCount > 1 ? '' : ''})
-      </span>
-    </span>
-  );
-}
-
-function formatPrice(amount: number): string {
-  return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(amount);
 }
