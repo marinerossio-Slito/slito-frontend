@@ -1,22 +1,44 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+
 import { DashboardSidebar, type SidebarNavItem } from '@/components/DashboardSidebar';
+import { useAuth } from '@/hooks/useAuth';
+import { fetchDashboard } from '@/lib/artisan';
 
 const ARTISAN_NAV: SidebarNavItem[] = [
-  { icon: '🏠', label: 'Vue d’ensemble', href: '/artisan', exact: true },
-  { icon: '📊', label: 'Dashboard',            href: '/artisan/dashboard' },
-  { icon: '🗓️', label: 'Agenda',               href: '/artisan/agenda' },
-  { icon: '🏪', label: 'Ma fiche',             href: '/artisan/fiche' },
-  { icon: '💎', label: 'Abonnement',           href: '/artisan/abonnement' },
+  { icon: '🏠', label: 'Tableau de bord', href: '/artisan/dashboard' },
+  { icon: '📋', label: 'Ma présentation',  href: '/artisan/fiche' },
+  { icon: '📅', label: 'Agenda',           href: '/artisan/agenda' },
+  { icon: '👥', label: 'Clients',          href: '/artisan/clients', soon: true },
+  { icon: '📊', label: 'Analytics',        href: '#', soon: true },
+  { icon: '💰', label: 'Facturation',      href: '#', soon: true },
 ];
 
 /**
- * Layout partagé de l'espace artisan : sidebar forest à gauche +
- * zone de contenu cream à droite.
- * Les pages individuelles conservent leur propre `<RouteGuard roles={…}>`.
+ * Layout espace artisan : sidebar forest + zone de contenu crème.
+ * Récupère le nom de l'entreprise pour l'afficher dans la sidebar.
  */
 export default function ArtisanSpaceLayout({ children }: { children: React.ReactNode }) {
+  const { token } = useAuth();
+  const [businessName, setBusinessName] = useState('Espace artisan');
+  const [subtitle, setSubtitle] = useState('');
+
+  useEffect(() => {
+    if (!token) return;
+    fetchDashboard(token)
+      .then((data) => {
+        if (data.business?.name) {
+          setBusinessName(data.business.name);
+        }
+        // On pourrait afficher catégorie + ville si la fiche le fournit
+      })
+      .catch(() => { /* sidebar se replie sur le titre par défaut */ });
+  }, [token]);
+
   return (
     <div className="flex flex-1 overflow-hidden">
-      <DashboardSidebar nav={ARTISAN_NAV} title="Espace artisan" />
+      <DashboardSidebar nav={ARTISAN_NAV} title={businessName} subtitle={subtitle} />
       <div className="flex flex-1 flex-col overflow-auto bg-cream">{children}</div>
     </div>
   );
