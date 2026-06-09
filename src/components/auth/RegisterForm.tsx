@@ -128,7 +128,7 @@ export function RegisterForm() {
         <FormBanner tone="success">{successMessage}</FormBanner>
         <Link
           href="/connexion"
-          className="inline-flex items-center justify-center rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white shadow-[0_2px_12px_rgba(196,97,58,0.30)] transition hover:bg-terra-dark"
+          className="inline-flex items-center justify-center rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
         >
           Aller à la page de connexion
         </Link>
@@ -293,7 +293,7 @@ export function RegisterForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex items-center justify-center rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white shadow-[0_2px_12px_rgba(196,97,58,0.30)] transition hover:bg-terra-dark disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex items-center justify-center rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? 'Création du compte…' : 'Créer mon compte'}
       </button>

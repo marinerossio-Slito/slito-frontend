@@ -182,7 +182,6 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
             <a
               href="#booking"
               className="shrink-0 self-start rounded-full bg-terra px-8 py-3.5 text-base font-semibold text-white transition hover:bg-terra-dark sm:self-auto"
-              style={{ boxShadow: '0 4px 18px rgba(196,97,58,0.40)' }}
             >
               Prendre RDV
             </a>

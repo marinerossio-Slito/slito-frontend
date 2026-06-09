@@ -29,7 +29,7 @@ const ghostClass =
 
 /** Bouton primaire terracotta : contraste orange sur kaki. */
 const primaryClass =
-  'rounded-full bg-terra px-5 py-2 text-sm font-semibold text-white shadow-[0_2px_14px_rgba(196,97,58,0.45)] transition hover:-translate-y-px hover:bg-terra-dark hover:shadow-[0_4px_18px_rgba(196,97,58,0.55)]';
+  'rounded-full bg-terra px-5 py-2 text-sm font-semibold text-white transition hover:-translate-y-px hover:bg-terra-dark';
 
 /** Style inline du fond kaki — garantit l'opacité même avant le CSS Tailwind. */
 const FOREST_BG = '#2D4A3E' as const;

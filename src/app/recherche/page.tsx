@@ -208,7 +208,7 @@ function SidebarFilters({
 
       <button
         type="submit"
-        className="w-full rounded-full bg-terra py-2.5 text-sm font-semibold text-white shadow-[0_2px_12px_rgba(196,97,58,0.30)] transition hover:bg-terra-dark"
+        className="w-full rounded-full bg-terra py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
       >
         Appliquer
       </button>
