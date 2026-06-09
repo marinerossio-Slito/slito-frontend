@@ -35,3 +35,21 @@ export function formatDuration(minutes: number): string {
 
   return rest === 0 ? `${hours} h` : `${hours} h ${rest}`;
 }
+
+/**
+ * Met en forme une date/heure ISO 8601 (ex. `Appointment.dateTime`) dans le
+ * fuseau horaire local de l'utilisateur, en français : "mercredi 1 juillet
+ * 2026 à 14:30". Destiné à être appelé côté client uniquement (composants
+ * `'use client'`) : n'est pas hydration-safe si appelé depuis le serveur
+ * (le fuseau du serveur peut différer de celui du navigateur).
+ */
+export function formatDateTime(isoString: string): string {
+  return new Date(isoString).toLocaleString('fr-FR', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}

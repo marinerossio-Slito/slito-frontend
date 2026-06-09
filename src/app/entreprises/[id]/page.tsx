@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { EmptyState } from '@/components/EmptyState';
 import { RatingBadge } from '@/components/RatingBadge';
+import { BookingPanel } from '@/components/booking/BookingPanel';
 import { ApiError } from '@/lib/api';
 import { fetchBusiness } from '@/lib/catalog';
 import { formatDuration, formatPrice } from '@/lib/format';
@@ -96,7 +96,7 @@ export default async function BusinessDetailPage({ params }: { params: Promise<R
         </div>
 
         <aside className="flex flex-col gap-6">
-          <BusinessActions business={business} />
+          <BookingPanel business={business} />
           <BusinessInfoCard business={business} />
         </aside>
       </div>
@@ -166,30 +166,6 @@ function ServiceCard({ service }: { service: Service }) {
   );
 }
 
-function BusinessActions({ business }: { business: BusinessDetail }) {
-  return (
-    <div className="flex flex-col gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-5">
-      <p className="text-sm text-amber-900">
-        Connectez-vous pour prendre rendez-vous avec <span className="font-semibold">{business.name}</span> ou lui
-        envoyer un message directement depuis Slito.
-      </p>
-      <div className="flex flex-col gap-2 sm:flex-row">
-        <Link
-          href="/connexion"
-          className="inline-flex flex-1 items-center justify-center rounded-full bg-amber-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-600"
-        >
-          Se connecter
-        </Link>
-        <Link
-          href="/inscription"
-          className="inline-flex flex-1 items-center justify-center rounded-full border border-amber-300 px-5 py-2.5 text-sm font-semibold text-amber-800 transition hover:border-amber-400"
-        >
-          Créer un compte
-        </Link>
-      </div>
-    </div>
-  );
-}
 
 function BusinessInfoCard({ business }: { business: BusinessDetail }) {
   const hasWorkingHours = business.workingHours !== null && Object.keys(business.workingHours).length > 0;
