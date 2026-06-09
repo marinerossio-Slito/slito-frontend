@@ -71,32 +71,34 @@ export default async function BusinessDetailPage({ params }: { params: Promise<R
     <div className="flex flex-1 flex-col bg-cream">
       <BusinessHero business={business} />
 
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 px-6 py-12 lg:grid-cols-[1fr_360px]">
-        <div className="flex flex-col gap-10">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 px-6 py-8 lg:grid-cols-[1fr_360px]">
+        <div className="flex flex-col gap-5">
           {business.description && (
-            <section>
-              <h2 className="font-serif text-2xl font-bold text-ink">À propos</h2>
-              <p className="mt-4 whitespace-pre-line leading-relaxed text-ink-mid">{business.description}</p>
-            </section>
+            <div className="rounded-2xl border border-sand bg-white p-7">
+              <h2 className="mb-4 border-b border-sand pb-4 font-serif text-[22px] font-bold text-ink">
+                À propos
+              </h2>
+              <p className="whitespace-pre-line leading-relaxed text-ink-mid">{business.description}</p>
+            </div>
           )}
 
-          <section>
-            <h2 className="font-serif text-2xl font-bold text-ink">Prestations</h2>
+          <div className="rounded-2xl border border-sand bg-white p-7">
+            <h2 className="mb-4 border-b border-sand pb-4 font-serif text-[22px] font-bold text-ink">
+              Services proposés
+            </h2>
             {business.services.length === 0 ? (
-              <div className="mt-4">
-                <EmptyState message="Cette entreprise n'a pas encore renseigné de prestations." />
-              </div>
+              <EmptyState message="Cette entreprise n'a pas encore renseigné de prestations." />
             ) : (
-              <ul className="mt-4 flex flex-col gap-4">
+              <ul className="flex flex-col gap-3">
                 {business.services.map((service) => (
                   <ServiceCard key={service.id} service={service} />
                 ))}
               </ul>
             )}
-          </section>
+          </div>
         </div>
 
-        <aside id="booking" className="flex flex-col gap-6">
+        <aside id="booking" className="flex flex-col gap-4">
           <BookingPanel business={business} />
           <BusinessInfoCard business={business} />
         </aside>
@@ -129,62 +131,44 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
         </nav>
       </div>
 
-      {/* Informations principales */}
-      <div className="pb-10">
+      {/* Profil — avatar chevauchant + nom côte à côte, boutons à droite */}
+      <div className="pb-8">
         <div className="mx-auto w-full max-w-6xl px-8">
-          {/* Avatar blanc chevauchant la zone cover */}
-          <div
-            className="mb-5 -mt-12 flex h-24 w-24 items-center justify-center rounded-full border-4 border-white bg-white text-5xl"
-            style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.22)' }}
-            aria-hidden
-          >
-            {business.category?.icon ?? '🏢'}
-          </div>
-
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <div className="flex flex-col gap-2">
-              {business.category && (
-                <p className="text-xs font-semibold uppercase tracking-widest text-white/55">
-                  {business.category.name}
-                </p>
-              )}
-
-              <h1
-                className="font-serif text-4xl font-bold text-white sm:text-5xl"
-                style={{ textShadow: '0 2px 12px rgba(0,0,0,0.18)' }}
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            {/* Gauche : avatar + nom */}
+            <div className="flex items-end gap-5">
+              {/* Avatar blanc chevauchant la zone cover */}
+              <div
+                className="-mt-12 flex h-24 w-24 shrink-0 items-center justify-center rounded-full border-4 border-white bg-white text-5xl"
+                style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}
+                aria-hidden
               >
-                {business.name}
-              </h1>
+                {business.category?.icon ?? '🏢'}
+              </div>
 
-              {business.headline && (
-                <p className="max-w-2xl text-lg leading-relaxed text-white/75">{business.headline}</p>
-              )}
-
-              <div className="mt-1 flex flex-wrap items-center gap-4">
-                <RatingBadge
-                  averageRating={business.averageRating}
-                  reviewsCount={business.reviewsCount}
-                  size="lg"
-                  variant="light"
-                />
-                {business.officeAddress && (
-                  <span className="text-sm text-white/60">📍 {business.officeAddress}</span>
-                )}
-                {business.priceFrom !== null && (
-                  <span className="text-sm text-white/65">
-                    À partir de{' '}
-                    <span className="font-semibold text-white">{formatPrice(business.priceFrom)}</span>
-                  </span>
-                )}
+              {/* Texte aligné en bas avec l'avatar */}
+              <div className="pb-2">
+                <h1
+                  className="font-serif text-[28px] font-bold leading-tight text-white"
+                  style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}
+                >
+                  {business.name}
+                </h1>
+                <p className="mt-1 text-sm text-white/80">
+                  {[business.category?.name, business.officeAddress].filter(Boolean).join(' · ')}
+                </p>
               </div>
             </div>
 
-            <a
-              href="#booking"
-              className="shrink-0 self-start rounded-full bg-terra px-8 py-3.5 text-base font-semibold text-white transition hover:bg-terra-dark sm:self-auto"
-            >
-              Prendre RDV
-            </a>
+            {/* Droite : bouton */}
+            <div className="pb-2">
+              <a
+                href="#booking"
+                className="rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
+              >
+                📅 Prendre RDV
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -194,7 +178,8 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
 
 function ServiceCard({ service }: { service: Service }) {
   return (
-    <li className="rounded-2xl border border-sand bg-warm-white p-5 transition hover:border-sand hover:shadow-[0_4px_16px_rgba(26,21,16,0.08)]">
+    <li className="rounded-lg border-[1.5px] border-sand p-4 transition hover:border-terra"
+        style={{ borderRadius: '8px' }}>
       <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <div>
           <p className="font-serif text-lg font-semibold text-ink">{service.name}</p>
@@ -233,8 +218,8 @@ function BusinessInfoCard({ business }: { business: BusinessDetail }) {
   }
 
   return (
-    <div className="flex flex-col gap-5 rounded-2xl border border-sand bg-white p-5">
-      <h2 className="text-base font-semibold text-ink">Informations pratiques</h2>
+    <div className="flex flex-col gap-5 rounded-2xl border border-sand bg-white p-7">
+      <h2 className="border-b border-sand pb-4 font-serif text-[22px] font-bold text-ink">Informations pratiques</h2>
 
       {hasContactInfo && (
         <dl className="flex flex-col gap-3 text-sm">
