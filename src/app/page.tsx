@@ -14,6 +14,12 @@ export default async function Home() {
   const [categories, businesses] = await Promise.all([fetchCategories(), searchBusinesses()]);
   const featuredBusinesses = businesses.slice(0, 6);
 
+  // Compte d'artisans par catégorie (calculé depuis les businesses chargés)
+  const countBySlug = businesses.reduce<Record<string, number>>((acc, b) => {
+    if (b.category?.slug) acc[b.category.slug] = (acc[b.category.slug] ?? 0) + 1;
+    return acc;
+  }, {});
+
   return (
     <div className="flex flex-1 flex-col">
       <Hero />
@@ -31,9 +37,13 @@ export default async function Home() {
         {categories.length === 0 ? (
           <EmptyState message="Aucune catégorie n'est disponible pour le moment." />
         ) : (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-5">
             {categories.map((category) => (
-              <CategoryCard key={category.id} category={category} />
+              <CategoryCard
+                key={category.id}
+                category={category}
+                count={countBySlug[category.slug]}
+              />
             ))}
           </div>
         )}

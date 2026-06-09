@@ -3,18 +3,45 @@ import Link from 'next/link';
 import type { ArtisanCategory } from '@/types/catalog';
 
 /**
- * Vignette de catégorie de métier, affichée sur l'accueil et utilisable comme
- * point d'entrée vers la recherche filtrée (`/recherche?category=<slug>`).
- * Design : fond warm-white, bordure sand, hover terracotta.
+ * Vignette de catégorie — accueil.
+ * Design : fond crème garanti par inline style, bordure sable, hover terra.
+ * `count` = nombre d'artisans dans la catégorie (optionnel).
  */
-export function CategoryCard({ category }: { category: ArtisanCategory }) {
+export function CategoryCard({
+  category,
+  count,
+}: {
+  category: ArtisanCategory;
+  count?: number;
+}) {
   return (
     <Link
       href={`/recherche?category=${encodeURIComponent(category.slug)}`}
-      className="group flex flex-col items-center gap-3 rounded-2xl border-[1.5px] border-sand bg-warm-white p-6 text-center transition hover:-translate-y-0.5 hover:border-terra hover:shadow-[0_4px_24px_rgba(196,97,58,0.12)]"
+      className="group flex flex-col items-center gap-3 rounded-2xl border-[1.5px] p-6 text-center transition hover:-translate-y-0.5"
+      style={{
+        backgroundColor: '#FFFDF9',
+        borderColor: '#E8D5B7',
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.borderColor = '#C4613A';
+        (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 4px 24px rgba(196,97,58,0.12)';
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLAnchorElement).style.borderColor = '#E8D5B7';
+        (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none';
+      }}
     >
-      <span className="block text-4xl">{category.icon ?? '🛠️'}</span>
-      <span className="text-sm font-medium text-ink-mid">{category.name}</span>
+      <span className="block text-5xl leading-none">{category.icon ?? '🛠️'}</span>
+      <div>
+        <p className="text-sm font-semibold" style={{ color: '#1A1510' }}>
+          {category.name}
+        </p>
+        {count !== undefined && (
+          <p className="mt-0.5 text-xs" style={{ color: '#8A7E72' }}>
+            {count} artisan{count > 1 ? 's' : ''}
+          </p>
+        )}
+      </div>
     </Link>
   );
 }
