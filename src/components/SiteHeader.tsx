@@ -74,7 +74,10 @@ export function SiteHeader() {
     );
 
   return (
-    <header className="sticky top-0 z-50 border-b border-sand bg-warm-white shadow-[0_2px_16px_rgba(26,21,16,0.06)]">
+    <header
+      className="sticky top-0 z-50 border-b border-sand bg-warm-white shadow-[0_2px_16px_rgba(26,21,16,0.08)]"
+      style={{ backgroundColor: '#FFFDF9' }}
+    >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-8" style={{ height: '64px' }}>
         {/* Logo bicolore */}
         <Link href="/" aria-label="Slito — Accueil">
@@ -120,6 +123,7 @@ export function SiteHeader() {
           id="mobile-nav"
           aria-label="Menu mobile"
           className="absolute inset-x-0 top-full z-50 flex flex-col gap-2 border-b border-sand bg-warm-white px-8 pb-5 pt-3 shadow-[0_8px_24px_rgba(26,21,16,0.10)] sm:hidden"
+          style={{ backgroundColor: '#FFFDF9' }}
         >
           {navLinks}
         </nav>
