@@ -74,19 +74,9 @@ export default async function Home() {
 function Hero() {
   return (
     <section
-      className="relative overflow-hidden px-8 pb-24 pt-20 text-center"
-      style={{ background: 'linear-gradient(135deg, #2D4A3E 0%, #1E3329 60%, #2D4A3E 100%)' }}
+      className="relative overflow-hidden px-8 pb-24 pt-20 text-center bg-forest"
+      style={{ backgroundColor: '#2D4A3E' }}
     >
-      {/* Halos décoratifs */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden
-        style={{
-          background:
-            'radial-gradient(ellipse at 30% 50%, rgba(201,151,58,0.15) 0%, transparent 60%), ' +
-            'radial-gradient(ellipse at 70% 30%, rgba(196,97,58,0.10) 0%, transparent 50%)',
-        }}
-      />
 
       {/* Badge */}
       <div className="relative mx-auto mb-6 inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/20 px-4 py-1.5 text-xs font-medium tracking-wide text-gold">

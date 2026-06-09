@@ -18,7 +18,7 @@ export function BusinessCard({ business }: { business: BusinessSummary }) {
       className="group flex flex-col overflow-hidden rounded-2xl border border-sand bg-warm-white transition hover:-translate-y-0.5 hover:border-transparent hover:shadow-[0_12px_48px_rgba(26,21,16,0.18)]"
     >
       {/* Zone de couverture */}
-      <div className="relative flex h-36 items-center justify-center bg-gradient-to-br from-sand to-sand-light text-5xl">
+      <div className="relative flex h-36 items-center justify-center bg-sand text-5xl">
         {business.category?.icon ?? '🔨'}
         {business.category && (
           <span className="absolute right-3 top-3 rounded-full bg-gold px-2.5 py-1 text-[11px] font-semibold text-white">

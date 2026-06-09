@@ -108,7 +108,8 @@ export default async function BusinessDetailPage({ params }: { params: Promise<R
 function BusinessHero({ business }: { business: BusinessDetail }) {
   return (
     <section
-      style={{ background: 'linear-gradient(160deg, #2D4A3E 0%, #3D6455 100%)' }}
+      className="bg-forest"
+      style={{ backgroundColor: '#2D4A3E' }}
     >
       {/* Cover – zone décorative avec l'icône en filigrane */}
       <div className="relative h-56 overflow-hidden">

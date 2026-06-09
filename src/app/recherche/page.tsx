@@ -23,8 +23,8 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
     <div className="flex flex-1 flex-col">
       {/* ── Page hero ──────────────────────────────────────────────────────── */}
       <div
-        className="border-b border-sand px-8 py-10"
-        style={{ background: 'linear-gradient(135deg, #F2E8D5 0%, #FAF7F2 100%)' }}
+        className="border-b border-sand bg-sand-light px-8 py-10"
+        style={{ backgroundColor: '#F2E8D5' }}
       >
         <nav aria-label="Fil d'Ariane" className="mb-3 text-sm text-ink-light">
           <Link href="/" className="text-terra hover:underline">Accueil</Link>
@@ -242,11 +242,8 @@ function SearchResultCard({ business }: { business: BusinessSummary }) {
     >
       {/* Avatar circle */}
       <div
-        className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full text-4xl"
+        className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-sand text-4xl"
         aria-hidden
-        style={{
-          background: 'linear-gradient(135deg, #E8D5B7 0%, #E8896A 100%)',
-        }}
       >
         {business.category?.icon ?? '🔨'}
       </div>
