@@ -11,33 +11,29 @@ export const metadata: Metadata = {
     "Recherchez un artisan par métier, ville, budget ou note moyenne et accédez directement aux fiches qui vous intéressent.",
 };
 
-// Le contenu dépend à la fois de l'API (résultats de recherche, qui évoluent)
-// et de `searchParams` (filtres saisis par l'utilisateur) : la page est donc
-// nécessairement rendue à la demande. La lecture de `searchParams` suffit en
-// principe à déclencher le rendu dynamique (cf. docs Next 16, « Rendering with
-// search params »), mais on le rend explicite ici, par cohérence avec
-// `app/page.tsx` et pour éviter toute tentative de prérendu au build.
+// Le contenu dépend à la fois de l'API et des `searchParams` : rendu dynamique.
 export const dynamic = 'force-dynamic';
 
 export default async function SearchPage({ searchParams }: { searchParams: Promise<RawSearchParams> }) {
   const filters = parseSearchFilters(await searchParams);
-
   const [categories, businesses] = await Promise.all([fetchCategories(), searchBusinesses(filters)]);
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-6 py-12">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight text-zinc-900">Trouver un artisan</h1>
-        <p className="mt-2 max-w-2xl text-zinc-600">
-          Affinez votre recherche par métier, ville, budget ou note moyenne pour trouver le professionnel qui
-          correspond le mieux à votre besoin.
+    <div className="mx-auto w-full max-w-6xl px-8 py-12">
+      {/* En-tête */}
+      <header className="mb-8 border-b border-sand pb-8">
+        <h1 className="font-serif text-3xl font-bold text-ink">Trouver un artisan</h1>
+        <p className="mt-2 max-w-2xl text-ink-mid">
+          Affinez votre recherche par métier, ville, budget ou note moyenne pour trouver le professionnel
+          qui correspond le mieux à votre besoin.
         </p>
       </header>
 
       <SearchFiltersForm categories={categories} filters={filters} />
 
-      <div className="mt-8 mb-4 flex items-baseline justify-between">
-        <p className="text-sm text-zinc-500">
+      {/* Compteur de résultats */}
+      <div className="mb-4 mt-8 flex items-baseline justify-between">
+        <p className="text-sm text-ink-light">
           {businesses.length === 0
             ? 'Aucun résultat'
             : businesses.length === 1

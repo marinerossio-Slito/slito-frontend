@@ -95,7 +95,7 @@ export function AgendaPanel() {
     return (
       <div className="flex flex-col gap-3">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="h-20 animate-pulse rounded-2xl bg-zinc-100" />
+          <div key={i} className="h-20 animate-pulse rounded-2xl bg-sand-light" />
         ))}
       </div>
     );
@@ -107,7 +107,7 @@ export function AgendaPanel() {
     <div className="flex flex-col gap-8">
       {/* Rendez-vous actifs */}
       <section>
-        <h2 className="mb-4 text-base font-semibold text-zinc-900">
+        <h2 className="mb-4 text-base font-semibold text-ink">
           Rendez-vous actifs ({appointments.length})
         </h2>
 
@@ -116,7 +116,7 @@ export function AgendaPanel() {
         )}
 
         {appointments.length === 0 ? (
-          <p className="rounded-2xl border border-zinc-100 bg-zinc-50 px-5 py-4 text-sm text-zinc-500">
+          <p className="rounded-2xl border border-sand-light bg-cream px-5 py-4 text-sm text-ink-light">
             Aucun rendez-vous en attente ou confirmé pour le moment.
           </p>
         ) : (
@@ -137,25 +137,25 @@ export function AgendaPanel() {
       {/* Événements de calendrier */}
       {events.length > 0 && (
         <section>
-          <h2 className="mb-4 text-base font-semibold text-zinc-900">
+          <h2 className="mb-4 text-base font-semibold text-ink">
             Événements ({events.length})
           </h2>
           <ul className="flex flex-col gap-3">
             {events.map((evt) => (
               <li
                 key={evt.id}
-                className="rounded-2xl border border-zinc-200 bg-white px-5 py-4"
+                className="rounded-2xl border border-sand bg-white px-5 py-4"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex flex-col gap-0.5">
-                    <span className="font-semibold text-zinc-900">
+                    <span className="font-semibold text-ink">
                       {evt.title ?? 'Événement sans titre'}
                     </span>
                     {evt.description && (
-                      <span className="text-sm text-zinc-500">{evt.description}</span>
+                      <span className="text-sm text-ink-light">{evt.description}</span>
                     )}
                     {evt.startDate && (
-                      <span className="text-xs text-zinc-400">{formatDateTime(evt.startDate)}</span>
+                      <span className="text-xs text-ink-light">{formatDateTime(evt.startDate)}</span>
                     )}
                   </div>
                   {evt.isAvailability && (
@@ -192,17 +192,17 @@ function AppointmentCard({
   const status = appointment.status as AppointmentStatus;
 
   return (
-    <li className="rounded-2xl border border-zinc-200 bg-white px-5 py-4">
+    <li className="rounded-2xl border border-sand bg-white px-5 py-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-zinc-900">{customerName}</span>
+            <span className="font-semibold text-ink">{customerName}</span>
             <AppointmentStatusBadge status={status} />
           </div>
           {appointment.service && (
-            <span className="text-sm text-zinc-600">{appointment.service}</span>
+            <span className="text-sm text-ink-mid">{appointment.service}</span>
           )}
-          <span className="text-xs text-zinc-400">{formatDateTime(appointment.dateTime)}</span>
+          <span className="text-xs text-ink-light">{formatDateTime(appointment.dateTime)}</span>
         </div>
 
         <div className="flex shrink-0 gap-2">
@@ -221,7 +221,7 @@ function AppointmentCard({
               type="button"
               onClick={onCancel}
               disabled={isActing}
-              className="rounded-full border border-zinc-300 px-4 py-1.5 text-xs font-semibold text-zinc-700 transition hover:border-red-300 hover:text-red-700 disabled:opacity-60"
+              className="rounded-full border border-sand px-4 py-1.5 text-xs font-semibold text-ink-mid transition hover:border-red-300 hover:text-red-700 disabled:opacity-60"
             >
               {isActing ? '…' : 'Annuler'}
             </button>

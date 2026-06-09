@@ -47,7 +47,7 @@ function StarRatingInput({
           aria-label={`${star} étoile${star > 1 ? 's' : ''}`}
           aria-pressed={value === star}
           onClick={() => onChange(star)}
-          className={`text-2xl leading-none transition ${value >= star ? 'text-amber-400' : 'text-zinc-200 hover:text-amber-200'}`}
+          className={`text-2xl leading-none transition ${value >= star ? 'text-gold' : 'text-sand hover:text-gold/50'}`}
         >
           ★
         </button>
@@ -101,17 +101,17 @@ export function ReviewForm({ appointmentId, targetName, token, onSuccess, onCanc
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="mt-4 flex flex-col gap-4 rounded-xl border border-zinc-100 bg-zinc-50 p-4"
+      className="mt-4 flex flex-col gap-4 rounded-xl border border-sand-light bg-cream p-4"
     >
-      <p className="text-sm font-medium text-zinc-800">
-        Votre avis sur <span className="text-zinc-900">{targetName}</span>
+      <p className="text-sm font-medium text-ink">
+        Votre avis sur <span className="text-ink">{targetName}</span>
       </p>
 
       {formError && <FormBanner tone="error">{formError}</FormBanner>}
 
       {/* Note globale */}
       <div className="flex flex-col gap-1.5">
-        <span id="rating-label" className="text-sm font-medium text-zinc-700">
+        <span id="rating-label" className="text-sm font-medium text-ink-mid">
           Note globale
         </span>
         <StarRatingInput id="rating" value={rating} onChange={setRating} />
@@ -120,14 +120,14 @@ export function ReviewForm({ appointmentId, targetName, token, onSuccess, onCanc
       {/* Notes optionnelles */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-medium text-zinc-700">
-            Ponctualité <span className="font-normal text-zinc-400">(optionnel)</span>
+          <span className="text-sm font-medium text-ink-mid">
+            Ponctualité <span className="font-normal text-ink-light">(optionnel)</span>
           </span>
           <StarRatingInput id="punctuality" value={punctualityRating} onChange={setPunctualityRating} />
         </div>
         <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-medium text-zinc-700">
-            Qualité <span className="font-normal text-zinc-400">(optionnel)</span>
+          <span className="text-sm font-medium text-ink-mid">
+            Qualité <span className="font-normal text-ink-light">(optionnel)</span>
           </span>
           <StarRatingInput id="quality" value={qualityRating} onChange={setQualityRating} />
         </div>
@@ -150,14 +150,14 @@ export function ReviewForm({ appointmentId, targetName, token, onSuccess, onCanc
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center justify-center rounded-full bg-amber-500 px-5 py-2 text-sm font-semibold text-white transition hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex items-center justify-center rounded-full bg-terra px-5 py-2 text-sm font-semibold text-white transition hover:bg-terra-dark disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSubmitting ? 'Envoi…' : 'Publier l\'avis'}
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="inline-flex items-center justify-center rounded-full border border-zinc-300 px-5 py-2 text-sm font-medium text-zinc-600 transition hover:border-zinc-400"
+          className="inline-flex items-center justify-center rounded-full border border-sand px-5 py-2 text-sm font-medium text-ink-mid transition hover:border-terra"
         >
           Annuler
         </button>

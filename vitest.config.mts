@@ -18,5 +18,7 @@ export default defineConfig({
     // imports — required so that @testing-library/react can register its own
     // afterEach(cleanup) hook automatically.
     globals: true,
+    // Exclure les tests Playwright (dossier tests/) qui utilisent leur propre runner.
+    exclude: ['tests/**', 'node_modules/**'],
   },
 });

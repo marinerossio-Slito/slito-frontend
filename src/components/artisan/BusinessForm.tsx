@@ -163,7 +163,7 @@ export function BusinessForm() {
     return (
       <div className="flex flex-col gap-4">
         {[1, 2, 3, 4].map((i) => (
-          <div key={i} className="h-12 animate-pulse rounded-xl bg-zinc-100" />
+          <div key={i} className="h-12 animate-pulse rounded-xl bg-sand-light" />
         ))}
       </div>
     );
@@ -172,7 +172,7 @@ export function BusinessForm() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-base font-semibold text-zinc-900">
+        <h2 className="text-base font-semibold text-ink">
           {current ? 'Modifier la fiche' : 'Créer ma fiche entreprise'}
         </h2>
         {current && (
@@ -180,7 +180,7 @@ export function BusinessForm() {
             href={`/entreprises/${current.id}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-amber-700 hover:underline"
+            className="text-sm text-terra hover:underline"
           >
             Voir la fiche publique →
           </a>
@@ -345,7 +345,7 @@ export function BusinessForm() {
         <button
           type="submit"
           disabled={submitting}
-          className="self-start rounded-full bg-amber-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-60"
+          className="self-start rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark disabled:cursor-not-allowed disabled:opacity-60"
         >
           {submitting ? 'Sauvegarde…' : current ? 'Enregistrer les modifications' : 'Créer ma fiche'}
         </button>

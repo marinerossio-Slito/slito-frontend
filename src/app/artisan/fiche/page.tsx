@@ -15,8 +15,8 @@ export default function ArtisanFichePage() {
       <div className="mx-auto w-full max-w-2xl flex-1 px-6 py-10">
         <header className="mb-8">
           <BackLink href="/artisan" label="Espace artisan" />
-          <h1 className="mt-3 text-xl font-bold tracking-tight text-zinc-900">Ma fiche entreprise</h1>
-          <p className="mt-1 text-sm text-zinc-500">
+          <h1 className="mt-3 text-xl font-bold tracking-tight text-ink">Ma fiche entreprise</h1>
+          <p className="mt-1 text-sm text-ink-light">
             Ces informations sont visibles par tous les utilisateurs de Slito.
           </p>
         </header>

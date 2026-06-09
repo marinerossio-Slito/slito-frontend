@@ -59,7 +59,7 @@ export function PasswordResetConfirmForm({ token }: { token: string }) {
         <FormBanner tone="success">{message}</FormBanner>
         <Link
           href="/connexion"
-          className="inline-flex items-center justify-center rounded-full bg-amber-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-600"
+          className="inline-flex items-center justify-center rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
         >
           Se connecter
         </Link>
@@ -83,7 +83,7 @@ export function PasswordResetConfirmForm({ token }: { token: string }) {
           onChange={(event) => setPassword(event.target.value)}
           className={FIELD_CLASSES}
         />
-        <span className="text-xs font-normal text-zinc-400">8 caractères minimum.</span>
+        <span className="text-xs font-normal text-ink-light">8 caractères minimum.</span>
       </FormField>
 
       <FormField label="Confirmer le mot de passe" htmlFor="confirmation">
@@ -103,7 +103,7 @@ export function PasswordResetConfirmForm({ token }: { token: string }) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex items-center justify-center rounded-full bg-amber-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex items-center justify-center rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? 'Validation…' : 'Réinitialiser le mot de passe'}
       </button>

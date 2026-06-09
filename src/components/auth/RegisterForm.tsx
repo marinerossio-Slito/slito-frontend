@@ -44,11 +44,7 @@ const ACCOUNT_TYPE_OPTIONS: { value: AccountType; label: string }[] = [
 
 /**
  * Formulaire d'inscription — bascule entre les deux DTOs réellement exposés
- * par l'API (`POST /api/register/customer` et `POST /api/register/artisan`,
- * cf. `RegisterCustomerRequest`/`RegisterArtisanRequest`). Les champs communs
- * (email, mot de passe, nom...) sont partagés ; chaque profil ajoute ses
- * propres champs (adresse personnelle pour un client ; SIRET, adresse du local
- * et justificatif pour un artisan).
+ * par l'API (`POST /api/register/customer` et `POST /api/register/artisan`).
  */
 export function RegisterForm() {
   const { login } = useAuth();
@@ -92,9 +88,6 @@ export function RegisterForm() {
           homeAddress: values.homeAddress || undefined,
         });
 
-        // Pas d'état d'attente pour un compte client : on connecte directement
-        // avec les identifiants qui viennent de servir à l'inscription, pour
-        // éviter à la personne de les ressaisir tout de suite après.
         const user = await login({ email: values.email, password: values.password });
         router.push(primaryAccountPath(user));
         return;
@@ -111,10 +104,6 @@ export function RegisterForm() {
         ownershipDocument: values.ownershipDocument,
       });
 
-      // À la différence d'un compte client, un compte artisan est créé
-      // `isApproved = false` (cf. AuthController::registerArtisan) : on évite
-      // ici de connecter directement la personne pour laisser bien visible le
-      // message renvoyé par l'API expliquant qu'il reste à valider.
       setSuccessMessage(response.message);
       setValues(INITIAL_VALUES);
     } catch (err) {
@@ -139,7 +128,7 @@ export function RegisterForm() {
         <FormBanner tone="success">{successMessage}</FormBanner>
         <Link
           href="/connexion"
-          className="inline-flex items-center justify-center rounded-full bg-amber-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-600"
+          className="inline-flex items-center justify-center rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white shadow-[0_2px_12px_rgba(196,97,58,0.30)] transition hover:bg-terra-dark"
         >
           Aller à la page de connexion
         </Link>
@@ -149,7 +138,8 @@ export function RegisterForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
-      <div className="grid grid-cols-2 gap-1 rounded-full bg-zinc-100 p-1 text-sm font-medium">
+      {/* Sélecteur de type de compte */}
+      <div className="grid grid-cols-2 gap-1 rounded-full bg-sand-light p-1 text-sm font-medium">
         {ACCOUNT_TYPE_OPTIONS.map((option) => (
           <button
             key={option.value}
@@ -158,8 +148,8 @@ export function RegisterForm() {
             aria-pressed={accountType === option.value}
             className={
               accountType === option.value
-                ? 'rounded-full bg-white px-4 py-2 text-zinc-900 shadow-sm'
-                : 'rounded-full px-4 py-2 text-zinc-500 transition hover:text-zinc-800'
+                ? 'rounded-full bg-white px-4 py-2 text-ink shadow-sm'
+                : 'rounded-full px-4 py-2 text-ink-light transition hover:text-ink-mid'
             }
           >
             {option.label}
@@ -222,7 +212,7 @@ export function RegisterForm() {
           onChange={handleChange('password')}
           className={FIELD_CLASSES}
         />
-        <span className="text-xs font-normal text-zinc-400">8 caractères minimum.</span>
+        <span className="text-xs font-normal text-ink-light">8 caractères minimum.</span>
       </FormField>
 
       <FormField label="Téléphone" htmlFor="phone" optional error={fieldErrors.phone}>
@@ -265,7 +255,7 @@ export function RegisterForm() {
               onChange={handleChange('siret')}
               className={FIELD_CLASSES}
             />
-            <span className="text-xs font-normal text-zinc-400">Exactement 14 chiffres, sans espaces.</span>
+            <span className="text-xs font-normal text-ink-light">Exactement 14 chiffres, sans espaces.</span>
           </FormField>
 
           <FormField label="Adresse du local professionnel" htmlFor="officeAddress" optional error={fieldErrors.officeAddress}>
@@ -291,7 +281,7 @@ export function RegisterForm() {
               onChange={handleChange('ownershipDocument')}
               className={FIELD_CLASSES}
             />
-            <span className="text-xs font-normal text-zinc-400">
+            <span className="text-xs font-normal text-ink-light">
               Le dépôt de fichier n&apos;est pas encore disponible : indiquez pour l&apos;instant une référence ou un
               lien vers votre justificatif (Kbis ou équivalent), qu&apos;un administrateur vérifiera avant
               d&apos;activer votre compte.
@@ -303,14 +293,14 @@ export function RegisterForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex items-center justify-center rounded-full bg-amber-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex items-center justify-center rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white shadow-[0_2px_12px_rgba(196,97,58,0.30)] transition hover:bg-terra-dark disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? 'Création du compte…' : 'Créer mon compte'}
       </button>
 
-      <p className="text-center text-sm text-zinc-500">
+      <p className="text-center text-sm text-ink-light">
         Déjà inscrit ?{' '}
-        <Link href="/connexion" className="font-medium text-amber-700 transition hover:text-amber-800">
+        <Link href="/connexion" className="font-medium text-terra transition hover:text-terra-dark">
           Se connecter
         </Link>
       </p>

@@ -25,8 +25,8 @@ export default async function PasswordResetConfirmPage({ params }: { params: Pro
   return (
     <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-6 py-16">
       <header className="mb-8 text-center">
-        <h1 className="text-2xl font-bold tracking-tight text-zinc-900">Nouveau mot de passe</h1>
-        <p className="mt-2 text-sm text-zinc-600">Choisissez un nouveau mot de passe pour votre compte Slito.</p>
+        <h1 className="text-2xl font-bold tracking-tight text-ink">Nouveau mot de passe</h1>
+        <p className="mt-2 text-sm text-ink-mid">Choisissez un nouveau mot de passe pour votre compte Slito.</p>
       </header>
 
       <PasswordResetConfirmForm token={token} />

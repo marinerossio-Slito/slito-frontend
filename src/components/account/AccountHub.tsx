@@ -20,11 +20,11 @@ export function AccountHub() {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-12">
       <header>
-        <h1 className="text-2xl font-bold tracking-tight text-zinc-900">Mon compte</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-ink">Mon compte</h1>
         {user && (
-          <p className="mt-2 text-zinc-600">
+          <p className="mt-2 text-ink-mid">
             Connecté·e en tant que{' '}
-            <span className="font-semibold text-zinc-900">{user.email}</span>
+            <span className="font-semibold text-ink">{user.email}</span>
           </p>
         )}
       </header>
@@ -35,13 +35,13 @@ export function AccountHub() {
           <li>
             <Link
               href="/compte/rendez-vous"
-              className="flex flex-col gap-2 rounded-2xl border border-zinc-200 bg-white p-5 transition hover:border-amber-300 hover:shadow-sm"
+              className="flex flex-col gap-2 rounded-2xl border border-sand bg-white p-5 transition hover:border-sand hover:shadow-sm"
             >
               <span className="text-2xl" aria-hidden>
                 📅
               </span>
-              <span className="font-semibold text-zinc-900">Mes rendez-vous</span>
-              <span className="text-sm text-zinc-500">
+              <span className="font-semibold text-ink">Mes rendez-vous</span>
+              <span className="text-sm text-ink-light">
                 Retrouvez, suivez et annulez vos demandes de prestation.
               </span>
             </Link>
@@ -51,13 +51,13 @@ export function AccountHub() {
           <li>
             <Link
               href="/compte/messages"
-              className="flex flex-col gap-2 rounded-2xl border border-zinc-200 bg-white p-5 transition hover:border-amber-300 hover:shadow-sm"
+              className="flex flex-col gap-2 rounded-2xl border border-sand bg-white p-5 transition hover:border-sand hover:shadow-sm"
             >
               <span className="text-2xl" aria-hidden>
                 💬
               </span>
-              <span className="font-semibold text-zinc-900">Messagerie</span>
-              <span className="text-sm text-zinc-500">
+              <span className="font-semibold text-ink">Messagerie</span>
+              <span className="text-sm text-ink-light">
                 Échangez directement avec les artisans Slito.
               </span>
             </Link>

@@ -103,7 +103,7 @@ export function AppointmentList() {
     return (
       <div className="flex flex-col gap-4">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="h-28 animate-pulse rounded-2xl bg-zinc-100" />
+          <div key={i} className="h-28 animate-pulse rounded-2xl bg-sand-light" />
         ))}
       </div>
     );
@@ -131,8 +131,8 @@ export function AppointmentList() {
             aria-pressed={activeFilter === tab.value}
             className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
               activeFilter === tab.value
-                ? 'bg-amber-500 text-white'
-                : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
+                ? 'bg-terra text-white'
+                : 'bg-sand-light text-ink-mid hover:bg-sand'
             }`}
           >
             {tab.label}
@@ -176,7 +176,7 @@ export function AppointmentList() {
       )}
 
       {all.length > 0 && (
-        <p className="text-center text-sm text-zinc-400">
+        <p className="text-center text-sm text-ink-light">
           Vous avez {all.length} rendez-vous au total.
         </p>
       )}
@@ -212,17 +212,17 @@ function AppointmentCard({
   const canReview = appointment.status === 'COMPLETED' && !hasBeenReviewed;
 
   return (
-    <li className="rounded-2xl border border-zinc-200 bg-white p-5">
+    <li className="rounded-2xl border border-sand bg-white p-5">
       {/* En-tête : prestation + statut */}
       <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <div>
-          <p className="font-semibold text-zinc-900">
+          <p className="font-semibold text-ink">
             {appointment.service?.name ?? 'Prestation inconnue'}
           </p>
           {appointment.business && (
             <Link
               href={`/entreprises/${appointment.business.id}`}
-              className="text-sm font-medium text-amber-700 transition hover:text-amber-800"
+              className="text-sm font-medium text-terra transition hover:text-terra-dark"
             >
               {appointment.business.name}
             </Link>
@@ -255,7 +255,7 @@ function AppointmentCard({
 
       {/* Actions */}
       {(canCancel || canReview) && (
-        <div className="mt-4 flex flex-wrap gap-2 border-t border-zinc-100 pt-4">
+        <div className="mt-4 flex flex-wrap gap-2 border-t border-sand-light pt-4">
           {canCancel && (
             <button
               type="button"
@@ -270,7 +270,7 @@ function AppointmentCard({
             <button
               type="button"
               onClick={onStartReview}
-              className="inline-flex items-center rounded-full bg-amber-50 px-4 py-1.5 text-sm font-medium text-amber-800 transition hover:bg-amber-100"
+              className="inline-flex items-center rounded-full bg-sand-light px-4 py-1.5 text-sm font-medium text-terra-dark transition hover:bg-sand"
             >
               ★ Laisser un avis
             </button>
@@ -308,8 +308,8 @@ function InfoItem({
 }) {
   return (
     <div className={`flex flex-col gap-0.5 ${className ?? ''}`}>
-      <dt className="text-xs font-medium uppercase tracking-wide text-zinc-400">{label}</dt>
-      <dd className="text-zinc-700">{children}</dd>
+      <dt className="text-xs font-medium uppercase tracking-wide text-ink-light">{label}</dt>
+      <dd className="text-ink-mid">{children}</dd>
     </div>
   );
 }

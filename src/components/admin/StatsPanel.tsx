@@ -48,7 +48,7 @@ export function StatsPanel() {
     return (
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
         {[1, 2, 3, 4, 5, 6].map((i) => (
-          <div key={i} className="h-24 animate-pulse rounded-2xl bg-zinc-100" />
+          <div key={i} className="h-24 animate-pulse rounded-2xl bg-sand-light" />
         ))}
       </div>
     );
@@ -58,7 +58,7 @@ export function StatsPanel() {
     <div className="flex flex-col gap-8">
       {/* Utilisateurs */}
       <section>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500">
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-ink-light">
           Utilisateurs
         </h2>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -71,7 +71,7 @@ export function StatsPanel() {
 
       {/* Artisans */}
       <section>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500">
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-ink-light">
           Artisans
         </h2>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
@@ -87,7 +87,7 @@ export function StatsPanel() {
 
       {/* Rendez-vous */}
       <section>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500">
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-ink-light">
           Rendez-vous
         </h2>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -100,7 +100,7 @@ export function StatsPanel() {
 
       {/* Revenus et avis */}
       <section>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500">
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-ink-light">
           Revenus et avis
         </h2>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
@@ -128,13 +128,13 @@ function StatCard({
   return (
     <div
       className={`flex flex-col gap-1 rounded-2xl border p-4 ${
-        alert ? 'border-amber-200 bg-amber-50' : 'border-zinc-200 bg-white'
+        alert ? 'border-sand bg-sand-light' : 'border-sand bg-white'
       }`}
     >
-      <span className={`text-xl font-bold ${alert ? 'text-amber-700' : 'text-zinc-900'}`}>
+      <span className={`text-xl font-bold ${alert ? 'text-terra' : 'text-ink'}`}>
         {value}
       </span>
-      <span className="text-xs text-zinc-500">{label}</span>
+      <span className="text-xs text-ink-light">{label}</span>
     </div>
   );
 }

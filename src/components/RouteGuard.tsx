@@ -48,7 +48,7 @@ export function RouteGuard({
     return (
       <GuardMessage title="Accès refusé">
         Votre compte ne dispose pas des droits nécessaires pour accéder à cette page.{' '}
-        <Link href="/" className="font-medium text-amber-700 transition hover:text-amber-800">
+        <Link href="/" className="font-medium text-terra transition hover:text-terra-dark">
           Retour à l&apos;accueil
         </Link>
         .
@@ -62,8 +62,8 @@ export function RouteGuard({
 function GuardMessage({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center gap-2 px-6 py-24 text-center">
-      <h1 className="text-lg font-semibold text-zinc-900">{title}</h1>
-      <p className="text-sm text-zinc-600">{children}</p>
+      <h1 className="font-serif text-lg font-semibold text-ink">{title}</h1>
+      <p className="text-sm text-ink-mid">{children}</p>
     </div>
   );
 }

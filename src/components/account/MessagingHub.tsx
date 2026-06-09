@@ -192,13 +192,13 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
   const showDetail = selectedId !== null || isNewConversation;
 
   return (
-    <div className="flex flex-1 overflow-hidden rounded-2xl border border-zinc-200 bg-white">
+    <div className="flex flex-1 overflow-hidden rounded-2xl border border-sand bg-white">
       {/* Panneau gauche : liste des conversations */}
       <aside
-        className={`flex flex-col border-r border-zinc-100 ${showDetail ? 'hidden lg:flex lg:w-80 lg:shrink-0' : 'flex w-full'}`}
+        className={`flex flex-col border-r border-sand-light ${showDetail ? 'hidden lg:flex lg:w-80 lg:shrink-0' : 'flex w-full'}`}
       >
-        <div className="border-b border-zinc-100 px-4 py-3">
-          <h2 className="text-sm font-semibold text-zinc-900">Messages</h2>
+        <div className="border-b border-sand-light px-4 py-3">
+          <h2 className="text-sm font-semibold text-ink">Messages</h2>
         </div>
 
         <div className="flex-1 overflow-y-auto">
@@ -207,7 +207,7 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
           {conversations === null && !listError && (
             <div className="flex flex-col gap-2 p-3">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="h-16 animate-pulse rounded-xl bg-zinc-100" />
+                <div key={i} className="h-16 animate-pulse rounded-xl bg-sand-light" />
               ))}
             </div>
           )}
@@ -233,9 +233,9 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
 
           {/* Entrée dans la liste pour la nouvelle conversation en cours */}
           {isNewConversation && (
-            <div className="border-l-2 border-amber-400 bg-amber-50 px-4 py-3 text-sm">
-              <p className="font-medium text-zinc-900">Nouvelle conversation</p>
-              <p className="truncate text-zinc-500">
+            <div className="border-l-2 border-terra bg-sand-light px-4 py-3 text-sm">
+              <p className="font-medium text-ink">Nouvelle conversation</p>
+              <p className="truncate text-ink-light">
                 {initialBusinessName ?? `Entreprise #${initialBusinessId}`}
               </p>
             </div>
@@ -247,11 +247,11 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
       <main className={`flex min-h-0 flex-1 flex-col ${showDetail ? 'flex' : 'hidden lg:flex'}`}>
         {/* Bouton retour (mobile) */}
         {showDetail && (
-          <div className="flex items-center gap-2 border-b border-zinc-100 px-4 py-3 lg:hidden">
+          <div className="flex items-center gap-2 border-b border-sand-light px-4 py-3 lg:hidden">
             <button
               type="button"
               onClick={() => setSelectedId(null)}
-              className="text-sm font-medium text-amber-700"
+              className="text-sm font-medium text-terra"
             >
               ← Retour
             </button>
@@ -276,7 +276,7 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
           <>
             {detailLoading && (
               <div className="flex flex-1 items-center justify-center">
-                <p className="text-sm text-zinc-400">Chargement…</p>
+                <p className="text-sm text-ink-light">Chargement…</p>
               </div>
             )}
 
@@ -289,8 +289,8 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
             {detail !== null && !detailLoading && (
               <>
                 {/* En-tête */}
-                <div className="border-b border-zinc-100 px-5 py-4">
-                  <p className="font-semibold text-zinc-900">
+                <div className="border-b border-sand-light px-5 py-4">
+                  <p className="font-semibold text-ink">
                     {detail.business?.name ?? 'Conversation'}
                   </p>
                   {detail.isBlocked && (
@@ -303,7 +303,7 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
                 {/* Fil de messages */}
                 <div className="flex-1 overflow-y-auto p-4">
                   {detail.messages.length === 0 ? (
-                    <p className="text-center text-sm text-zinc-400">
+                    <p className="text-center text-sm text-ink-light">
                       Aucun message dans cette conversation.
                     </p>
                   ) : (
@@ -311,26 +311,26 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
                       {detail.messages.map((msg) => (
                         <li key={msg.id} className="flex flex-col gap-0.5">
                           <div className="flex items-baseline gap-2">
-                            <span className="text-xs font-semibold text-zinc-700">
+                            <span className="text-xs font-semibold text-ink-mid">
                               {msg.sender
                                 ? `${msg.sender.firstName ?? ''} ${msg.sender.lastName ?? ''}`.trim() ||
                                   'Inconnu'
                                 : 'Inconnu'}
                             </span>
-                            <span className="text-xs text-zinc-400">
+                            <span className="text-xs text-ink-light">
                               {formatDateTime(msg.sentAt)}
                             </span>
                             {!msg.isRead && (
-                              <span className="rounded-full bg-amber-400 px-1.5 py-0.5 text-[10px] font-semibold text-white">
+                              <span className="rounded-full bg-terra px-1.5 py-0.5 text-[10px] font-semibold text-white">
                                 Nouveau
                               </span>
                             )}
                           </div>
-                          <p className="whitespace-pre-wrap rounded-xl rounded-tl-none bg-zinc-50 px-3 py-2 text-sm text-zinc-800">
+                          <p className="whitespace-pre-wrap rounded-xl rounded-tl-none bg-cream px-3 py-2 text-sm text-ink">
                             {msg.content}
                           </p>
                           {msg.attachment && (
-                            <p className="text-xs text-zinc-400">📎 {msg.attachment}</p>
+                            <p className="text-xs text-ink-light">📎 {msg.attachment}</p>
                           )}
                         </li>
                       ))}
@@ -340,9 +340,9 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
                 </div>
 
                 {/* Formulaire de réponse */}
-                <div className="border-t border-zinc-100 p-4">
+                <div className="border-t border-sand-light p-4">
                   {detail.isBlocked ? (
-                    <p className="text-center text-sm text-zinc-400">
+                    <p className="text-center text-sm text-ink-light">
                       Cette conversation est bloquée : vous ne pouvez plus envoyer de messages.
                     </p>
                   ) : (
@@ -355,7 +355,7 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
                           onChange={(e) => setReplyContent(e.target.value)}
                           placeholder="Écrivez votre message…"
                           maxLength={5000}
-                          className="flex-1 resize-none rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-100"
+                          className="flex-1 resize-none rounded-xl border border-sand bg-white px-3 py-2 text-sm text-ink transition focus:border-terra focus:outline-none focus:ring-2 focus:ring-terra/20"
                           onKeyDown={(e) => {
                             if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
                               e.currentTarget.form?.requestSubmit();
@@ -365,12 +365,12 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
                         <button
                           type="submit"
                           disabled={replySending || !replyContent.trim()}
-                          className="self-end rounded-full bg-amber-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-60"
+                          className="self-end rounded-full bg-terra px-4 py-2 text-sm font-semibold text-white transition hover:bg-terra-dark disabled:cursor-not-allowed disabled:opacity-60"
                         >
                           {replySending ? '…' : 'Envoyer'}
                         </button>
                       </div>
-                      <p className="text-right text-xs text-zinc-400">Ctrl+Entrée pour envoyer</p>
+                      <p className="text-right text-xs text-ink-light">Ctrl+Entrée pour envoyer</p>
                     </form>
                   )}
                 </div>
@@ -382,7 +382,7 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
         {/* Aucune conversation sélectionnée — desktop only */}
         {!showDetail && (
           <div className="hidden flex-1 items-center justify-center lg:flex">
-            <p className="text-sm text-zinc-400">Sélectionnez une conversation à gauche.</p>
+            <p className="text-sm text-ink-light">Sélectionnez une conversation à gauche.</p>
           </div>
         )}
       </main>
@@ -408,19 +408,19 @@ function ConversationItem({
         type="button"
         onClick={onClick}
         className={`flex w-full flex-col gap-0.5 px-4 py-3 text-left transition ${
-          isSelected ? 'border-l-2 border-amber-400 bg-amber-50' : 'hover:bg-zinc-50'
+          isSelected ? 'border-l-2 border-terra bg-sand-light' : 'hover:bg-cream'
         }`}
       >
         <div className="flex items-center justify-between gap-2">
-          <span className="truncate text-sm font-semibold text-zinc-900">{title}</span>
+          <span className="truncate text-sm font-semibold text-ink">{title}</span>
           {conversation.unreadCount > 0 && (
-            <span className="shrink-0 rounded-full bg-amber-500 px-2 py-0.5 text-[11px] font-semibold text-white">
+            <span className="shrink-0 rounded-full bg-terra px-2 py-0.5 text-[11px] font-semibold text-white">
               {conversation.unreadCount}
             </span>
           )}
         </div>
-        <span className="truncate text-xs text-zinc-500">{subtitle}</span>
-        <span className="text-[11px] text-zinc-400">{formatDateTime(conversation.createdAt)}</span>
+        <span className="truncate text-xs text-ink-light">{subtitle}</span>
+        <span className="text-[11px] text-ink-light">{formatDateTime(conversation.createdAt)}</span>
       </button>
     </li>
   );
@@ -445,13 +445,13 @@ function NewConversationPanel({
 }) {
   return (
     <div className="flex flex-1 flex-col">
-      <div className="border-b border-zinc-100 px-5 py-4">
-        <p className="font-semibold text-zinc-900">Nouvelle conversation</p>
-        <p className="text-sm text-zinc-500">
+      <div className="border-b border-sand-light px-5 py-4">
+        <p className="font-semibold text-ink">Nouvelle conversation</p>
+        <p className="text-sm text-ink-light">
           {businessName ? (
             <>
               Votre premier message à{' '}
-              <span className="font-medium text-zinc-700">{businessName}</span>
+              <span className="font-medium text-ink-mid">{businessName}</span>
             </>
           ) : (
             <>Premier message à l&apos;entreprise #{businessId}</>
@@ -461,7 +461,7 @@ function NewConversationPanel({
 
       <div className="flex-1" />
 
-      <div className="border-t border-zinc-100 p-4">
+      <div className="border-t border-sand-light p-4">
         <form onSubmit={onSubmit} className="flex flex-col gap-2">
           {error && <p className="text-xs text-red-600">{error}</p>}
           <div className="flex gap-2">
@@ -472,23 +472,23 @@ function NewConversationPanel({
               placeholder="Écrivez votre premier message…"
               maxLength={5000}
               autoFocus
-              className="flex-1 resize-none rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 transition focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-100"
+              className="flex-1 resize-none rounded-xl border border-sand bg-white px-3 py-2 text-sm text-ink transition focus:border-terra focus:outline-none focus:ring-2 focus:ring-terra/20"
             />
             <button
               type="submit"
               disabled={isSending || !content.trim()}
-              className="self-end rounded-full bg-amber-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-60"
+              className="self-end rounded-full bg-terra px-4 py-2 text-sm font-semibold text-white transition hover:bg-terra-dark disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSending ? '…' : 'Envoyer'}
             </button>
           </div>
           <div className="flex items-center justify-between">
-            <p className="text-xs text-zinc-400">
+            <p className="text-xs text-ink-light">
               Votre message sera transmis à l&apos;artisan.
             </p>
             <Link
               href={`/entreprises/${businessId}`}
-              className="text-xs text-amber-700 hover:text-amber-800"
+              className="text-xs text-terra hover:text-terra-dark"
             >
               ← Retour à la fiche
             </Link>

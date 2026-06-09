@@ -12,11 +12,10 @@ import { primaryAccountPath, translateAuthError } from '@/lib/auth';
 /**
  * Formulaire de connexion (`POST /api/login` via `useAuth().login`).
  *
- * `redirectTo` vient du paramètre `?next=` (cf. `RouteGuard`, qui y redirige
- * les visiteurs anonymes voulant accéder à une page protégée) : une fois
+ * `redirectTo` vient du paramètre `?next=` (cf. `RouteGuard`) : une fois
  * connecté, on renvoie l'utilisateur là où il voulait aller plutôt que vers son
- * espace par défaut. Validé côté page serveur (`/connexion`) pour ne renvoyer
- * que des chemins internes — jamais une URL externe (open redirect).
+ * espace par défaut. Validé côté page serveur pour ne renvoyer que des chemins
+ * internes — jamais une URL externe (open redirect).
  */
 export function LoginForm({ redirectTo }: { redirectTo: string | null }) {
   const { login } = useAuth();
@@ -72,7 +71,10 @@ export function LoginForm({ redirectTo }: { redirectTo: string | null }) {
       </FormField>
 
       <div className="flex justify-end text-sm">
-        <Link href="/mot-de-passe-oublie" className="font-medium text-amber-700 transition hover:text-amber-800">
+        <Link
+          href="/mot-de-passe-oublie"
+          className="font-medium text-terra transition hover:text-terra-dark"
+        >
           Mot de passe oublié ?
         </Link>
       </div>
@@ -80,14 +82,14 @@ export function LoginForm({ redirectTo }: { redirectTo: string | null }) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex items-center justify-center rounded-full bg-amber-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex items-center justify-center rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white shadow-[0_2px_12px_rgba(196,97,58,0.30)] transition hover:bg-terra-dark disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? 'Connexion…' : 'Se connecter'}
       </button>
 
-      <p className="text-center text-sm text-zinc-500">
+      <p className="text-center text-sm text-ink-light">
         Pas encore de compte ?{' '}
-        <Link href="/inscription" className="font-medium text-amber-700 transition hover:text-amber-800">
+        <Link href="/inscription" className="font-medium text-terra transition hover:text-terra-dark">
           Créer un compte
         </Link>
       </p>

@@ -27,25 +27,25 @@ export default function GlobalError({
         ⚠️
       </p>
       <div>
-        <h1 className="text-2xl font-bold text-zinc-900">Une erreur est survenue</h1>
-        <p className="mt-2 text-zinc-500">
+        <h1 className="text-2xl font-bold text-ink">Une erreur est survenue</h1>
+        <p className="mt-2 text-ink-light">
           Quelque chose s&apos;est mal passé. Vous pouvez réessayer ou revenir à l&apos;accueil.
         </p>
         {error.digest && (
-          <p className="mt-1 text-xs text-zinc-400">Référence : {error.digest}</p>
+          <p className="mt-1 text-xs text-ink-light">Référence : {error.digest}</p>
         )}
       </div>
       <div className="flex gap-3">
         <button
           type="button"
           onClick={reset}
-          className="rounded-full bg-amber-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-600"
+          className="rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
         >
           Réessayer
         </button>
         <Link
           href="/"
-          className="rounded-full border border-zinc-300 px-6 py-2.5 text-sm font-semibold text-zinc-700 transition hover:border-zinc-400"
+          className="rounded-full border border-sand px-6 py-2.5 text-sm font-semibold text-ink-mid transition hover:border-terra"
         >
           Retour à l&apos;accueil
         </Link>

@@ -17,14 +17,14 @@ export default function AppointmentsPage() {
         <header className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <BackLink href="/compte" label="Mon compte" />
-            <h1 className="mt-3 text-2xl font-bold tracking-tight text-zinc-900">Mes rendez-vous</h1>
-            <p className="mt-1 text-zinc-500">
+            <h1 className="mt-3 text-2xl font-bold tracking-tight text-ink">Mes rendez-vous</h1>
+            <p className="mt-1 text-ink-light">
               Suivez l&apos;état de vos demandes, annulez ou laissez un avis.
             </p>
           </div>
           <Link
             href="/recherche"
-            className="inline-flex shrink-0 items-center justify-center rounded-full bg-amber-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-600"
+            className="inline-flex shrink-0 items-center justify-center rounded-full bg-terra px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
           >
             Trouver un artisan
           </Link>

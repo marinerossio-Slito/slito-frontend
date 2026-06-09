@@ -49,7 +49,7 @@ export function DashboardPanel() {
     return (
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="h-28 animate-pulse rounded-2xl bg-zinc-100" />
+          <div key={i} className="h-28 animate-pulse rounded-2xl bg-sand-light" />
         ))}
       </div>
     );
@@ -63,20 +63,20 @@ export function DashboardPanel() {
       <div className="flex items-center justify-between">
         <div>
           {business ? (
-            <p className="text-zinc-600">
+            <p className="text-ink-mid">
               Fiche :{' '}
               <Link
                 href={`/entreprises/${business.id}`}
-                className="font-semibold text-amber-700 hover:underline"
+                className="font-semibold text-terra hover:underline"
                 target="_blank"
               >
                 {business.name}
               </Link>
             </p>
           ) : (
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-ink-light">
               Vous n&apos;avez pas encore de fiche entreprise.{' '}
-              <Link href="/artisan/fiche" className="text-amber-700 hover:underline">
+              <Link href="/artisan/fiche" className="text-terra hover:underline">
                 Créer ma fiche →
               </Link>
             </p>
@@ -84,7 +84,7 @@ export function DashboardPanel() {
         </div>
         <Link
           href="/artisan/agenda"
-          className="text-sm font-medium text-amber-700 hover:text-amber-800"
+          className="text-sm font-medium text-terra hover:text-terra-dark"
         >
           Voir l&apos;agenda →
         </Link>
@@ -120,20 +120,20 @@ export function DashboardPanel() {
 
       {/* Répartition par statut */}
       {appointments.total > 0 && (
-        <div className="rounded-2xl border border-zinc-200 bg-white p-5">
-          <h2 className="mb-4 text-sm font-semibold text-zinc-700">
+        <div className="rounded-2xl border border-sand bg-white p-5">
+          <h2 className="mb-4 text-sm font-semibold text-ink-mid">
             Répartition des rendez-vous
           </h2>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {Object.entries(STATUS_LABELS).map(([status, label]) => (
               <div
                 key={status}
-                className="flex flex-col items-center rounded-xl bg-zinc-50 px-3 py-3"
+                className="flex flex-col items-center rounded-xl bg-cream px-3 py-3"
               >
-                <span className="text-xl font-bold text-zinc-900">
+                <span className="text-xl font-bold text-ink">
                   {appointments.byStatus[status] ?? 0}
                 </span>
-                <span className="mt-0.5 text-center text-xs text-zinc-500">{label}</span>
+                <span className="mt-0.5 text-center text-xs text-ink-light">{label}</span>
               </div>
             ))}
           </div>
@@ -145,12 +145,12 @@ export function DashboardPanel() {
 
 function StatCard({ label, value, icon }: { label: string; value: string; icon: string }) {
   return (
-    <div className="flex flex-col gap-1.5 rounded-2xl border border-zinc-200 bg-white p-5">
+    <div className="flex flex-col gap-1.5 rounded-2xl border border-sand bg-white p-5">
       <span className="text-2xl" aria-hidden>
         {icon}
       </span>
-      <span className="text-xl font-bold text-zinc-900">{value}</span>
-      <span className="text-xs text-zinc-500">{label}</span>
+      <span className="text-xl font-bold text-ink">{value}</span>
+      <span className="text-xs text-ink-light">{label}</span>
     </div>
   );
 }

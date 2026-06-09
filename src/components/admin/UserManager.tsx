@@ -81,9 +81,9 @@ export function UserManager() {
   return (
     <div className="flex flex-col gap-8">
       {/* Formulaire de recherche */}
-      <section className="rounded-2xl border border-zinc-200 bg-white p-6">
-        <h2 className="mb-1 text-base font-semibold text-zinc-900">Rechercher un utilisateur</h2>
-        <p className="mb-4 text-sm text-zinc-500">
+      <section className="rounded-2xl border border-sand bg-white p-6">
+        <h2 className="mb-1 text-base font-semibold text-ink">Rechercher un utilisateur</h2>
+        <p className="mb-4 text-sm text-ink-light">
           Entrez l&apos;identifiant numérique (ID) du compte à gérer.
         </p>
 
@@ -100,7 +100,7 @@ export function UserManager() {
           <button
             type="submit"
             disabled={acting || !userId}
-            className="rounded-full bg-amber-500 px-5 py-2 text-sm font-semibold text-white transition hover:bg-amber-600 disabled:opacity-60"
+            className="rounded-full bg-terra px-5 py-2 text-sm font-semibold text-white transition hover:bg-terra-dark disabled:opacity-60"
           >
             {acting ? '…' : 'Rechercher'}
           </button>
@@ -113,8 +113,8 @@ export function UserManager() {
 
       {/* Fiche utilisateur + actions */}
       {user && (
-        <section className="rounded-2xl border border-zinc-200 bg-white p-6">
-          <h2 className="mb-4 text-base font-semibold text-zinc-900">
+        <section className="rounded-2xl border border-sand bg-white p-6">
+          <h2 className="mb-4 text-base font-semibold text-ink">
             Compte #{user.id}
           </h2>
 
@@ -181,7 +181,7 @@ export function UserManager() {
       )}
 
       {/* Note API */}
-      <p className="text-xs text-zinc-400">
+      <p className="text-xs text-ink-light">
         Note : l&apos;API courante n&apos;expose pas d&apos;endpoint de liste des utilisateurs.
         La recherche s&apos;effectue par ID numérique. Utilisez l&apos;interface base de données
         pour obtenir les IDs.
@@ -193,8 +193,8 @@ export function UserManager() {
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-xs font-medium text-zinc-500">{label}</dt>
-      <dd className="mt-0.5 text-sm text-zinc-900">{value}</dd>
+      <dt className="text-xs font-medium text-ink-light">{label}</dt>
+      <dd className="mt-0.5 text-sm text-ink">{value}</dd>
     </div>
   );
 }
@@ -212,7 +212,7 @@ function ActionButton({
 }) {
   const cls = {
     success: 'bg-emerald-500 hover:bg-emerald-600 text-white',
-    warning: 'border border-amber-300 text-amber-700 hover:border-amber-400',
+    warning: 'border border-sand text-terra hover:border-terra',
     danger: 'border border-red-300 text-red-700 hover:border-red-400',
   }[variant];
 

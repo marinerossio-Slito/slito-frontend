@@ -67,20 +67,20 @@ export default async function BusinessDetailPage({ params }: { params: Promise<R
   const business = await loadBusiness(id);
 
   return (
-    <div className="flex flex-1 flex-col bg-zinc-50">
+    <div className="flex flex-1 flex-col bg-cream">
       <BusinessHero business={business} />
 
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 px-6 py-12 lg:grid-cols-3">
         <div className="flex flex-col gap-10 lg:col-span-2">
           {business.description && (
             <section>
-              <h2 className="text-xl font-semibold text-zinc-900">À propos</h2>
-              <p className="mt-3 whitespace-pre-line text-zinc-700">{business.description}</p>
+              <h2 className="text-xl font-semibold text-ink">À propos</h2>
+              <p className="mt-3 whitespace-pre-line text-ink-mid">{business.description}</p>
             </section>
           )}
 
           <section>
-            <h2 className="text-xl font-semibold text-zinc-900">Prestations</h2>
+            <h2 className="text-xl font-semibold text-ink">Prestations</h2>
             {business.services.length === 0 ? (
               <div className="mt-4">
                 <EmptyState message="Cette entreprise n'a pas encore renseigné de prestations." />
@@ -106,18 +106,18 @@ export default async function BusinessDetailPage({ params }: { params: Promise<R
 
 function BusinessHero({ business }: { business: BusinessDetail }) {
   return (
-    <section className="border-b border-zinc-200 bg-white">
+    <section className="border-b border-sand bg-white">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-12 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex flex-col gap-3">
           {business.category && (
-            <span className="w-fit rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">
+            <span className="w-fit rounded-full bg-sand-light px-3 py-1 text-xs font-medium text-terra">
               {business.category.name}
             </span>
           )}
-          <h1 className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">{business.name}</h1>
-          {business.headline && <p className="max-w-2xl text-lg text-zinc-600">{business.headline}</p>}
+          <h1 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">{business.name}</h1>
+          {business.headline && <p className="max-w-2xl text-lg text-ink-mid">{business.headline}</p>}
           {business.officeAddress && (
-            <p className="flex items-center gap-2 text-sm text-zinc-500">
+            <p className="flex items-center gap-2 text-sm text-ink-light">
               <span aria-hidden>📍</span> {business.officeAddress}
             </p>
           )}
@@ -126,8 +126,8 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
         <div className="flex flex-col items-start gap-2 sm:items-end">
           <RatingBadge averageRating={business.averageRating} reviewsCount={business.reviewsCount} size="lg" />
           {business.priceFrom !== null && (
-            <p className="text-sm text-zinc-500">
-              Prestations dès <span className="font-semibold text-zinc-900">{formatPrice(business.priceFrom)}</span>
+            <p className="text-sm text-ink-light">
+              Prestations dès <span className="font-semibold text-ink">{formatPrice(business.priceFrom)}</span>
             </p>
           )}
         </div>
@@ -138,26 +138,26 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
 
 function ServiceCard({ service }: { service: Service }) {
   return (
-    <li className="rounded-2xl border border-zinc-200 bg-white p-5">
+    <li className="rounded-2xl border border-sand bg-white p-5">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <div>
-          <p className="font-semibold text-zinc-900">{service.name}</p>
-          <p className="mt-1 text-sm text-zinc-500">
+          <p className="font-semibold text-ink">{service.name}</p>
+          <p className="mt-1 text-sm text-ink-light">
             {formatDuration(service.duration)}
             {service.location && <> · {LOCATION_LABELS[service.location] ?? service.location}</>}
           </p>
         </div>
-        <p className="shrink-0 text-lg font-semibold text-zinc-900">{formatPrice(service.price)}</p>
+        <p className="shrink-0 text-lg font-semibold text-ink">{formatPrice(service.price)}</p>
       </div>
 
-      {service.description && <p className="mt-3 text-sm text-zinc-600">{service.description}</p>}
+      {service.description && <p className="mt-3 text-sm text-ink-mid">{service.description}</p>}
 
       {service.faq && service.faq.length > 0 && (
-        <dl className="mt-4 flex flex-col gap-3 border-t border-zinc-100 pt-4">
+        <dl className="mt-4 flex flex-col gap-3 border-t border-sand-light pt-4">
           {service.faq.map((entry) => (
             <div key={entry.question}>
-              <dt className="text-sm font-medium text-zinc-800">{entry.question}</dt>
-              <dd className="mt-1 text-sm text-zinc-600">{entry.answer}</dd>
+              <dt className="text-sm font-medium text-ink">{entry.question}</dt>
+              <dd className="mt-1 text-sm text-ink-mid">{entry.answer}</dd>
             </div>
           ))}
         </dl>
@@ -177,14 +177,14 @@ function BusinessInfoCard({ business }: { business: BusinessDetail }) {
   }
 
   return (
-    <div className="flex flex-col gap-5 rounded-2xl border border-zinc-200 bg-white p-5">
-      <h2 className="text-base font-semibold text-zinc-900">Informations pratiques</h2>
+    <div className="flex flex-col gap-5 rounded-2xl border border-sand bg-white p-5">
+      <h2 className="text-base font-semibold text-ink">Informations pratiques</h2>
 
       {hasContactInfo && (
         <dl className="flex flex-col gap-3 text-sm">
           {business.contactNumber && (
             <InfoRow label="Téléphone">
-              <a href={`tel:${business.contactNumber}`} className="text-amber-700 transition hover:text-amber-800">
+              <a href={`tel:${business.contactNumber}`} className="text-terra transition hover:text-terra-dark">
                 {business.contactNumber}
               </a>
             </InfoRow>
@@ -195,7 +195,7 @@ function BusinessInfoCard({ business }: { business: BusinessDetail }) {
                 href={business.website}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="break-all text-amber-700 transition hover:text-amber-800"
+                className="break-all text-terra transition hover:text-terra-dark"
               >
                 {business.website}
               </a>
@@ -216,8 +216,8 @@ function BusinessInfoCard({ business }: { business: BusinessDetail }) {
 function InfoRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-0.5">
-      <dt className="text-xs font-medium uppercase tracking-wide text-zinc-400">{label}</dt>
-      <dd className="text-zinc-700">{children}</dd>
+      <dt className="text-xs font-medium uppercase tracking-wide text-ink-light">{label}</dt>
+      <dd className="text-ink-mid">{children}</dd>
     </div>
   );
 }
@@ -230,16 +230,16 @@ function WorkingHoursList({ workingHours }: { workingHours: WorkingHours }) {
   const otherDays = Object.keys(workingHours).filter((day) => !WEEK_DAYS.includes(day));
 
   return (
-    <div className="border-t border-zinc-100 pt-4">
-      <p className="text-xs font-medium uppercase tracking-wide text-zinc-400">Horaires d&apos;ouverture</p>
+    <div className="border-t border-sand-light pt-4">
+      <p className="text-xs font-medium uppercase tracking-wide text-ink-light">Horaires d&apos;ouverture</p>
       <ul className="mt-2 flex flex-col gap-1 text-sm">
         {[...knownDays, ...otherDays].map((day) => {
           const slot = workingHours[day];
 
           return (
             <li key={day} className="flex items-center justify-between gap-4">
-              <span className="capitalize text-zinc-700">{day}</span>
-              <span className={slot ? 'text-zinc-700' : 'text-zinc-400'}>
+              <span className="capitalize text-ink-mid">{day}</span>
+              <span className={slot ? 'text-ink-mid' : 'text-ink-light'}>
                 {slot ? `${slot[0]} – ${slot[1]}` : 'Fermé'}
               </span>
             </li>

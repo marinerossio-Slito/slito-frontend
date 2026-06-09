@@ -76,7 +76,7 @@ export function CategoryManager() {
     <div className="flex flex-col gap-8">
       {/* Liste existante */}
       <section>
-        <h2 className="mb-4 text-base font-semibold text-zinc-900">
+        <h2 className="mb-4 text-base font-semibold text-ink">
           Catégories existantes ({categories?.length ?? '…'})
         </h2>
 
@@ -86,12 +86,12 @@ export function CategoryManager() {
 
         {categories === null && !listError && (
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {[1, 2, 3].map((i) => <div key={i} className="h-12 animate-pulse rounded-xl bg-zinc-100" />)}
+            {[1, 2, 3].map((i) => <div key={i} className="h-12 animate-pulse rounded-xl bg-sand-light" />)}
           </div>
         )}
 
         {categories !== null && categories.length === 0 && (
-          <p className="text-sm text-zinc-500">Aucune catégorie pour le moment.</p>
+          <p className="text-sm text-ink-light">Aucune catégorie pour le moment.</p>
         )}
 
         {categories !== null && categories.length > 0 && (
@@ -99,12 +99,12 @@ export function CategoryManager() {
             {categories.map((cat) => (
               <li
                 key={cat.id}
-                className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3"
+                className="flex items-center gap-3 rounded-xl border border-sand bg-white px-4 py-3"
               >
                 {cat.icon && <span className="text-lg" aria-hidden>{cat.icon}</span>}
                 <div className="flex flex-col">
-                  <span className="text-sm font-medium text-zinc-900">{cat.name}</span>
-                  <span className="text-xs text-zinc-400">{cat.slug}</span>
+                  <span className="text-sm font-medium text-ink">{cat.name}</span>
+                  <span className="text-xs text-ink-light">{cat.slug}</span>
                 </div>
               </li>
             ))}
@@ -113,8 +113,8 @@ export function CategoryManager() {
       </section>
 
       {/* Formulaire de création */}
-      <section className="rounded-2xl border border-zinc-200 bg-white p-6">
-        <h2 className="mb-5 text-base font-semibold text-zinc-900">Créer une catégorie</h2>
+      <section className="rounded-2xl border border-sand bg-white p-6">
+        <h2 className="mb-5 text-base font-semibold text-ink">Créer une catégorie</h2>
 
         <form onSubmit={handleCreate} noValidate className="flex flex-col gap-4">
           {formError && <FormBanner tone="error">{formError}</FormBanner>}
@@ -166,7 +166,7 @@ export function CategoryManager() {
           <button
             type="submit"
             disabled={submitting || !name.trim()}
-            className="self-start rounded-full bg-amber-500 px-5 py-2 text-sm font-semibold text-white transition hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-60"
+            className="self-start rounded-full bg-terra px-5 py-2 text-sm font-semibold text-white transition hover:bg-terra-dark disabled:cursor-not-allowed disabled:opacity-60"
           >
             {submitting ? 'Création…' : 'Créer la catégorie'}
           </button>

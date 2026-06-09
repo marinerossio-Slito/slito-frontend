@@ -41,7 +41,7 @@ export function PasswordResetRequestForm() {
     return (
       <div className="flex flex-col gap-5">
         <FormBanner tone="success">{message}</FormBanner>
-        <Link href="/connexion" className="text-center text-sm font-medium text-amber-700 transition hover:text-amber-800">
+        <Link href="/connexion" className="text-center text-sm font-medium text-terra transition hover:text-terra-dark">
           Retour à la connexion
         </Link>
       </div>
@@ -68,13 +68,13 @@ export function PasswordResetRequestForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex items-center justify-center rounded-full bg-amber-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex items-center justify-center rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? 'Envoi…' : 'Envoyer le lien de réinitialisation'}
       </button>
 
-      <p className="text-center text-sm text-zinc-500">
-        <Link href="/connexion" className="font-medium text-amber-700 transition hover:text-amber-800">
+      <p className="text-center text-sm text-ink-light">
+        <Link href="/connexion" className="font-medium text-terra transition hover:text-terra-dark">
           Retour à la connexion
         </Link>
       </p>
