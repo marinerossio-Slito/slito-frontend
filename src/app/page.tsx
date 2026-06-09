@@ -79,8 +79,8 @@ function Hero() {
     >
 
       {/* Badge */}
-      <div className="relative mx-auto mb-6 inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/20 px-4 py-1.5 text-xs font-medium tracking-wide text-gold">
-        🔨 La plateforme des artisans de confiance
+      <div className="relative mx-auto mb-6 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-medium tracking-wide text-white/80">
+        La plateforme des artisans de confiance
       </div>
 
       {/* Titre */}
