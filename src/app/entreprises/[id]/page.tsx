@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { EmptyState } from '@/components/EmptyState';
@@ -70,17 +71,17 @@ export default async function BusinessDetailPage({ params }: { params: Promise<R
     <div className="flex flex-1 flex-col bg-cream">
       <BusinessHero business={business} />
 
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 px-6 py-12 lg:grid-cols-3">
-        <div className="flex flex-col gap-10 lg:col-span-2">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 px-6 py-12 lg:grid-cols-[1fr_360px]">
+        <div className="flex flex-col gap-10">
           {business.description && (
             <section>
-              <h2 className="text-xl font-semibold text-ink">À propos</h2>
-              <p className="mt-3 whitespace-pre-line text-ink-mid">{business.description}</p>
+              <h2 className="font-serif text-2xl font-bold text-ink">À propos</h2>
+              <p className="mt-4 whitespace-pre-line leading-relaxed text-ink-mid">{business.description}</p>
             </section>
           )}
 
           <section>
-            <h2 className="text-xl font-semibold text-ink">Prestations</h2>
+            <h2 className="font-serif text-2xl font-bold text-ink">Prestations</h2>
             {business.services.length === 0 ? (
               <div className="mt-4">
                 <EmptyState message="Cette entreprise n'a pas encore renseigné de prestations." />
@@ -95,7 +96,7 @@ export default async function BusinessDetailPage({ params }: { params: Promise<R
           </section>
         </div>
 
-        <aside className="flex flex-col gap-6">
+        <aside id="booking" className="flex flex-col gap-6">
           <BookingPanel business={business} />
           <BusinessInfoCard business={business} />
         </aside>
@@ -106,30 +107,85 @@ export default async function BusinessDetailPage({ params }: { params: Promise<R
 
 function BusinessHero({ business }: { business: BusinessDetail }) {
   return (
-    <section className="border-b border-sand bg-white">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-12 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex flex-col gap-3">
-          {business.category && (
-            <span className="w-fit rounded-full bg-sand-light px-3 py-1 text-xs font-medium text-terra">
-              {business.category.name}
-            </span>
-          )}
-          <h1 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">{business.name}</h1>
-          {business.headline && <p className="max-w-2xl text-lg text-ink-mid">{business.headline}</p>}
-          {business.officeAddress && (
-            <p className="flex items-center gap-2 text-sm text-ink-light">
-              <span aria-hidden>📍</span> {business.officeAddress}
-            </p>
-          )}
-        </div>
+    <section
+      style={{ background: 'linear-gradient(160deg, #2D4A3E 0%, #3D6455 100%)' }}
+    >
+      {/* Cover – zone décorative avec l'icône en filigrane */}
+      <div className="relative h-56 overflow-hidden">
+        {business.category?.icon && (
+          <span
+            className="pointer-events-none absolute right-24 top-1/2 -translate-y-1/2 select-none leading-none"
+            aria-hidden
+            style={{ fontSize: '220px', opacity: 0.09 }}
+          >
+            {business.category.icon}
+          </span>
+        )}
+        <nav aria-label="Fil d'Ariane" className="absolute left-0 top-0 px-8 pt-5 text-sm">
+          <Link href="/recherche" className="font-medium text-white/60 transition hover:text-white">
+            ← Retour aux résultats
+          </Link>
+        </nav>
+      </div>
 
-        <div className="flex flex-col items-start gap-2 sm:items-end">
-          <RatingBadge averageRating={business.averageRating} reviewsCount={business.reviewsCount} size="lg" />
-          {business.priceFrom !== null && (
-            <p className="text-sm text-ink-light">
-              Prestations dès <span className="font-semibold text-ink">{formatPrice(business.priceFrom)}</span>
-            </p>
-          )}
+      {/* Informations principales */}
+      <div className="pb-10">
+        <div className="mx-auto w-full max-w-6xl px-8">
+          {/* Avatar blanc chevauchant la zone cover */}
+          <div
+            className="mb-5 -mt-12 flex h-24 w-24 items-center justify-center rounded-full border-4 border-white bg-white text-5xl"
+            style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.22)' }}
+            aria-hidden
+          >
+            {business.category?.icon ?? '🏢'}
+          </div>
+
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div className="flex flex-col gap-2">
+              {business.category && (
+                <p className="text-xs font-semibold uppercase tracking-widest text-white/55">
+                  {business.category.name}
+                </p>
+              )}
+
+              <h1
+                className="font-serif text-4xl font-bold text-white sm:text-5xl"
+                style={{ textShadow: '0 2px 12px rgba(0,0,0,0.18)' }}
+              >
+                {business.name}
+              </h1>
+
+              {business.headline && (
+                <p className="max-w-2xl text-lg leading-relaxed text-white/75">{business.headline}</p>
+              )}
+
+              <div className="mt-1 flex flex-wrap items-center gap-4">
+                <RatingBadge
+                  averageRating={business.averageRating}
+                  reviewsCount={business.reviewsCount}
+                  size="lg"
+                  variant="light"
+                />
+                {business.officeAddress && (
+                  <span className="text-sm text-white/60">📍 {business.officeAddress}</span>
+                )}
+                {business.priceFrom !== null && (
+                  <span className="text-sm text-white/65">
+                    À partir de{' '}
+                    <span className="font-semibold text-white">{formatPrice(business.priceFrom)}</span>
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <a
+              href="#booking"
+              className="shrink-0 self-start rounded-full bg-terra px-8 py-3.5 text-base font-semibold text-white transition hover:bg-terra-dark sm:self-auto"
+              style={{ boxShadow: '0 4px 18px rgba(196,97,58,0.40)' }}
+            >
+              Prendre RDV
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -138,25 +194,25 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
 
 function ServiceCard({ service }: { service: Service }) {
   return (
-    <li className="rounded-2xl border border-sand bg-white p-5">
+    <li className="rounded-2xl border border-sand bg-warm-white p-5 transition hover:border-sand hover:shadow-[0_4px_16px_rgba(26,21,16,0.08)]">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <div>
-          <p className="font-semibold text-ink">{service.name}</p>
+          <p className="font-serif text-lg font-semibold text-ink">{service.name}</p>
           <p className="mt-1 text-sm text-ink-light">
             {formatDuration(service.duration)}
             {service.location && <> · {LOCATION_LABELS[service.location] ?? service.location}</>}
           </p>
         </div>
-        <p className="shrink-0 text-lg font-semibold text-ink">{formatPrice(service.price)}</p>
+        <p className="shrink-0 font-serif text-xl font-bold text-terra">{formatPrice(service.price)}</p>
       </div>
 
-      {service.description && <p className="mt-3 text-sm text-ink-mid">{service.description}</p>}
+      {service.description && <p className="mt-3 text-sm leading-relaxed text-ink-mid">{service.description}</p>}
 
       {service.faq && service.faq.length > 0 && (
-        <dl className="mt-4 flex flex-col gap-3 border-t border-sand-light pt-4">
+        <dl className="mt-4 flex flex-col gap-3 border-t border-sand pt-4">
           {service.faq.map((entry) => (
             <div key={entry.question}>
-              <dt className="text-sm font-medium text-ink">{entry.question}</dt>
+              <dt className="text-sm font-semibold text-ink">{entry.question}</dt>
               <dd className="mt-1 text-sm text-ink-mid">{entry.answer}</dd>
             </div>
           ))}
