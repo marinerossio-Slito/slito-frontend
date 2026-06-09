@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { AppointmentList } from '@/components/account/AppointmentList';
+import { BackLink } from '@/components/BackLink';
 import { RouteGuard } from '@/components/RouteGuard';
 
 export const metadata: Metadata = {
@@ -15,7 +16,8 @@ export default function AppointmentsPage() {
       <div className="mx-auto w-full max-w-3xl flex-1 px-6 py-12">
         <header className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-zinc-900">Mes rendez-vous</h1>
+            <BackLink href="/compte" label="Mon compte" />
+            <h1 className="mt-3 text-2xl font-bold tracking-tight text-zinc-900">Mes rendez-vous</h1>
             <p className="mt-1 text-zinc-500">
               Suivez l&apos;état de vos demandes, annulez ou laissez un avis.
             </p>

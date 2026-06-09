@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { AgendaPanel } from '@/components/artisan/AgendaPanel';
+import { BackLink } from '@/components/BackLink';
 import { RouteGuard } from '@/components/RouteGuard';
 
 export const metadata: Metadata = {
@@ -13,7 +14,8 @@ export default function ArtisanAgendaPage() {
     <RouteGuard roles={['ROLE_ARTISAN']}>
       <div className="mx-auto w-full max-w-3xl flex-1 px-6 py-10">
         <header className="mb-8">
-          <h1 className="text-xl font-bold tracking-tight text-zinc-900">Agenda</h1>
+          <BackLink href="/artisan" label="Espace artisan" />
+          <h1 className="mt-3 text-xl font-bold tracking-tight text-zinc-900">Agenda</h1>
           <p className="mt-1 text-sm text-zinc-500">
             Rendez-vous en attente de confirmation et confirmés. Confirmez ou annulez directement depuis ici.
           </p>
