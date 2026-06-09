@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
+import { AdminHub } from '@/components/admin/AdminHub';
 import { RouteGuard } from '@/components/RouteGuard';
-import { SpacePlaceholder } from '@/components/SpacePlaceholder';
 
 export const metadata: Metadata = {
   title: 'Administration',
@@ -11,10 +11,7 @@ export const metadata: Metadata = {
 export default function AdminSpacePage() {
   return (
     <RouteGuard roles={['ROLE_ADMIN']}>
-      <SpacePlaceholder
-        title="Administration"
-        description="Les statistiques de la plateforme et la gestion des catégories et des comptes s'afficheront ici (cf. ARCHITECTURE.md, étape 7 « Espace admin »)."
-      />
+      <AdminHub />
     </RouteGuard>
   );
 }
