@@ -1,15 +1,13 @@
 'use client';
 
 /**
- * En-tête commun à toutes les pages publiques.
+ * En-tête commun à toutes les pages.
  *
- * - Sticky : reste visible à la lecture.
- * - Logo bicolore "Sli" (terracotta) + "to" (forest) en Playfair Display.
- * - Desktop : liens horizontaux dans la barre de navigation.
- * - Mobile (< sm) : bouton hamburger qui ouvre un menu vertical fullscreen.
- *
- * Reste un Client Component car la navigation dépend de l'état d'authentification
- * (`useAuth`), connu uniquement côté client (JWT dans localStorage).
+ * - Fond forest uni (#2D4A3E) — toujours opaque, garanti par style inline.
+ * - Logo : "Sli" en terra-light (orange) + "to" en blanc — Playfair Display.
+ * - Liens : texte blanc/80, bordure blanche/20, hover plein blanc.
+ * - CTA principal : fond terra (orange) pour le contraste.
+ * - Mobile : hamburger blanc + menu déroulant sur fond forest.
  */
 
 import Link from 'next/link';
@@ -25,13 +23,16 @@ const ACCOUNT_LINK_LABELS: Record<string, string> = {
   '/admin': 'Administration',
 };
 
-/** Bouton/lien fantôme (contour sand, hover terracotta). */
+/** Lien fantôme sur fond sombre : texte blanc, bordure blanche/30. */
 const ghostClass =
-  'rounded-full border border-sand px-5 py-2 text-sm font-medium text-ink-mid transition hover:border-terra hover:text-terra';
+  'rounded-full border border-white/30 px-5 py-2 text-sm font-medium text-white/80 transition hover:border-white hover:bg-white/10 hover:text-white';
 
-/** Bouton primaire terracotta. */
+/** Bouton primaire terracotta : contraste orange sur kaki. */
 const primaryClass =
-  'rounded-full bg-terra px-5 py-2 text-sm font-medium text-white shadow-[0_2px_12px_rgba(196,97,58,0.30)] transition hover:-translate-y-px hover:bg-terra-dark hover:shadow-[0_4px_16px_rgba(196,97,58,0.40)]';
+  'rounded-full bg-terra px-5 py-2 text-sm font-semibold text-white shadow-[0_2px_14px_rgba(196,97,58,0.45)] transition hover:-translate-y-px hover:bg-terra-dark hover:shadow-[0_4px_18px_rgba(196,97,58,0.55)]';
+
+/** Style inline du fond kaki — garantit l'opacité même avant le CSS Tailwind. */
+const FOREST_BG = '#2D4A3E' as const;
 
 export function SiteHeader() {
   const { status, user, logout } = useAuth();
@@ -75,15 +76,18 @@ export function SiteHeader() {
 
   return (
     <header
-      className="sticky top-0 z-50 border-b border-sand bg-warm-white shadow-[0_2px_16px_rgba(26,21,16,0.08)]"
-      style={{ backgroundColor: '#FFFDF9' }}
+      className="sticky top-0 z-50 border-b border-white/10 bg-forest"
+      style={{ backgroundColor: FOREST_BG }}
     >
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-8" style={{ height: '64px' }}>
+      <div
+        className="mx-auto flex w-full max-w-6xl items-center justify-between px-8"
+        style={{ height: '64px' }}
+      >
         {/* Logo bicolore */}
         <Link href="/" aria-label="Slito — Accueil">
           <span className="font-serif text-[26px] font-bold leading-none tracking-[-0.5px]">
-            <span className="text-terra">Sli</span>
-            <span className="text-forest">to</span>
+            <span className="text-terra-light">Sli</span>
+            <span className="text-white">to</span>
           </span>
         </Link>
 
@@ -103,14 +107,28 @@ export function SiteHeader() {
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav"
           onClick={() => setMobileOpen((v) => !v)}
-          className="flex h-9 w-9 items-center justify-center rounded-lg text-ink-mid transition hover:bg-sand-light sm:hidden"
+          className="flex h-9 w-9 items-center justify-center rounded-lg text-white/70 transition hover:bg-white/10 hover:text-white sm:hidden"
         >
           {mobileOpen ? (
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5" aria-hidden>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="h-5 w-5"
+              aria-hidden
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5" aria-hidden>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="h-5 w-5"
+              aria-hidden
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           )}
@@ -122,8 +140,8 @@ export function SiteHeader() {
         <nav
           id="mobile-nav"
           aria-label="Menu mobile"
-          className="absolute inset-x-0 top-full z-50 flex flex-col gap-2 border-b border-sand bg-warm-white px-8 pb-5 pt-3 shadow-[0_8px_24px_rgba(26,21,16,0.10)] sm:hidden"
-          style={{ backgroundColor: '#FFFDF9' }}
+          className="absolute inset-x-0 top-full z-50 flex flex-col gap-2 border-b border-white/10 bg-forest px-8 pb-6 pt-4 shadow-[0_8px_32px_rgba(0,0,0,0.25)] sm:hidden"
+          style={{ backgroundColor: FOREST_BG }}
         >
           {navLinks}
         </nav>
