@@ -111,7 +111,7 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
   return (
     <section
       className="bg-forest"
-      style={{ backgroundColor: '#2D4A3E' }}
+      style={{ backgroundColor: '#334534' }}
     >
       {/* Cover – zone décorative avec l'icône en filigrane */}
       <div className="relative h-56 overflow-hidden">
@@ -165,7 +165,7 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
               <a
                 href="#booking"
                 className="rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
-                style={{ backgroundColor: '#C4613A' }}
+                style={{ backgroundColor: '#c56339' }}
               >
                 📅 Prendre RDV
               </a>

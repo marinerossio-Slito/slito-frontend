@@ -58,13 +58,13 @@ export function DashboardSidebar({
   return (
     <aside
       className="sticky top-16 hidden h-[calc(100vh-4rem)] w-60 shrink-0 flex-col overflow-y-auto px-4 py-6 lg:flex"
-      style={{ backgroundColor: '#2D4A3E' }}
+      style={{ backgroundColor: '#334534' }}
     >
       {/* Profil */}
       <div className="mb-6 border-b border-white/10 pb-6 text-center">
         <div
           className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full text-lg font-bold text-white"
-          style={{ backgroundColor: '#C4613A' }}
+          style={{ backgroundColor: '#c56339' }}
         >
           {avatarLetters}
         </div>

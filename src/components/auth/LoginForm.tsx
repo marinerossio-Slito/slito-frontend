@@ -83,7 +83,7 @@ export function LoginForm({ redirectTo }: { redirectTo: string | null }) {
         type="submit"
         disabled={isSubmitting}
         className="inline-flex items-center justify-center rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark disabled:cursor-not-allowed disabled:opacity-60"
-        style={{ backgroundColor: '#C4613A' }}
+        style={{ backgroundColor: '#c56339' }}
       >
         {isSubmitting ? 'Connexion…' : 'Se connecter'}
       </button>

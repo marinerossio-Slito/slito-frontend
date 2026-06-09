@@ -84,8 +84,8 @@ export default async function Home() {
 function Hero() {
   return (
     <section
-      className="relative overflow-hidden px-8 pb-24 pt-20 text-center bg-forest"
-      style={{ backgroundColor: '#2D4A3E' }}
+      className="relative overflow-hidden px-8 pb-24 pt-20 text-center"
+      style={{ background: 'linear-gradient(rgba(197,99,57,0.04), rgba(197,99,57,0.04)), radial-gradient(ellipse at 55% 30%, #3d5440 0%, #334534 60%, #1a2419 100%)' }}
     >
 
       {/* Badge */}
@@ -95,10 +95,11 @@ function Hero() {
 
       {/* Titre */}
       <h1 className="relative mx-auto mb-5 max-w-3xl font-serif text-5xl font-bold leading-[1.15] text-white sm:text-6xl">
-        Trouvez l&apos;artisan{' '}
-        <em className="not-italic text-terra-light" style={{ color: '#E8896A' }}>qu&apos;il vous faut</em>,
-        <br className="hidden sm:block" />
-        {' '}quand vous en avez besoin
+        Trouvez l&apos;artisan
+        <br />
+        <em className="not-italic text-terra-light" style={{ color: '#d8825a' }}>qu&apos;il vous faut</em>,
+        <br />
+        quand vous en avez besoin
       </h1>
 
       {/* Sous-titre */}
@@ -112,14 +113,14 @@ function Hero() {
         method="get"
         action="/recherche"
         className="relative mx-auto flex max-w-2xl items-center gap-2 rounded-2xl bg-warm-white p-2 shadow-[0_8px_40px_rgba(0,0,0,0.25)]"
-        style={{ backgroundColor: '#FFFDF9' }}
+        style={{ backgroundColor: '#fdfaf3' }}
       >
         <input
           name="category"
           type="text"
           placeholder="Plombier, électricien, menuisier..."
           className="flex-1 bg-transparent px-4 py-3 text-sm focus:outline-none"
-          style={{ color: '#2D4A3E' }}
+          style={{ color: '#334534' }}
         />
         <div className="h-7 w-px bg-sand" aria-hidden />
         <input
@@ -127,12 +128,12 @@ function Hero() {
           type="text"
           placeholder="📍 Ville ou code postal"
           className="bg-transparent px-4 py-3 text-sm focus:outline-none"
-          style={{ color: '#2D4A3E', minWidth: '160px' }}
+          style={{ color: '#334534', minWidth: '160px' }}
         />
         <button
           type="submit"
           className="rounded-xl bg-terra px-7 py-3.5 text-sm font-semibold text-white transition hover:scale-[1.02] hover:bg-terra-dark"
-          style={{ backgroundColor: '#C4613A' }}
+          style={{ backgroundColor: '#c56339' }}
         >
           Rechercher
         </button>
@@ -186,7 +187,7 @@ function HowItWorks() {
   ];
 
   return (
-    <section className="bg-forest py-20 text-center">
+    <section className="py-20 text-center" style={{ background: 'linear-gradient(rgba(197,99,57,0.04), rgba(197,99,57,0.04)), radial-gradient(ellipse at 55% 30%, #3d5440 0%, #334534 60%, #1a2419 100%)' }}>
       <div className="mx-auto max-w-5xl px-8">
         <h2 className="mb-3 font-serif text-3xl font-bold text-white">Comment ça marche ?</h2>
         <p className="mb-14 text-base text-white/60">

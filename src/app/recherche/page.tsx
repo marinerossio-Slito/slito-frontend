@@ -24,7 +24,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
       {/* ── Page hero ──────────────────────────────────────────────────────── */}
       <div
         className="border-b border-sand bg-sand-light px-8 py-10"
-        style={{ backgroundColor: '#F2E8D5' }}
+        style={{ backgroundColor: '#f0e8d5' }}
       >
         <nav aria-label="Fil d'Ariane" className="mb-3 text-sm text-ink-light">
           <Link href="/" className="text-terra hover:underline">Accueil</Link>
@@ -35,7 +35,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
         <form
           method="get"
           className="flex max-w-2xl items-center gap-2 rounded-xl border border-sand bg-warm-white p-2"
-          style={{ backgroundColor: '#FFFDF9' }}
+          style={{ backgroundColor: '#fdfaf3' }}
         >
           <input
             name="category"
@@ -43,7 +43,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
             placeholder="Plombier, électricien..."
             defaultValue={filters.category ?? ''}
             className="flex-1 bg-transparent px-4 py-2.5 text-sm focus:outline-none"
-            style={{ color: '#2D4A3E' }}
+            style={{ color: '#334534' }}
           />
           <div className="h-6 w-px bg-sand" aria-hidden />
           <input
@@ -52,12 +52,12 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
             placeholder="📍 Ville"
             defaultValue={filters.city ?? ''}
             className="bg-transparent px-4 py-2.5 text-sm focus:outline-none"
-            style={{ color: '#2D4A3E', minWidth: '130px' }}
+            style={{ color: '#334534', minWidth: '130px' }}
           />
           <button
             type="submit"
             className="rounded-lg bg-terra px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
-            style={{ backgroundColor: '#C4613A' }}
+            style={{ backgroundColor: '#c56339' }}
           >
             Rechercher
           </button>
@@ -212,7 +212,7 @@ function SidebarFilters({
       <button
         type="submit"
         className="w-full rounded-full bg-terra py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
-        style={{ backgroundColor: '#C4613A' }}
+        style={{ backgroundColor: '#c56339' }}
       >
         Appliquer
       </button>

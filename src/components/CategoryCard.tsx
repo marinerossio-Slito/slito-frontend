@@ -19,25 +19,25 @@ export function CategoryCard({
       href={`/recherche?category=${encodeURIComponent(category.slug)}`}
       className="group flex flex-col items-center gap-3 rounded-2xl border-[1.5px] p-6 text-center transition hover:-translate-y-0.5"
       style={{
-        backgroundColor: '#FFFDF9',
-        borderColor: '#E8D5B7',
+        backgroundColor: '#fdfaf3',
+        borderColor: '#e8dcc8',
       }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.borderColor = '#C4613A';
+        (e.currentTarget as HTMLAnchorElement).style.borderColor = '#c56339';
         (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 4px 24px rgba(196,97,58,0.12)';
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.borderColor = '#E8D5B7';
+        (e.currentTarget as HTMLAnchorElement).style.borderColor = '#e8dcc8';
         (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none';
       }}
     >
       <span className="block text-5xl leading-none">{category.icon ?? '🛠️'}</span>
       <div>
-        <p className="text-sm font-semibold" style={{ color: '#2D4A3E' }}>
+        <p className="text-sm font-semibold" style={{ color: '#334534' }}>
           {category.name}
         </p>
         {count !== undefined && (
-          <p className="mt-0.5 text-xs" style={{ color: '#7A9E92' }}>
+          <p className="mt-0.5 text-xs" style={{ color: '#7a9478' }}>
             {count} artisan{count > 1 ? 's' : ''}
           </p>
         )}

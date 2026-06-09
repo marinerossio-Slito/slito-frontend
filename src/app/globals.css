@@ -2,20 +2,20 @@
 
 /* ─── Design tokens Slito ──────────────────────────────────────────────────── */
 @theme {
-  /* Palette */
-  --color-terra:       #C4613A;
-  --color-terra-light: #E8896A;
-  --color-terra-dark:  #9B4A2A;
-  --color-forest:      #2D4A3E;
-  --color-forest-light: #3D6455;
-  --color-gold:        #C9973A;
-  --color-sand:        #E8D5B7;
-  --color-sand-light:  #F2E8D5;
-  --color-cream:       #FAF7F2;
-  --color-warm-white:  #FFFDF9;
-  --color-ink:         #2D4A3E;   /* vert forêt foncé — texte principal sur crème */
-  --color-ink-mid:     #4A6E5E;   /* vert forêt moyen — texte secondaire */
-  --color-ink-light:   #7A9E92;   /* vert forêt clair — texte tertiaire / placeholders */
+  /* Palette — couleurs exactes de la charte */
+  --color-terra:       #c56339;   /* terracotta charte */
+  --color-terra-light: #d8825a;   /* terracotta clair */
+  --color-terra-dark:  #9e4e2e;   /* terracotta foncé */
+  --color-forest:      #334534;   /* vert forêt charte */
+  --color-forest-light: #4a6348;  /* vert forêt clair */
+  --color-gold:        #c49440;   /* doré chaud */
+  --color-sand:        #e8dcc8;   /* sable dérivé crème */
+  --color-sand-light:  #f0e8d5;   /* sable clair */
+  --color-cream:       #f8f3e9;   /* crème charte */
+  --color-warm-white:  #fdfaf3;   /* blanc chaud */
+  --color-ink:         #334534;   /* suit forest */
+  --color-ink-mid:     #506850;   /* vert moyen */
+  --color-ink-light:   #7a9478;   /* vert clair */
 }
 
 /* Polices : injectées par Next.js en tant que variables CSS sur <html> */
@@ -26,8 +26,8 @@
 
 /* ─── Base ─────────────────────────────────────────────────────────────────── */
 body {
-  background-color: #FAF7F2; /* cream */
-  color: #2D4A3E;            /* ink = vert forêt */
+  background-color: #f8f3e9; /* cream charte */
+  color: #334534;            /* ink = vert forêt charte */
 }
 
 /* Anneau de focus cohérent avec la charte terracotta */

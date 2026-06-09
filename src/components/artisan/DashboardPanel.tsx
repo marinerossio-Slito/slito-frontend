@@ -136,7 +136,7 @@ export function DashboardPanel() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
 
         {/* Rendez-vous du jour */}
-        <div className="rounded-2xl border border-sand bg-warm-white p-6" style={{ backgroundColor: '#FFFDF9' }}>
+        <div className="rounded-2xl border border-sand bg-warm-white p-6" style={{ backgroundColor: '#fdfaf3' }}>
           <h2 className="mb-5 font-serif text-lg font-bold text-ink">Rendez-vous du jour</h2>
 
           {loading ? (
@@ -184,7 +184,7 @@ export function DashboardPanel() {
         </div>
 
         {/* Notifications */}
-        <div className="rounded-2xl border border-sand bg-warm-white p-6" style={{ backgroundColor: '#FFFDF9' }}>
+        <div className="rounded-2xl border border-sand bg-warm-white p-6" style={{ backgroundColor: '#fdfaf3' }}>
           <h2 className="mb-5 font-serif text-lg font-bold text-ink">Notifications</h2>
 
           {loading ? (
@@ -256,7 +256,7 @@ function StatCard({
   subColor?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-sand bg-warm-white p-5" style={{ backgroundColor: '#FFFDF9' }}>
+    <div className="rounded-2xl border border-sand bg-warm-white p-5" style={{ backgroundColor: '#fdfaf3' }}>
       <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-light">{label}</p>
       <p className="mt-2 font-serif text-3xl font-bold text-ink">{value}</p>
       {sub && <p className={`mt-1.5 text-xs ${subColor ?? 'text-ink-light'}`}>{sub}</p>}
