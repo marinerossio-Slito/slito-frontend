@@ -46,3 +46,16 @@ export function cancelAppointment(token: string, id: number): Promise<Appointmen
     body: { status: 'CANCELLED' },
   });
 }
+
+/**
+ * Confirme un rendez-vous en attente (`PATCH /api/appointments/{id}`
+ * avec `{ status: 'CONFIRMED' }`).
+ * Réservé à l'artisan concerné.
+ */
+export function confirmAppointment(token: string, id: number): Promise<Appointment> {
+  return apiFetch<Appointment>(`/api/appointments/${id}`, {
+    method: 'PATCH',
+    token,
+    body: { status: 'CONFIRMED' },
+  });
+}
