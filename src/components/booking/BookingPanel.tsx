@@ -78,7 +78,7 @@ export function BookingPanel({ business }: { business: BusinessDetail }) {
   // Artisan, admin ou autre rôle non-client
   if (!hasRole(['ROLE_CUSTOMER'])) {
     return (
-      <div className="rounded-2xl border border-sand bg-white p-5 text-sm text-ink-mid">
+      <div className="rounded-2xl border border-sand bg-warm-white p-5 text-sm text-ink-mid">
         Seuls les comptes clients peuvent prendre rendez-vous via Slito.
       </div>
     );
@@ -87,7 +87,7 @@ export function BookingPanel({ business }: { business: BusinessDetail }) {
   // Aucune prestation disponible
   if (business.services.length === 0) {
     return (
-      <div className="rounded-2xl border border-sand bg-white p-5 text-sm text-ink-mid">
+      <div className="rounded-2xl border border-sand bg-warm-white p-5 text-sm text-ink-mid">
         Cette entreprise n&apos;a pas encore renseigné de prestations réservables.
       </div>
     );
@@ -186,7 +186,7 @@ function BookingForm({ business, token }: { business: BusinessDetail; token: str
   }
 
   return (
-    <div className="flex flex-col gap-5 rounded-2xl border border-sand bg-white p-5">
+    <div className="flex flex-col gap-5 rounded-2xl border border-sand bg-warm-white p-5">
       <h2 className="text-base font-semibold text-ink">Prendre rendez-vous</h2>
 
       <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">

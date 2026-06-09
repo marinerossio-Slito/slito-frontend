@@ -192,7 +192,7 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
   const showDetail = selectedId !== null || isNewConversation;
 
   return (
-    <div className="flex flex-1 overflow-hidden rounded-2xl border border-sand bg-white">
+    <div className="flex flex-1 overflow-hidden rounded-2xl border border-sand bg-warm-white">
       {/* Panneau gauche : liste des conversations */}
       <aside
         className={`flex flex-col border-r border-sand-light ${showDetail ? 'hidden lg:flex lg:w-80 lg:shrink-0' : 'flex w-full'}`}
@@ -355,7 +355,7 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
                           onChange={(e) => setReplyContent(e.target.value)}
                           placeholder="Écrivez votre message…"
                           maxLength={5000}
-                          className="flex-1 resize-none rounded-xl border border-sand bg-white px-3 py-2 text-sm text-ink transition focus:border-terra focus:outline-none focus:ring-2 focus:ring-terra/20"
+                          className="flex-1 resize-none rounded-xl border border-sand bg-warm-white px-3 py-2 text-sm text-ink transition focus:border-terra focus:outline-none focus:ring-2 focus:ring-terra/20"
                           onKeyDown={(e) => {
                             if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
                               e.currentTarget.form?.requestSubmit();
@@ -472,7 +472,7 @@ function NewConversationPanel({
               placeholder="Écrivez votre premier message…"
               maxLength={5000}
               autoFocus
-              className="flex-1 resize-none rounded-xl border border-sand bg-white px-3 py-2 text-sm text-ink transition focus:border-terra focus:outline-none focus:ring-2 focus:ring-terra/20"
+              className="flex-1 resize-none rounded-xl border border-sand bg-warm-white px-3 py-2 text-sm text-ink transition focus:border-terra focus:outline-none focus:ring-2 focus:ring-terra/20"
             />
             <button
               type="submit"

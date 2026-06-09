@@ -81,7 +81,7 @@ export function UserManager() {
   return (
     <div className="flex flex-col gap-8">
       {/* Formulaire de recherche */}
-      <section className="rounded-2xl border border-sand bg-white p-6">
+      <section className="rounded-2xl border border-sand bg-warm-white p-6">
         <h2 className="mb-1 text-base font-semibold text-ink">Rechercher un utilisateur</h2>
         <p className="mb-4 text-sm text-ink-light">
           Entrez l&apos;identifiant numérique (ID) du compte à gérer.
@@ -113,7 +113,7 @@ export function UserManager() {
 
       {/* Fiche utilisateur + actions */}
       {user && (
-        <section className="rounded-2xl border border-sand bg-white p-6">
+        <section className="rounded-2xl border border-sand bg-warm-white p-6">
           <h2 className="mb-4 text-base font-semibold text-ink">
             Compte #{user.id}
           </h2>

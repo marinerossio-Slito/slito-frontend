@@ -144,7 +144,7 @@ export function AgendaPanel() {
             {events.map((evt) => (
               <li
                 key={evt.id}
-                className="rounded-2xl border border-sand bg-white px-5 py-4"
+                className="rounded-2xl border border-sand bg-warm-white px-5 py-4"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex flex-col gap-0.5">
@@ -192,7 +192,7 @@ function AppointmentCard({
   const status = appointment.status as AppointmentStatus;
 
   return (
-    <li className="rounded-2xl border border-sand bg-white px-5 py-4">
+    <li className="rounded-2xl border border-sand bg-warm-white px-5 py-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">

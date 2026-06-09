@@ -20,7 +20,7 @@ export function SpacePlaceholder({ title, description }: { title: string; descri
       </header>
 
       {user && (
-        <div className="rounded-2xl border border-sand bg-white p-5 text-sm text-ink-mid">
+        <div className="rounded-2xl border border-sand bg-warm-white p-5 text-sm text-ink-mid">
           <p>
             Connecté·e en tant que <span className="font-semibold text-ink">{user.email}</span>
           </p>

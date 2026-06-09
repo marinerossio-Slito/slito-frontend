@@ -128,7 +128,7 @@ function StatCard({
   return (
     <div
       className={`flex flex-col gap-1 rounded-2xl border p-4 ${
-        alert ? 'border-sand bg-sand-light' : 'border-sand bg-white'
+        alert ? 'border-sand bg-sand-light' : 'border-sand bg-warm-white'
       }`}
     >
       <span className={`text-xl font-bold ${alert ? 'text-terra' : 'text-ink'}`}>

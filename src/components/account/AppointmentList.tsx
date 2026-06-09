@@ -212,7 +212,7 @@ function AppointmentCard({
   const canReview = appointment.status === 'COMPLETED' && !hasBeenReviewed;
 
   return (
-    <li className="rounded-2xl border border-sand bg-white p-5">
+    <li className="rounded-2xl border border-sand bg-warm-white p-5">
       {/* En-tête : prestation + statut */}
       <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <div>

@@ -120,7 +120,7 @@ export function DashboardPanel() {
 
       {/* Répartition par statut */}
       {appointments.total > 0 && (
-        <div className="rounded-2xl border border-sand bg-white p-5">
+        <div className="rounded-2xl border border-sand bg-warm-white p-5">
           <h2 className="mb-4 text-sm font-semibold text-ink-mid">
             Répartition des rendez-vous
           </h2>
@@ -145,7 +145,7 @@ export function DashboardPanel() {
 
 function StatCard({ label, value, icon }: { label: string; value: string; icon: string }) {
   return (
-    <div className="flex flex-col gap-1.5 rounded-2xl border border-sand bg-white p-5">
+    <div className="flex flex-col gap-1.5 rounded-2xl border border-sand bg-warm-white p-5">
       <span className="text-2xl" aria-hidden>
         {icon}
       </span>

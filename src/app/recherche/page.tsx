@@ -34,7 +34,8 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
         <h1 className="mb-4 font-serif text-3xl font-bold text-ink">Trouver un artisan</h1>
         <form
           method="get"
-          className="flex max-w-2xl items-center gap-2 rounded-xl border border-sand bg-white p-2"
+          className="flex max-w-2xl items-center gap-2 rounded-xl border border-sand bg-warm-white p-2"
+          style={{ backgroundColor: '#FFFDF9' }}
         >
           <input
             name="category"

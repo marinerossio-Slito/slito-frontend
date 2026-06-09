@@ -101,7 +101,8 @@ function Hero() {
       <form
         method="get"
         action="/recherche"
-        className="relative mx-auto flex max-w-2xl items-center gap-2 rounded-2xl bg-white p-2 shadow-[0_8px_40px_rgba(0,0,0,0.25)]"
+        className="relative mx-auto flex max-w-2xl items-center gap-2 rounded-2xl bg-warm-white p-2 shadow-[0_8px_40px_rgba(0,0,0,0.25)]"
+        style={{ backgroundColor: '#FFFDF9' }}
       >
         <input
           name="category"

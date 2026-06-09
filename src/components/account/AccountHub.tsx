@@ -35,7 +35,7 @@ export function AccountHub() {
           <li>
             <Link
               href="/compte/rendez-vous"
-              className="flex flex-col gap-2 rounded-2xl border border-sand bg-white p-5 transition hover:border-sand hover:shadow-sm"
+              className="flex flex-col gap-2 rounded-2xl border border-sand bg-warm-white p-5 transition hover:border-sand hover:shadow-sm"
             >
               <span className="text-2xl" aria-hidden>
                 📅
@@ -51,7 +51,7 @@ export function AccountHub() {
           <li>
             <Link
               href="/compte/messages"
-              className="flex flex-col gap-2 rounded-2xl border border-sand bg-white p-5 transition hover:border-sand hover:shadow-sm"
+              className="flex flex-col gap-2 rounded-2xl border border-sand bg-warm-white p-5 transition hover:border-sand hover:shadow-sm"
             >
               <span className="text-2xl" aria-hidden>
                 💬

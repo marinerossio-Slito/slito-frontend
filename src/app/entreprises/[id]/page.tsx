@@ -74,7 +74,7 @@ export default async function BusinessDetailPage({ params }: { params: Promise<R
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 px-6 py-8 lg:grid-cols-[1fr_360px]">
         <div className="flex flex-col gap-5">
           {business.description && (
-            <div className="rounded-2xl border border-sand bg-white p-7">
+            <div className="rounded-2xl border border-sand bg-warm-white p-7">
               <h2 className="mb-4 border-b border-sand pb-4 font-serif text-[22px] font-bold text-ink">
                 À propos
               </h2>
@@ -82,7 +82,7 @@ export default async function BusinessDetailPage({ params }: { params: Promise<R
             </div>
           )}
 
-          <div className="rounded-2xl border border-sand bg-white p-7">
+          <div className="rounded-2xl border border-sand bg-warm-white p-7">
             <h2 className="mb-4 border-b border-sand pb-4 font-serif text-[22px] font-bold text-ink">
               Services proposés
             </h2>
@@ -139,7 +139,7 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
             <div className="flex items-end gap-5">
               {/* Avatar blanc chevauchant la zone cover */}
               <div
-                className="-mt-12 flex h-24 w-24 shrink-0 items-center justify-center rounded-full border-4 border-white bg-white text-5xl"
+                className="-mt-12 flex h-24 w-24 shrink-0 items-center justify-center rounded-full border-4 border-white bg-warm-white text-5xl"
                 style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}
                 aria-hidden
               >
@@ -219,7 +219,7 @@ function BusinessInfoCard({ business }: { business: BusinessDetail }) {
   }
 
   return (
-    <div className="flex flex-col gap-5 rounded-2xl border border-sand bg-white p-7">
+    <div className="flex flex-col gap-5 rounded-2xl border border-sand bg-warm-white p-7">
       <h2 className="border-b border-sand pb-4 font-serif text-[22px] font-bold text-ink">Informations pratiques</h2>
 
       {hasContactInfo && (

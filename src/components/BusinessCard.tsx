@@ -13,7 +13,7 @@ export function BusinessCard({ business }: { business: BusinessSummary }) {
   return (
     <Link
       href={`/entreprises/${business.id}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-sand bg-white transition hover:-translate-y-0.5 hover:border-transparent hover:shadow-[0_12px_48px_rgba(26,21,16,0.18)]"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-sand bg-warm-white transition hover:-translate-y-0.5 hover:border-transparent hover:shadow-[0_12px_48px_rgba(26,21,16,0.18)]"
     >
       {/* Zone de couverture */}
       <div className="relative flex h-36 items-center justify-center bg-sand text-5xl">

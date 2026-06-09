@@ -99,7 +99,7 @@ export function CategoryManager() {
             {categories.map((cat) => (
               <li
                 key={cat.id}
-                className="flex items-center gap-3 rounded-xl border border-sand bg-white px-4 py-3"
+                className="flex items-center gap-3 rounded-xl border border-sand bg-warm-white px-4 py-3"
               >
                 {cat.icon && <span className="text-lg" aria-hidden>{cat.icon}</span>}
                 <div className="flex flex-col">
@@ -113,7 +113,7 @@ export function CategoryManager() {
       </section>
 
       {/* Formulaire de création */}
-      <section className="rounded-2xl border border-sand bg-white p-6">
+      <section className="rounded-2xl border border-sand bg-warm-white p-6">
         <h2 className="mb-5 text-base font-semibold text-ink">Créer une catégorie</h2>
 
         <form onSubmit={handleCreate} noValidate className="flex flex-col gap-4">

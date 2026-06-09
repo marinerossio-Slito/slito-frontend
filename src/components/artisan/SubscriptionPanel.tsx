@@ -101,7 +101,7 @@ export function SubscriptionPanel() {
   return (
     <div className="flex flex-col gap-6">
       {/* Statut courant */}
-      <div className="rounded-2xl border border-sand bg-white p-6">
+      <div className="rounded-2xl border border-sand bg-warm-white p-6">
         <h2 className="mb-4 text-base font-semibold text-ink">Votre abonnement</h2>
 
         {subscription ? (
@@ -224,8 +224,8 @@ function PlanOption({
       onClick={onSelect}
       className={`flex flex-1 flex-col gap-0.5 rounded-xl border-2 px-4 py-3 text-left transition ${
         selected
-          ? 'border-terra bg-white'
-          : 'border-sand bg-white hover:border-sand'
+          ? 'border-terra bg-warm-white'
+          : 'border-sand bg-warm-white hover:border-sand'
       }`}
     >
       <span className="font-semibold text-ink">{label}</span>

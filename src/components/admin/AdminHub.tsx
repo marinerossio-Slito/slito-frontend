@@ -29,7 +29,7 @@ export function AdminHub() {
           <li>
             <Link
               href="/admin/stats"
-              className="flex flex-col gap-2 rounded-2xl border border-sand bg-white p-5 transition hover:border-sand hover:shadow-sm"
+              className="flex flex-col gap-2 rounded-2xl border border-sand bg-warm-white p-5 transition hover:border-sand hover:shadow-sm"
             >
               <span className="text-2xl" aria-hidden>
                 📈
@@ -44,7 +44,7 @@ export function AdminHub() {
           <li>
             <Link
               href="/admin/categories"
-              className="flex flex-col gap-2 rounded-2xl border border-sand bg-white p-5 transition hover:border-sand hover:shadow-sm"
+              className="flex flex-col gap-2 rounded-2xl border border-sand bg-warm-white p-5 transition hover:border-sand hover:shadow-sm"
             >
               <span className="text-2xl" aria-hidden>
                 🏷️
@@ -59,7 +59,7 @@ export function AdminHub() {
           <li>
             <Link
               href="/admin/utilisateurs"
-              className="flex flex-col gap-2 rounded-2xl border border-sand bg-white p-5 transition hover:border-sand hover:shadow-sm"
+              className="flex flex-col gap-2 rounded-2xl border border-sand bg-warm-white p-5 transition hover:border-sand hover:shadow-sm"
             >
               <span className="text-2xl" aria-hidden>
                 👤

@@ -149,7 +149,7 @@ export function RegisterForm() {
             aria-pressed={accountType === option.value}
             className={
               accountType === option.value
-                ? 'rounded-full bg-white px-4 py-2 text-ink shadow-sm'
+                ? 'rounded-full bg-warm-white px-4 py-2 text-ink shadow-sm'
                 : 'rounded-full px-4 py-2 text-ink-light transition hover:text-ink-mid'
             }
           >
