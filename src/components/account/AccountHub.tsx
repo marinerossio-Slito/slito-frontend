@@ -47,17 +47,20 @@ export function AccountHub() {
             </Link>
           </li>
 
-          {/* Messagerie — étape 5 */}
+          {/* Messagerie */}
           <li>
-            <div className="flex flex-col gap-2 rounded-2xl border border-dashed border-zinc-200 bg-zinc-50 p-5 opacity-60">
+            <Link
+              href="/compte/messages"
+              className="flex flex-col gap-2 rounded-2xl border border-zinc-200 bg-white p-5 transition hover:border-amber-300 hover:shadow-sm"
+            >
               <span className="text-2xl" aria-hidden>
                 💬
               </span>
               <span className="font-semibold text-zinc-900">Messagerie</span>
               <span className="text-sm text-zinc-500">
-                Échangez directement avec les artisans. Disponible à l&apos;étape 5.
+                Échangez directement avec les artisans Slito.
               </span>
-            </div>
+            </Link>
           </li>
         </ul>
       </nav>

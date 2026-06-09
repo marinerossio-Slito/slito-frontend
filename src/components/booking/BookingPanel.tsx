@@ -272,6 +272,16 @@ function BookingForm({ business, token }: { business: BusinessDetail; token: str
           {isSubmitting ? 'Envoi en cours…' : 'Envoyer la demande'}
         </button>
       </form>
+
+      <p className="text-center text-sm text-zinc-500">
+        Ou{' '}
+        <Link
+          href={`/compte/messages?businessId=${business.id}&businessName=${encodeURIComponent(business.name)}`}
+          className="font-medium text-amber-700 transition hover:text-amber-800"
+        >
+          envoyer un message à l&apos;artisan
+        </Link>
+      </p>
     </div>
   );
 }
