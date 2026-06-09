@@ -13,9 +13,9 @@
   --color-sand-light:  #F2E8D5;
   --color-cream:       #FAF7F2;
   --color-warm-white:  #FFFDF9;
-  --color-ink:         #1A1510;
-  --color-ink-mid:     #4A4035;
-  --color-ink-light:   #8A7E72;
+  --color-ink:         #2D4A3E;   /* vert forêt foncé — texte principal sur crème */
+  --color-ink-mid:     #4A6E5E;   /* vert forêt moyen — texte secondaire */
+  --color-ink-light:   #7A9E92;   /* vert forêt clair — texte tertiaire / placeholders */
 }
 
 /* Polices : injectées par Next.js en tant que variables CSS sur <html> */
@@ -27,7 +27,7 @@
 /* ─── Base ─────────────────────────────────────────────────────────────────── */
 body {
   background-color: #FAF7F2; /* cream */
-  color: #1A1510;            /* ink */
+  color: #2D4A3E;            /* ink = vert forêt */
 }
 
 /* Anneau de focus cohérent avec la charte terracotta */

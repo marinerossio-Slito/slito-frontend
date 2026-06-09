@@ -21,7 +21,7 @@ const ACCOUNT_LINK_LABELS: Record<string, string> = {
 };
 
 const ghostClass =
-  'rounded-full border border-sand px-5 py-2 text-sm font-medium text-ink-mid transition hover:border-terra/60 hover:text-ink';
+  'rounded-full border border-sand px-5 py-2 text-sm font-medium text-[#2D4A3E] transition hover:border-terra/60 hover:text-[#1E3328]';
 
 const primaryClass =
   'rounded-full bg-terra px-5 py-2 text-sm font-semibold text-white transition hover:-translate-y-px hover:bg-terra-dark';
@@ -65,7 +65,8 @@ export function SiteHeader() {
         <button
           type="button"
           aria-label="Notifications"
-          className="relative flex h-9 w-9 items-center justify-center rounded-full border border-sand text-ink-mid transition hover:bg-sand-light"
+          className="relative flex h-9 w-9 items-center justify-center rounded-full border border-sand transition hover:bg-sand-light"
+          style={{ color: '#2D4A3E' }}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5" aria-hidden>
             <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
@@ -84,7 +85,8 @@ export function SiteHeader() {
           type="button"
           onClick={handleLogout}
           title={`Déconnexion (${user.email})`}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-sand bg-warm-white text-[13px] font-semibold text-ink-mid transition hover:bg-sand-light"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-sand bg-warm-white text-[13px] font-semibold transition hover:bg-sand-light"
+          style={{ color: '#2D4A3E', backgroundColor: '#FFFDF9' }}
         >
           {emailInitials(user.email)}
         </button>
@@ -141,7 +143,7 @@ export function SiteHeader() {
         <Link href="/" aria-label="Slito — Accueil">
           <span className="font-serif text-[26px] font-bold leading-none tracking-[-0.5px]">
             <span className="text-terra-light" style={{ color: '#E8896A' }}>Sli</span>
-            <span className="text-ink">to</span>
+            <span style={{ color: '#2D4A3E' }}>to</span>
           </span>
         </Link>
 

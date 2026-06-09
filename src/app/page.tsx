@@ -118,15 +118,16 @@ function Hero() {
           name="category"
           type="text"
           placeholder="Plombier, électricien, menuisier..."
-          className="flex-1 bg-transparent px-4 py-3 text-sm text-ink placeholder:text-ink-light focus:outline-none"
+          className="flex-1 bg-transparent px-4 py-3 text-sm focus:outline-none"
+          style={{ color: '#2D4A3E' }}
         />
         <div className="h-7 w-px bg-sand" aria-hidden />
         <input
           name="city"
           type="text"
           placeholder="📍 Ville ou code postal"
-          className="bg-transparent px-4 py-3 text-sm text-ink-mid placeholder:text-ink-light focus:outline-none"
-          style={{ minWidth: '160px' }}
+          className="bg-transparent px-4 py-3 text-sm focus:outline-none"
+          style={{ color: '#2D4A3E', minWidth: '160px' }}
         />
         <button
           type="submit"

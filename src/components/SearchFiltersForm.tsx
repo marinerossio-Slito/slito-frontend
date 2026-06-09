@@ -5,7 +5,7 @@ import type { ArtisanCategory, SearchFilters } from '@/types/catalog';
 const RATING_OPTIONS = [4, 3, 2, 1];
 
 const FIELD_CLASSES =
-  'rounded-lg border border-sand bg-warm-white px-3 py-2 text-sm text-ink transition focus:border-terra focus:outline-none focus:ring-2 focus:ring-terra/20';
+  'rounded-lg border border-sand bg-warm-white px-3 py-2 text-sm text-[#2D4A3E] transition focus:border-terra focus:outline-none focus:ring-2 focus:ring-terra/20';
 
 /**
  * Formulaire de filtrage de la recherche d'artisans (`/recherche`).
@@ -106,7 +106,7 @@ export function SearchFiltersForm({ categories, filters }: { categories: Artisan
 
 function Field({ label, htmlFor, children }: { label: string; htmlFor: string; children: React.ReactNode }) {
   return (
-    <label htmlFor={htmlFor} className="flex flex-col gap-1.5 text-sm font-medium text-ink-mid">
+    <label htmlFor={htmlFor} className="flex flex-col gap-1.5 text-sm font-medium text-[#2D4A3E]">
       {label}
       {children}
     </label>

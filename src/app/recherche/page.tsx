@@ -42,7 +42,8 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
             type="text"
             placeholder="Plombier, électricien..."
             defaultValue={filters.category ?? ''}
-            className="flex-1 bg-transparent px-4 py-2.5 text-sm text-ink placeholder:text-ink-light focus:outline-none"
+            className="flex-1 bg-transparent px-4 py-2.5 text-sm focus:outline-none"
+            style={{ color: '#2D4A3E' }}
           />
           <div className="h-6 w-px bg-sand" aria-hidden />
           <input
@@ -50,8 +51,8 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
             type="text"
             placeholder="📍 Ville"
             defaultValue={filters.city ?? ''}
-            className="bg-transparent px-4 py-2.5 text-sm text-ink-mid placeholder:text-ink-light focus:outline-none"
-            style={{ minWidth: '130px' }}
+            className="bg-transparent px-4 py-2.5 text-sm focus:outline-none"
+            style={{ color: '#2D4A3E', minWidth: '130px' }}
           />
           <button
             type="submit"

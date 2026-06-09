@@ -33,11 +33,11 @@ export function CategoryCard({
     >
       <span className="block text-5xl leading-none">{category.icon ?? '🛠️'}</span>
       <div>
-        <p className="text-sm font-semibold" style={{ color: '#1A1510' }}>
+        <p className="text-sm font-semibold" style={{ color: '#2D4A3E' }}>
           {category.name}
         </p>
         {count !== undefined && (
-          <p className="mt-0.5 text-xs" style={{ color: '#8A7E72' }}>
+          <p className="mt-0.5 text-xs" style={{ color: '#7A9E92' }}>
             {count} artisan{count > 1 ? 's' : ''}
           </p>
         )}
