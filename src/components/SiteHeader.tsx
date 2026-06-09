@@ -68,7 +68,7 @@ export function SiteHeader() {
         <Link href="/connexion" className={ghostClass} onClick={() => setMobileOpen(false)}>
           Connexion
         </Link>
-        <Link href="/inscription" className={primaryClass} onClick={() => setMobileOpen(false)}>
+        <Link href="/inscription" className={primaryClass} style={{ backgroundColor: '#C4613A' }} onClick={() => setMobileOpen(false)}>
           S&apos;inscrire
         </Link>
       </>
@@ -86,7 +86,7 @@ export function SiteHeader() {
         {/* Logo bicolore */}
         <Link href="/" aria-label="Slito — Accueil">
           <span className="font-serif text-[26px] font-bold leading-none tracking-[-0.5px]">
-            <span className="text-terra-light">Sli</span>
+            <span className="text-terra-light" style={{ color: '#E8896A' }}>Sli</span>
             <span className="text-white">to</span>
           </span>
         </Link>

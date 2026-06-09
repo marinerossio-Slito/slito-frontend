@@ -55,6 +55,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
           <button
             type="submit"
             className="rounded-lg bg-terra px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
+            style={{ backgroundColor: '#C4613A' }}
           >
             Rechercher
           </button>
@@ -209,6 +210,7 @@ function SidebarFilters({
       <button
         type="submit"
         className="w-full rounded-full bg-terra py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
+        style={{ backgroundColor: '#C4613A' }}
       >
         Appliquer
       </button>

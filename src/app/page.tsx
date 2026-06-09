@@ -86,7 +86,7 @@ function Hero() {
       {/* Titre */}
       <h1 className="relative mx-auto mb-5 max-w-3xl font-serif text-5xl font-bold leading-[1.15] text-white sm:text-6xl">
         Trouvez l&apos;artisan{' '}
-        <em className="not-italic text-terra-light">qu&apos;il vous faut</em>,
+        <em className="not-italic text-terra-light" style={{ color: '#E8896A' }}>qu&apos;il vous faut</em>,
         <br className="hidden sm:block" />
         {' '}quand vous en avez besoin
       </h1>
@@ -120,6 +120,7 @@ function Hero() {
         <button
           type="submit"
           className="rounded-xl bg-terra px-7 py-3.5 text-sm font-semibold text-white transition hover:scale-[1.02] hover:bg-terra-dark"
+          style={{ backgroundColor: '#C4613A' }}
         >
           Rechercher
         </button>

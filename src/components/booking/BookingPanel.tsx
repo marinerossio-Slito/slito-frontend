@@ -60,6 +60,7 @@ export function BookingPanel({ business }: { business: BusinessDetail }) {
           <Link
             href="/connexion"
             className="inline-flex flex-1 items-center justify-center rounded-full bg-terra px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
+            style={{ backgroundColor: '#C4613A' }}
           >
             Se connecter
           </Link>
@@ -268,6 +269,7 @@ function BookingForm({ business, token }: { business: BusinessDetail; token: str
           type="submit"
           disabled={isSubmitting}
           className="inline-flex items-center justify-center rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark disabled:cursor-not-allowed disabled:opacity-60"
+          style={{ backgroundColor: '#C4613A' }}
         >
           {isSubmitting ? 'Envoi en cours…' : 'Envoyer la demande'}
         </button>

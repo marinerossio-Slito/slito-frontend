@@ -165,6 +165,7 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
               <a
                 href="#booking"
                 className="rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
+                style={{ backgroundColor: '#C4613A' }}
               >
                 📅 Prendre RDV
               </a>

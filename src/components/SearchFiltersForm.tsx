@@ -90,6 +90,7 @@ export function SearchFiltersForm({ categories, filters }: { categories: Artisan
         <button
           type="submit"
           className="inline-flex items-center justify-center rounded-full bg-terra px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
+          style={{ backgroundColor: '#C4613A' }}
         >
           Rechercher
         </button>
