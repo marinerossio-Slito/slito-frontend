@@ -24,8 +24,9 @@ test.describe('Login page (/connexion)', () => {
   });
 
   test('shows the sign-up link', async ({ page }) => {
-    // "Créer un compte" link at the bottom of the form
-    await expect(page.getByRole('link', { name: /Cr.er un compte/i })).toBeVisible();
+    // "Créer un compte" link at the bottom of the form (the footer also has
+    // one, so scope the lookup to the main content to avoid ambiguity).
+    await expect(page.getByRole('main').getByRole('link', { name: /Cr.er un compte/i })).toBeVisible();
   });
 
   test('focuses the email input on label click', async ({ page }) => {
@@ -46,8 +47,9 @@ test.describe('Registration page (/inscription)', () => {
   });
 
   test('shows the login link for existing users', async ({ page }) => {
-    // "Déjà inscrit ? Se connecter"
-    await expect(page.getByRole('link', { name: /Se connecter/i })).toBeVisible();
+    // "Déjà inscrit ? Se connecter" (the footer also has a "Se connecter"
+    // link, so scope the lookup to the main content to avoid ambiguity).
+    await expect(page.getByRole('main').getByRole('link', { name: /Se connecter/i })).toBeVisible();
   });
 });
 
