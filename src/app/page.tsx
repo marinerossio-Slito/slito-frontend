@@ -118,6 +118,7 @@ function Hero() {
         <input
           name="category"
           type="text"
+          aria-label="Métier recherché"
           placeholder="Plombier, électricien, menuisier..."
           className="flex-1 bg-transparent px-4 py-3 text-sm focus:outline-none"
           style={{ color: '#334534' }}
@@ -126,6 +127,7 @@ function Hero() {
         <input
           name="city"
           type="text"
+          aria-label="Ville ou code postal"
           placeholder="📍 Ville ou code postal"
           className="bg-transparent px-4 py-3 text-sm focus:outline-none"
           style={{ color: '#334534', minWidth: '160px' }}

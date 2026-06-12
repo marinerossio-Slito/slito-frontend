@@ -15,6 +15,8 @@
 import { useEffect, useState } from 'react';
 
 import { AppointmentStatusBadge } from '@/components/AppointmentStatusBadge';
+import { SkeletonStack } from '@/components/Skeleton';
+import { useToast } from '@/components/Toast';
 import { useAuth } from '@/hooks/useAuth';
 import { ApiError } from '@/lib/api';
 import { fetchCalendar } from '@/lib/artisan';
@@ -25,10 +27,10 @@ import type { CalendarAppointmentRef, CalendarData } from '@/types/artisan';
 
 export function AgendaPanel() {
   const { token } = useAuth();
+  const { showToast } = useToast();
   const [data, setData] = useState<CalendarData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [actionId, setActionId] = useState<number | null>(null);
-  const [actionError, setActionError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!token) return;
@@ -44,7 +46,6 @@ export function AgendaPanel() {
   async function handleConfirm(id: number) {
     if (!token) return;
     setActionId(id);
-    setActionError(null);
     try {
       const updated = await confirmAppointment(token, id);
       setData((prev) =>
@@ -57,8 +58,9 @@ export function AgendaPanel() {
             }
           : prev,
       );
+      showToast('Rendez-vous confirmé.', 'success');
     } catch (err) {
-      setActionError(err instanceof ApiError ? err.message : 'Action échouée.');
+      showToast(err instanceof ApiError ? err.message : 'Action échouée.', 'error');
     } finally {
       setActionId(null);
     }
@@ -67,7 +69,6 @@ export function AgendaPanel() {
   async function handleCancel(id: number) {
     if (!token) return;
     setActionId(id);
-    setActionError(null);
     try {
       await cancelAppointment(token, id);
       // Retirer le RDV de la liste (il n'est plus actif)
@@ -76,8 +77,9 @@ export function AgendaPanel() {
           ? { ...prev, appointments: prev.appointments.filter((a) => a.id !== id) }
           : prev,
       );
+      showToast('Rendez-vous annulé.', 'success');
     } catch (err) {
-      setActionError(err instanceof ApiError ? err.message : 'Action échouée.');
+      showToast(err instanceof ApiError ? err.message : 'Action échouée.', 'error');
     } finally {
       setActionId(null);
     }
@@ -92,13 +94,7 @@ export function AgendaPanel() {
   }
 
   if (!data) {
-    return (
-      <div className="flex flex-col gap-3">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="h-20 animate-pulse rounded-2xl bg-sand-light" />
-        ))}
-      </div>
-    );
+    return <SkeletonStack count={3} className="h-20 rounded-2xl" />;
   }
 
   const { appointments, events } = data;
@@ -110,10 +106,6 @@ export function AgendaPanel() {
         <h2 className="mb-4 text-base font-semibold text-ink">
           Rendez-vous actifs ({appointments.length})
         </h2>
-
-        {actionError && (
-          <p className="mb-3 rounded-xl bg-red-50 px-4 py-2 text-sm text-red-700">{actionError}</p>
-        )}
 
         {appointments.length === 0 ? (
           <p className="rounded-2xl border border-sand-light bg-cream px-5 py-4 text-sm text-ink-light">

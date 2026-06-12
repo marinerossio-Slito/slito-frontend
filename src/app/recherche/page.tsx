@@ -40,6 +40,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
           <input
             name="category"
             type="text"
+            aria-label="Métier recherché"
             placeholder="Plombier, électricien..."
             defaultValue={filters.category ?? ''}
             className="flex-1 bg-transparent px-4 py-2.5 text-sm focus:outline-none"
@@ -49,6 +50,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
           <input
             name="city"
             type="text"
+            aria-label="Ville"
             placeholder="📍 Ville"
             defaultValue={filters.city ?? ''}
             className="bg-transparent px-4 py-2.5 text-sm focus:outline-none"
@@ -131,8 +133,9 @@ function SidebarFilters({
       <h3 className="font-serif text-xl font-bold text-ink">Filtres</h3>
 
       {/* Métier */}
-      <FilterGroup label="Métier">
+      <FilterGroup label="Métier" htmlFor="filter-category">
         <select
+          id="filter-category"
           name="category"
           defaultValue={filters.category ?? ''}
           className="w-full rounded-lg border border-sand bg-warm-white px-3 py-2.5 text-sm text-ink focus:border-terra focus:outline-none focus:ring-2 focus:ring-terra/20"
@@ -147,8 +150,9 @@ function SidebarFilters({
       </FilterGroup>
 
       {/* Ville */}
-      <FilterGroup label="Ville">
+      <FilterGroup label="Ville" htmlFor="filter-city">
         <input
+          id="filter-city"
           type="text"
           name="city"
           placeholder="ex. Lyon"
@@ -166,16 +170,18 @@ function SidebarFilters({
             min={0}
             inputMode="numeric"
             placeholder="Min"
+            aria-label="Tarif minimum en euros"
             defaultValue={filters.minPrice ?? ''}
             className="w-full rounded-lg border border-sand bg-warm-white px-3 py-2.5 text-sm text-ink placeholder:text-ink-light focus:border-terra focus:outline-none focus:ring-2 focus:ring-terra/20"
           />
-          <span className="shrink-0 text-ink-light">–</span>
+          <span className="shrink-0 text-ink-light" aria-hidden>–</span>
           <input
             type="number"
             name="maxPrice"
             min={0}
             inputMode="numeric"
             placeholder="Max"
+            aria-label="Tarif maximum en euros"
             defaultValue={filters.maxPrice ?? ''}
             className="w-full rounded-lg border border-sand bg-warm-white px-3 py-2.5 text-sm text-ink placeholder:text-ink-light focus:border-terra focus:outline-none focus:ring-2 focus:ring-terra/20"
           />
@@ -196,6 +202,7 @@ function SidebarFilters({
                 type="submit"
                 name="minRating"
                 value={value}
+                aria-current={isSelected ? 'true' : undefined}
                 className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
                   isSelected
                     ? 'border-gold bg-gold/10 text-gold'
@@ -229,12 +236,35 @@ function SidebarFilters({
   );
 }
 
-function FilterGroup({ label, children }: { label: string; children: React.ReactNode }) {
+function FilterGroup({
+  label,
+  htmlFor,
+  children,
+}: {
+  label: string;
+  /** Si fourni, le libellé est associé à ce champ unique via `<label htmlFor>`. */
+  htmlFor?: string;
+  children: React.ReactNode;
+}) {
+  const labelClasses = 'mb-3 block text-xs font-semibold uppercase tracking-widest text-ink-light';
+
+  if (htmlFor) {
+    return (
+      <div>
+        <label htmlFor={htmlFor} className={labelClasses}>{label}</label>
+        {children}
+      </div>
+    );
+  }
+
+  // Pas de champ unique (groupe de plusieurs contrôles) : on utilise un
+  // fieldset/legend, sémantiquement plus correct qu'un <p> pour décrire le
+  // groupe auprès des lecteurs d'écran.
   return (
-    <div>
-      <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-ink-light">{label}</p>
+    <fieldset className="m-0 border-0 p-0">
+      <legend className={labelClasses}>{label}</legend>
       {children}
-    </div>
+    </fieldset>
   );
 }
 

@@ -14,6 +14,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { Skeleton } from '@/components/Skeleton';
+import { useToast } from '@/components/Toast';
 import { useAuth } from '@/hooks/useAuth';
 import { ApiError } from '@/lib/api';
 import { fetchSubscription, startCheckout, startPortal } from '@/lib/artisan';
@@ -35,6 +37,7 @@ const STATUS_LABELS: Record<string, { label: string; className: string }> = {
 
 export function SubscriptionPanel() {
   const { token } = useAuth();
+  const { showToast } = useToast();
 
   const [data, setData] = useState<SubscriptionResponse | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -65,7 +68,9 @@ export function SubscriptionPanel() {
       const { checkoutUrl } = await startCheckout(token, selectedPlan);
       window.location.href = checkoutUrl;
     } catch (err) {
-      setCheckoutError(err instanceof ApiError ? err.message : 'Impossible d\'ouvrir la page de paiement.');
+      const message = err instanceof ApiError ? err.message : 'Impossible d\'ouvrir la page de paiement.';
+      setCheckoutError(message);
+      showToast(message, 'error');
       setCheckoutLoading(false);
     }
   }
@@ -78,7 +83,9 @@ export function SubscriptionPanel() {
       const { portalUrl } = await startPortal(token);
       window.open(portalUrl, '_blank', 'noopener,noreferrer');
     } catch (err) {
-      setPortalError(err instanceof ApiError ? err.message : 'Impossible d\'ouvrir le portail Stripe.');
+      const message = err instanceof ApiError ? err.message : 'Impossible d\'ouvrir le portail Stripe.';
+      setPortalError(message);
+      showToast(message, 'error');
     } finally {
       setPortalLoading(false);
     }
@@ -93,7 +100,7 @@ export function SubscriptionPanel() {
   }
 
   if (!data) {
-    return <div className="h-40 animate-pulse rounded-2xl bg-sand-light" />;
+    return <Skeleton className="h-40" />;
   }
 
   const { subscription } = data;

@@ -22,7 +22,6 @@ const ARTISAN_NAV: SidebarNavItem[] = [
 export default function ArtisanSpaceLayout({ children }: { children: React.ReactNode }) {
   const { token } = useAuth();
   const [businessName, setBusinessName] = useState('Espace artisan');
-  const [subtitle, setSubtitle] = useState('');
 
   useEffect(() => {
     if (!token) return;
@@ -31,14 +30,14 @@ export default function ArtisanSpaceLayout({ children }: { children: React.React
         if (data.business?.name) {
           setBusinessName(data.business.name);
         }
-        // On pourrait afficher catégorie + ville si la fiche le fournit
+        // On pourrait afficher catégorie + ville si la fiche le fournit un jour
       })
       .catch(() => { /* sidebar se replie sur le titre par défaut */ });
   }, [token]);
 
   return (
-    <div className="flex flex-1 overflow-hidden">
-      <DashboardSidebar nav={ARTISAN_NAV} title={businessName} subtitle={subtitle} />
+    <div className="flex flex-1 flex-col overflow-hidden lg:flex-row">
+      <DashboardSidebar nav={ARTISAN_NAV} title={businessName} />
       <div className="flex flex-1 flex-col overflow-auto bg-cream">{children}</div>
     </div>
   );

@@ -16,6 +16,7 @@
 import { useState, type FormEvent } from 'react';
 
 import { FIELD_CLASSES, FormBanner, FormField } from '@/components/forms/FormField';
+import { useToast } from '@/components/Toast';
 import { ApiError } from '@/lib/api';
 import { createReview } from '@/lib/reviews';
 
@@ -57,6 +58,7 @@ function StarRatingInput({
 }
 
 export function ReviewForm({ appointmentId, targetName, token, onSuccess, onCancel }: ReviewFormProps) {
+  const { showToast } = useToast();
   const [rating, setRating] = useState(0);
   const [punctualityRating, setPunctualityRating] = useState(0);
   const [qualityRating, setQualityRating] = useState(0);
@@ -82,6 +84,7 @@ export function ReviewForm({ appointmentId, targetName, token, onSuccess, onCanc
         qualityRating: qualityRating > 0 ? qualityRating : undefined,
         comment: comment.trim() || undefined,
       });
+      showToast('Merci, votre avis a été publié !', 'success');
       onSuccess();
     } catch (err) {
       if (err instanceof ApiError && err.status === 409) {
@@ -89,8 +92,10 @@ export function ReviewForm({ appointmentId, targetName, token, onSuccess, onCanc
         onSuccess();
       } else if (err instanceof ApiError) {
         setFormError(err.message);
+        showToast(err.message, 'error');
       } else {
         setFormError("L'envoi de l'avis a échoué. Réessayez.");
+        showToast("L'envoi de l'avis a échoué. Réessayez.", 'error');
       }
     } finally {
       setIsSubmitting(false);
@@ -120,13 +125,13 @@ export function ReviewForm({ appointmentId, targetName, token, onSuccess, onCanc
       {/* Notes optionnelles */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-medium text-ink-mid">
+          <span id="punctuality-label" className="text-sm font-medium text-ink-mid">
             Ponctualité <span className="font-normal text-ink-light">(optionnel)</span>
           </span>
           <StarRatingInput id="punctuality" value={punctualityRating} onChange={setPunctualityRating} />
         </div>
         <div className="flex flex-col gap-1.5">
-          <span className="text-sm font-medium text-ink-mid">
+          <span id="quality-label" className="text-sm font-medium text-ink-mid">
             Qualité <span className="font-normal text-ink-light">(optionnel)</span>
           </span>
           <StarRatingInput id="quality" value={qualityRating} onChange={setQualityRating} />

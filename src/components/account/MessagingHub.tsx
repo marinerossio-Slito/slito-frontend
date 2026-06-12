@@ -24,6 +24,8 @@ import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 
 import { EmptyState } from '@/components/EmptyState';
+import { Skeleton, SkeletonStack } from '@/components/Skeleton';
+import { useToast } from '@/components/Toast';
 import { useAuth } from '@/hooks/useAuth';
 import { ApiError } from '@/lib/api';
 import { formatDateTime } from '@/lib/format';
@@ -46,6 +48,7 @@ interface MessagingHubProps {
 
 export function MessagingHub({ initialBusinessId, initialBusinessName }: MessagingHubProps) {
   const { token } = useAuth();
+  const { showToast } = useToast();
 
   // Liste des conversations (null = en cours de chargement)
   const [conversations, setConversations] = useState<Conversation[] | null>(null);
@@ -155,7 +158,9 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
       setDetail(updated);
       setTimeout(() => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
     } catch (err) {
-      setReplyError(err instanceof ApiError ? err.message : "L'envoi a échoué. Réessayez.");
+      const message = err instanceof ApiError ? err.message : "L'envoi a échoué. Réessayez.";
+      setReplyError(message);
+      showToast(message, 'error');
     } finally {
       setReplySending(false);
     }
@@ -176,8 +181,11 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
       setConversations(updated);
       const match = updated.find((c) => c.business?.id === initialBusinessId);
       if (match) selectConversation(match.id);
+      showToast('Message envoyé !', 'success');
     } catch (err) {
-      setNewConvError(err instanceof ApiError ? err.message : "L'envoi a échoué. Réessayez.");
+      const message = err instanceof ApiError ? err.message : "L'envoi a échoué. Réessayez.";
+      setNewConvError(message);
+      showToast(message, 'error');
     } finally {
       setNewConvSending(false);
     }
@@ -205,10 +213,8 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
           {listError && <p className="p-4 text-sm text-red-600">{listError}</p>}
 
           {conversations === null && !listError && (
-            <div className="flex flex-col gap-2 p-3">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="h-16 animate-pulse rounded-xl bg-sand-light" />
-              ))}
+            <div className="p-3">
+              <SkeletonStack count={3} className="h-16" gap="gap-2" />
             </div>
           )}
 
@@ -275,8 +281,13 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
         {selectedId !== null && (
           <>
             {detailLoading && (
-              <div className="flex flex-1 items-center justify-center">
-                <p className="text-sm text-ink-light">Chargement…</p>
+              <div className="flex flex-1 flex-col gap-4 p-4">
+                <Skeleton className="h-5 w-40" />
+                <div className="flex flex-col gap-3">
+                  <Skeleton className="h-12 w-2/3 rounded-tl-none" />
+                  <Skeleton className="ml-auto h-12 w-1/2 rounded-tl-none" />
+                  <Skeleton className="h-12 w-3/5 rounded-tl-none" />
+                </div>
               </div>
             )}
 
@@ -354,6 +365,7 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
                           value={replyContent}
                           onChange={(e) => setReplyContent(e.target.value)}
                           placeholder="Écrivez votre message…"
+                          aria-label="Votre message"
                           maxLength={5000}
                           className="flex-1 resize-none rounded-xl border border-sand bg-warm-white px-3 py-2 text-sm text-ink transition focus:border-terra focus:outline-none focus:ring-2 focus:ring-terra/20"
                           onKeyDown={(e) => {
@@ -470,6 +482,7 @@ function NewConversationPanel({
               value={content}
               onChange={(e) => onContentChange(e.target.value)}
               placeholder="Écrivez votre premier message…"
+              aria-label="Votre message"
               maxLength={5000}
               autoFocus
               className="flex-1 resize-none rounded-xl border border-sand bg-warm-white px-3 py-2 text-sm text-ink transition focus:border-terra focus:outline-none focus:ring-2 focus:ring-terra/20"

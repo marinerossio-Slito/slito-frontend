@@ -157,6 +157,13 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
                 <p className="mt-1 text-sm text-white/80">
                   {[business.category?.name, business.officeAddress].filter(Boolean).join(' · ')}
                 </p>
+                <div className="mt-1.5">
+                  <RatingBadge
+                    averageRating={business.averageRating}
+                    reviewsCount={business.reviewsCount}
+                    variant="light"
+                  />
+                </div>
               </div>
             </div>
 

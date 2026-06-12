@@ -8,6 +8,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import { SkeletonGrid, SkeletonStack } from '@/components/Skeleton';
 import { useAuth } from '@/hooks/useAuth';
 import { ApiError } from '@/lib/api';
 import { fetchCalendar, fetchDashboard } from '@/lib/artisan';
@@ -98,9 +99,7 @@ export function DashboardPanel() {
 
       {/* ── KPIs ────────────────────────────────────────────────── */}
       {loading ? (
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          {[1,2,3,4].map((i) => <div key={i} className="h-28 animate-pulse rounded-2xl bg-sand-light" />)}
-        </div>
+        <SkeletonGrid count={4} className="h-28 rounded-2xl" />
       ) : (
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           <StatCard
@@ -140,9 +139,7 @@ export function DashboardPanel() {
           <h2 className="mb-5 font-serif text-lg font-bold text-ink">Rendez-vous du jour</h2>
 
           {loading ? (
-            <div className="space-y-3">
-              {[1,2,3].map((i) => <div key={i} className="h-10 animate-pulse rounded-lg bg-sand-light" />)}
-            </div>
+            <SkeletonStack count={3} className="h-10 rounded-lg" />
           ) : todayAppts.length === 0 ? (
             <p className="text-sm text-ink-light">Aucun rendez-vous prévu aujourd&apos;hui.</p>
           ) : (
@@ -188,9 +185,7 @@ export function DashboardPanel() {
           <h2 className="mb-5 font-serif text-lg font-bold text-ink">Notifications</h2>
 
           {loading ? (
-            <div className="space-y-3">
-              {[1,2,3].map((i) => <div key={i} className="h-8 animate-pulse rounded-lg bg-sand-light" />)}
-            </div>
+            <SkeletonStack count={3} className="h-8 rounded-lg" />
           ) : pending.length === 0 ? (
             <p className="text-sm text-ink-light">Aucune notification récente.</p>
           ) : (

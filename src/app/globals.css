@@ -32,9 +32,25 @@ body {
 
 /* Anneau de focus cohérent avec la charte terracotta */
 :focus-visible {
-  outline: 2px solid #C4613A;
+  outline: 2px solid #c56339;
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* ─── Toasts ───────────────────────────────────────────────────────────────── */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-toast-in {
+  animation: toast-in 0.25s ease-out;
 }
 
 /* Respecter la préférence de mouvement réduit */

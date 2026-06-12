@@ -16,6 +16,8 @@
 import { useEffect, useState, type FormEvent } from 'react';
 
 import { FIELD_CLASSES, FormBanner, FormField } from '@/components/forms/FormField';
+import { SkeletonStack } from '@/components/Skeleton';
+import { useToast } from '@/components/Toast';
 import { useAuth } from '@/hooks/useAuth';
 import { ApiError } from '@/lib/api';
 import { fetchDashboard, upsertBusiness } from '@/lib/artisan';
@@ -26,6 +28,7 @@ import type { ArtisanCategory } from '@/types/catalog';
 
 export function BusinessForm() {
   const { token } = useAuth();
+  const { showToast } = useToast();
 
   const [categories, setCategories] = useState<ArtisanCategory[] | null>(null);
   const [current, setCurrent] = useState<ArtisanBusiness | null>(null);
@@ -45,7 +48,6 @@ export function BusinessForm() {
   const [formError, setFormError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
-  const [saved, setSaved] = useState(false);
 
   // Charge dashboard + catégories + éventuellement la fiche courante
   useEffect(() => {
@@ -113,7 +115,6 @@ export function BusinessForm() {
 
     setFormError(null);
     setFieldErrors({});
-    setSaved(false);
 
     const catIdNum = Number(categoryId);
     if (!name.trim() || !catIdNum) {
@@ -136,15 +137,17 @@ export function BusinessForm() {
     try {
       const updated = await upsertBusiness(token, payload);
       setCurrent(updated);
-      setSaved(true);
+      showToast('Fiche enregistrée avec succès !', 'success');
     } catch (err) {
       if (err instanceof ApiError && err.body?.violations?.length) {
         setFieldErrors(Object.fromEntries(err.body.violations.map((v: { field: string; message: string }) => [v.field, v.message])));
         setFormError('Le formulaire contient des erreurs.');
       } else if (err instanceof ApiError) {
         setFormError(err.message);
+        showToast(err.message, 'error');
       } else {
         setFormError('Sauvegarde échouée. Réessayez.');
+        showToast('Sauvegarde échouée. Réessayez.', 'error');
       }
     } finally {
       setSubmitting(false);
@@ -160,13 +163,7 @@ export function BusinessForm() {
   }
 
   if (loading) {
-    return (
-      <div className="flex flex-col gap-4">
-        {[1, 2, 3, 4].map((i) => (
-          <div key={i} className="h-12 animate-pulse rounded-xl bg-sand-light" />
-        ))}
-      </div>
-    );
+    return <SkeletonStack count={4} className="h-12 rounded-xl" />;
   }
 
   return (
@@ -189,9 +186,6 @@ export function BusinessForm() {
 
       <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
         {formError && <FormBanner tone="error">{formError}</FormBanner>}
-        {saved && (
-          <FormBanner tone="success">Fiche sauvegardée avec succès !</FormBanner>
-        )}
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {/* Nom */}

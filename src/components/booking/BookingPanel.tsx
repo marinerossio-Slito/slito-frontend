@@ -19,6 +19,8 @@ import Link from 'next/link';
 import { useMemo, useState, type FormEvent } from 'react';
 
 import { FIELD_CLASSES, FormBanner, FormField } from '@/components/forms/FormField';
+import { Skeleton } from '@/components/Skeleton';
+import { useToast } from '@/components/Toast';
 import { useAuth } from '@/hooks/useAuth';
 import { ApiError } from '@/lib/api';
 import { createAppointment } from '@/lib/appointments';
@@ -44,7 +46,7 @@ export function BookingPanel({ business }: { business: BusinessDetail }) {
 
   // État transitoire : pas encore lu localStorage — évite un flash de CTA anonymous → formulaire
   if (status === 'loading') {
-    return <div className="h-48 animate-pulse rounded-2xl bg-sand-light" aria-hidden />;
+    return <Skeleton className="h-48" />;
   }
 
   // Visiteur non connecté
@@ -98,6 +100,7 @@ export function BookingPanel({ business }: { business: BusinessDetail }) {
 
 /** Formulaire de prise de rendez-vous — rendu uniquement pour un client authentifié. */
 function BookingForm({ business, token }: { business: BusinessDetail; token: string }) {
+  const { showToast } = useToast();
   const [serviceId, setServiceId] = useState(String(business.services[0].id));
   const [dateTime, setDateTime] = useState('');
   const [location, setLocation] = useState<AppointmentLocation>('HOME');
@@ -142,14 +145,17 @@ function BookingForm({ business, token }: { business: BusinessDetail; token: str
       setConfirmedId(appointment.id);
       setDateTime('');
       setCustomerNote('');
+      showToast('Votre demande de rendez-vous a été envoyée !', 'success');
     } catch (err) {
       if (err instanceof ApiError && err.body?.violations?.length) {
         setFieldErrors(Object.fromEntries(err.body.violations.map((v) => [v.field, v.message])));
         setFormError('Le formulaire contient des erreurs : corrigez les champs signalés.');
       } else if (err instanceof ApiError) {
         setFormError(err.message);
+        showToast(err.message, 'error');
       } else {
         setFormError('La demande de rendez-vous a échoué. Réessayez dans quelques instants.');
+        showToast('La demande de rendez-vous a échoué. Réessayez dans quelques instants.', 'error');
       }
     } finally {
       setIsSubmitting(false);

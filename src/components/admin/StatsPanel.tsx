@@ -7,6 +7,7 @@
 
 import { useEffect, useState } from 'react';
 
+import { SkeletonGrid } from '@/components/Skeleton';
 import { useAuth } from '@/hooks/useAuth';
 import { ApiError } from '@/lib/api';
 import { fetchAdminStats } from '@/lib/admin';
@@ -45,13 +46,7 @@ export function StatsPanel() {
   }
 
   if (!stats) {
-    return (
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-        {[1, 2, 3, 4, 5, 6].map((i) => (
-          <div key={i} className="h-24 animate-pulse rounded-2xl bg-sand-light" />
-        ))}
-      </div>
-    );
+    return <SkeletonGrid count={6} className="h-24 rounded-2xl" gridClassName="grid grid-cols-2 gap-4 sm:grid-cols-3" />;
   }
 
   return (

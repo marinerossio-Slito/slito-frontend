@@ -16,7 +16,8 @@
 
 import { useState, type FormEvent } from 'react';
 
-import { FIELD_CLASSES, FormBanner } from '@/components/forms/FormField';
+import { FIELD_CLASSES } from '@/components/forms/FormField';
+import { useToast } from '@/components/Toast';
 import { useAuth } from '@/hooks/useAuth';
 import { ApiError } from '@/lib/api';
 import { updateAdminUser } from '@/lib/admin';
@@ -24,12 +25,11 @@ import type { AdminUserRef } from '@/types/admin';
 
 export function UserManager() {
   const { token } = useAuth();
+  const { showToast } = useToast();
 
   const [userId, setUserId] = useState('');
   const [user, setUser] = useState<AdminUserRef | null>(null);
   const [lookupError, setLookupError] = useState<string | null>(null);
-  const [actionError, setActionError] = useState<string | null>(null);
-  const [actionSuccess, setActionSuccess] = useState<string | null>(null);
   const [acting, setActing] = useState(false);
 
   // Lookup via une action (ban ou approve) — le PATCH renvoie le user complet
@@ -41,8 +41,6 @@ export function UserManager() {
 
     setLookupError(null);
     setUser(null);
-    setActionError(null);
-    setActionSuccess(null);
     setActing(true);
 
     // On fait une action neutre (isBanned=false si non banni, pour forcer
@@ -64,15 +62,13 @@ export function UserManager() {
 
   async function applyAction(payload: { isBanned?: boolean; isApproved?: boolean }, successMsg: string) {
     if (!token || !user) return;
-    setActionError(null);
-    setActionSuccess(null);
     setActing(true);
     try {
       const result = await updateAdminUser(token, user.id, payload);
       setUser(result);
-      setActionSuccess(successMsg);
+      showToast(successMsg, 'success');
     } catch (err) {
-      setActionError(err instanceof ApiError ? err.message : 'Action échouée.');
+      showToast(err instanceof ApiError ? err.message : 'Action échouée.', 'error');
     } finally {
       setActing(false);
     }
@@ -117,9 +113,6 @@ export function UserManager() {
           <h2 className="mb-4 text-base font-semibold text-ink">
             Compte #{user.id}
           </h2>
-
-          {actionError && <FormBanner tone="error">{actionError}</FormBanner>}
-          {actionSuccess && <FormBanner tone="success">{actionSuccess}</FormBanner>}
 
           {/* Infos */}
           <dl className="mb-6 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">

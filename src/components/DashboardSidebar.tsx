@@ -56,6 +56,46 @@ export function DashboardSidebar({
   const displaySubtitle = subtitle ?? user?.email ?? '';
 
   return (
+    <>
+    {/* Navigation mobile (< lg) : barre d'onglets horizontale défilable */}
+    <nav
+      aria-label="Navigation du tableau de bord"
+      className="flex gap-2 overflow-x-auto border-b border-sand bg-warm-white px-4 py-3 lg:hidden"
+    >
+      {nav.map((item) => {
+        if (item.soon) {
+          return (
+            <span
+              key={item.href + item.label}
+              className="flex shrink-0 items-center gap-1.5 rounded-full bg-sand-light px-4 py-1.5 text-sm font-medium text-ink-light/60"
+            >
+              <span aria-hidden>{item.icon}</span>
+              {item.label}
+              <span className="rounded-full bg-sand px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-ink-light">
+                Bientôt
+              </span>
+            </span>
+          );
+        }
+
+        const active = isActive(item);
+
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            aria-current={active ? 'page' : undefined}
+            className={`flex shrink-0 items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition ${
+              active ? 'bg-terra text-white' : 'bg-sand-light text-ink-mid hover:bg-sand'
+            }`}
+          >
+            <span aria-hidden>{item.icon}</span>
+            {item.label}
+          </Link>
+        );
+      })}
+    </nav>
+
     <aside
       className="sticky top-16 hidden h-[calc(100vh-4rem)] w-60 shrink-0 flex-col overflow-y-auto px-4 py-6 lg:flex"
       style={{ backgroundColor: '#334534' }}
@@ -124,5 +164,6 @@ export function DashboardSidebar({
         Déconnexion
       </button>
     </aside>
+    </>
   );
 }

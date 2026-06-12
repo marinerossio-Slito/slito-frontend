@@ -9,6 +9,8 @@
 import { useEffect, useState, type FormEvent } from 'react';
 
 import { FIELD_CLASSES, FormBanner, FormField } from '@/components/forms/FormField';
+import { SkeletonGrid } from '@/components/Skeleton';
+import { useToast } from '@/components/Toast';
 import { useAuth } from '@/hooks/useAuth';
 import { ApiError } from '@/lib/api';
 import { createAdminCategory } from '@/lib/admin';
@@ -18,6 +20,7 @@ import type { ArtisanCategory } from '@/types/catalog';
 
 export function CategoryManager() {
   const { token } = useAuth();
+  const { showToast } = useToast();
 
   const [categories, setCategories] = useState<ArtisanCategory[] | null>(null);
   const [listError, setListError] = useState<string | null>(null);
@@ -58,14 +61,17 @@ export function CategoryManager() {
       setName('');
       setIcon('');
       setSlug('');
+      showToast('Catégorie créée avec succès !', 'success');
     } catch (err) {
       if (err instanceof ApiError && err.body?.violations?.length) {
         setFieldErrors(Object.fromEntries(err.body.violations.map((v: { field: string; message: string }) => [v.field, v.message])));
         setFormError('Corrigez les erreurs du formulaire.');
       } else if (err instanceof ApiError) {
         setFormError(err.message);
+        showToast(err.message, 'error');
       } else {
         setFormError('Création échouée. Réessayez.');
+        showToast('Création échouée. Réessayez.', 'error');
       }
     } finally {
       setSubmitting(false);
@@ -85,9 +91,7 @@ export function CategoryManager() {
         )}
 
         {categories === null && !listError && (
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {[1, 2, 3].map((i) => <div key={i} className="h-12 animate-pulse rounded-xl bg-sand-light" />)}
-          </div>
+          <SkeletonGrid count={3} className="h-12 rounded-xl" gridClassName="grid grid-cols-2 gap-3 sm:grid-cols-3" />
         )}
 
         {categories !== null && categories.length === 0 && (

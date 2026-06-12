@@ -24,6 +24,8 @@ import { useEffect, useState } from 'react';
 import { AppointmentStatusBadge } from '@/components/AppointmentStatusBadge';
 import { ReviewForm } from '@/components/account/ReviewForm';
 import { EmptyState } from '@/components/EmptyState';
+import { SkeletonStack } from '@/components/Skeleton';
+import { useToast } from '@/components/Toast';
 import { useAuth } from '@/hooks/useAuth';
 import { ApiError } from '@/lib/api';
 import { cancelAppointment, fetchAppointments } from '@/lib/appointments';
@@ -47,11 +49,11 @@ const FILTER_TABS: { value: StatusFilter; label: string }[] = [
 
 export function AppointmentList() {
   const { token } = useAuth();
+  const { showToast } = useToast();
   const [appointments, setAppointments] = useState<Appointment[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState<StatusFilter>('ALL');
   const [cancellingId, setCancellingId] = useState<number | null>(null);
-  const [cancelError, setCancelError] = useState<string | null>(null);
   const [reviewingId, setReviewingId] = useState<number | null>(null);
   const [reviewedIds, setReviewedIds] = useState<Set<number>>(new Set());
 
@@ -79,15 +81,15 @@ export function AppointmentList() {
     if (!token) return;
 
     setCancellingId(id);
-    setCancelError(null);
 
     try {
       const updated = await cancelAppointment(token, id);
       setAppointments((prev) =>
         prev?.map((a) => (a.id === updated.id ? updated : a)) ?? null,
       );
+      showToast('Rendez-vous annulé.', 'success');
     } catch (err) {
-      setCancelError(err instanceof ApiError ? err.message : "L'annulation a échoué. Réessayez.");
+      showToast(err instanceof ApiError ? err.message : "L'annulation a échoué. Réessayez.", 'error');
     } finally {
       setCancellingId(null);
     }
@@ -100,13 +102,7 @@ export function AppointmentList() {
 
   // Chargement
   if (appointments === null && loadError === null) {
-    return (
-      <div className="flex flex-col gap-4">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="h-28 animate-pulse rounded-2xl bg-sand-light" />
-        ))}
-      </div>
-    );
+    return <SkeletonStack count={3} className="h-28 rounded-2xl" gap="gap-4" />;
   }
 
   if (loadError !== null) {
@@ -139,13 +135,6 @@ export function AppointmentList() {
           </button>
         ))}
       </div>
-
-      {/* Message d'erreur d'annulation (global, non bloquant) */}
-      {cancelError && (
-        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-          {cancelError}
-        </p>
-      )}
 
       {/* Liste ou état vide */}
       {filtered.length === 0 ? (
