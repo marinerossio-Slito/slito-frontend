@@ -13,6 +13,13 @@
 const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8000').replace(/\/+$/, '');
 
 /**
+ * Émis sur `window` lorsqu'une requête authentifiée se voit refuser son jeton
+ * (HTTP 401). `AuthProvider` (cf. `src/hooks/useAuth.tsx`) l'écoute pour
+ * déconnecter proprement l'utilisateur et le renvoyer vers la connexion.
+ */
+export const UNAUTHORIZED_EVENT = 'slito:unauthorized';
+
+/**
  * Forme des réponses d'erreur renvoyées par les contrôleurs de l'API : tantôt
  * un message simple (`{ error }`), tantôt une liste de violations de
  * validation (`{ violations: [{ field, message }] }`, cf. par ex.
@@ -115,6 +122,18 @@ export async function apiFetch<T>(path: string, options: ApiFetchOptions = {}): 
   const data = raw === '' ? null : (JSON.parse(raw) as unknown);
 
   if (!response.ok) {
+    // Jeton rejeté par le serveur alors qu'on en avait envoyé un : il est
+    // expiré, ou signé avec une ancienne clé. Ce second cas survient à chaque
+    // redéploiement/redémarrage du back-end sur le plan gratuit de Render, où
+    // la paire de clés JWT est régénérée (disque non persistant, cf.
+    // render.yaml côté back-end). Le front ne peut pas le détecter localement
+    // (il n'a pas la clé pour vérifier la signature) : on s'appuie donc sur la
+    // réponse 401 du serveur pour invalider la session. `AuthProvider` écoute
+    // cet événement, déconnecte, et `RouteGuard` renvoie vers /connexion —
+    // plutôt que de laisser remonter un « Invalid JWT Token » brut.
+    if (response.status === 401 && token && typeof window !== 'undefined') {
+      window.dispatchEvent(new Event(UNAUTHORIZED_EVENT));
+    }
     throw new ApiError(response.status, data as ApiErrorBody | null);
   }
 

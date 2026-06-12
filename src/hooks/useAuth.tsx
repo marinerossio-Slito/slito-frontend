@@ -18,6 +18,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
+import { UNAUTHORIZED_EVENT } from '@/lib/api';
 import * as authApi from '@/lib/auth';
 import { clearStoredToken, hasAnyRole, isExpired, readStoredToken, userFromToken, writeStoredToken } from '@/lib/auth';
 import type { AuthUser, LoginCredentials } from '@/types/auth';
@@ -107,6 +108,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     clearStoredToken();
     setSnapshot(ANONYMOUS_SNAPSHOT);
   }, []);
+
+  // Le serveur a rejeté un jeton (401) : il est expiré ou signé avec une
+  // ancienne clé (régénérée au redéploiement du back-end, cf. apiFetch). On
+  // déconnecte alors silencieusement — `RouteGuard` prendra le relais pour
+  // renvoyer vers /connexion — au lieu de laisser les écrans afficher un
+  // « Invalid JWT Token » brut.
+  useEffect(() => {
+    const handleUnauthorized = () => logout();
+    window.addEventListener(UNAUTHORIZED_EVENT, handleUnauthorized);
+    return () => window.removeEventListener(UNAUTHORIZED_EVENT, handleUnauthorized);
+  }, [logout]);
 
   const hasRole = useCallback((roles: readonly string[]) => hasAnyRole(snapshot.user, roles), [snapshot.user]);
 
