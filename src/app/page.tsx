@@ -84,7 +84,7 @@ export default async function Home() {
 function Hero() {
   return (
     <section
-      className="relative overflow-hidden px-8 pb-24 pt-20 text-center"
+      className="relative overflow-hidden px-5 pb-20 pt-16 text-center sm:px-8 sm:pb-24 sm:pt-20"
       style={{ background: 'linear-gradient(rgba(197,99,57,0.04), rgba(197,99,57,0.04)), radial-gradient(ellipse at 55% 30%, #3d5440 0%, #334534 60%, #1a2419 100%)' }}
     >
 
@@ -94,7 +94,7 @@ function Hero() {
       </div>
 
       {/* Titre */}
-      <h1 className="relative mx-auto mb-5 max-w-3xl font-serif text-5xl font-bold leading-[1.15] text-white sm:text-6xl">
+      <h1 className="relative mx-auto mb-5 max-w-3xl font-serif text-4xl font-bold leading-[1.15] text-white sm:text-6xl">
         Trouvez l&apos;artisan
         <br />
         <em className="not-italic text-terra-light" style={{ color: '#d8825a' }}>qu&apos;il vous faut</em>,
@@ -112,7 +112,7 @@ function Hero() {
       <form
         method="get"
         action="/recherche"
-        className="relative mx-auto flex max-w-2xl items-center gap-2 rounded-2xl bg-warm-white p-2 shadow-[0_8px_40px_rgba(0,0,0,0.25)]"
+        className="relative mx-auto flex max-w-2xl flex-col gap-2 rounded-2xl bg-warm-white p-2 shadow-[0_8px_40px_rgba(0,0,0,0.25)] sm:flex-row sm:items-center"
         style={{ backgroundColor: '#fdfaf3' }}
       >
         <input
@@ -120,21 +120,21 @@ function Hero() {
           type="text"
           aria-label="Métier recherché"
           placeholder="Plombier, électricien, menuisier..."
-          className="flex-1 bg-transparent px-4 py-3 text-sm focus:outline-none"
+          className="w-full bg-transparent px-4 py-3 text-sm focus:outline-none sm:flex-1"
           style={{ color: '#334534' }}
         />
-        <div className="h-7 w-px bg-sand" aria-hidden />
+        <div className="hidden h-7 w-px bg-sand sm:block" aria-hidden />
         <input
           name="city"
           type="text"
           aria-label="Ville ou code postal"
           placeholder="📍 Ville ou code postal"
-          className="bg-transparent px-4 py-3 text-sm focus:outline-none"
-          style={{ color: '#334534', minWidth: '160px' }}
+          className="w-full bg-transparent px-4 py-3 text-sm focus:outline-none sm:w-auto sm:min-w-[160px]"
+          style={{ color: '#334534' }}
         />
         <button
           type="submit"
-          className="rounded-xl bg-terra px-7 py-3.5 text-sm font-semibold text-white transition hover:scale-[1.02] hover:bg-terra-dark"
+          className="w-full rounded-xl bg-terra px-7 py-3.5 text-sm font-semibold text-white transition hover:scale-[1.02] hover:bg-terra-dark sm:w-auto"
           style={{ backgroundColor: '#c56339' }}
         >
           Rechercher

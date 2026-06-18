@@ -24,7 +24,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
     <div className="flex flex-1 flex-col">
       {/* ── Page hero ──────────────────────────────────────────────────────── */}
       <div
-        className="border-b border-sand bg-sand-light px-8 py-10"
+        className="border-b border-sand bg-sand-light px-5 py-8 sm:px-8 sm:py-10"
         style={{ backgroundColor: '#f0e8d5' }}
       >
         <nav aria-label="Fil d'Ariane" className="mb-3 text-sm text-ink-light">
@@ -35,7 +35,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
         <h1 className="mb-4 font-serif text-3xl font-bold text-ink">Trouver un artisan</h1>
         <form
           method="get"
-          className="flex max-w-2xl items-center gap-2 rounded-xl border border-sand bg-warm-white p-2"
+          className="flex max-w-2xl flex-col gap-2 rounded-xl border border-sand bg-warm-white p-2 sm:flex-row sm:items-center"
           style={{ backgroundColor: '#fdfaf3' }}
         >
           <input
@@ -44,22 +44,22 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
             aria-label="Métier recherché"
             placeholder="Plombier, électricien..."
             defaultValue={filters.category ?? ''}
-            className="flex-1 bg-transparent px-4 py-2.5 text-sm focus:outline-none"
+            className="w-full bg-transparent px-4 py-2.5 text-sm focus:outline-none sm:flex-1"
             style={{ color: '#334534' }}
           />
-          <div className="h-6 w-px bg-sand" aria-hidden />
+          <div className="hidden h-6 w-px bg-sand sm:block" aria-hidden />
           <input
             name="city"
             type="text"
             aria-label="Ville"
             placeholder="📍 Ville"
             defaultValue={filters.city ?? ''}
-            className="bg-transparent px-4 py-2.5 text-sm focus:outline-none"
-            style={{ color: '#334534', minWidth: '130px' }}
+            className="w-full bg-transparent px-4 py-2.5 text-sm focus:outline-none sm:w-auto sm:min-w-[130px]"
+            style={{ color: '#334534' }}
           />
           <button
             type="submit"
-            className="rounded-lg bg-terra px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark"
+            className="w-full rounded-lg bg-terra px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-terra-dark sm:w-auto"
             style={{ backgroundColor: '#c56339' }}
           >
             Rechercher
