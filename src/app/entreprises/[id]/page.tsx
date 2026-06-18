@@ -114,16 +114,30 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
       className="bg-forest"
       style={{ backgroundColor: '#334534' }}
     >
-      {/* Cover – zone décorative avec l'icône en filigrane */}
+      {/* Cover – photo de couverture si fournie, sinon icône en filigrane */}
       <div className="relative h-56 overflow-hidden">
-        {business.category?.icon && (
-          <span
-            className="pointer-events-none absolute right-24 top-1/2 -translate-y-1/2 select-none leading-none"
-            aria-hidden
-            style={{ fontSize: '220px', opacity: 0.09 }}
-          >
-            {categoryIcon(business.category.icon)}
-          </span>
+        {business.coverImage ? (
+          <>
+            {/* Photo de couverture : URL arbitraire (hors domaines next/image). */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={business.coverImage}
+              alt={`Photo de couverture de ${business.name}`}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            {/* Voile sombre pour la lisibilité du fil d'Ariane par-dessus la photo. */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-black/30" aria-hidden />
+          </>
+        ) : (
+          business.category?.icon && (
+            <span
+              className="pointer-events-none absolute right-24 top-1/2 -translate-y-1/2 select-none leading-none"
+              aria-hidden
+              style={{ fontSize: '220px', opacity: 0.09 }}
+            >
+              {categoryIcon(business.category.icon)}
+            </span>
+          )
         )}
         <nav aria-label="Fil d'Ariane" className="absolute left-0 top-0 px-8 pt-5 text-sm">
           <Link href="/recherche" className="font-medium text-white/60 transition hover:text-white">

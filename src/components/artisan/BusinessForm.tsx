@@ -40,6 +40,7 @@ export function BusinessForm() {
   const [categoryId, setCategoryId] = useState('');
   const [headline, setHeadline] = useState('');
   const [description, setDescription] = useState('');
+  const [coverImage, setCoverImage] = useState('');
   const [website, setWebsite] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const [officeAddress, setOfficeAddress] = useState('');
@@ -85,6 +86,7 @@ export function BusinessForm() {
               setCategoryId(String(biz.category?.id ?? cats[0]?.id ?? ''));
               setHeadline(biz.headline ?? '');
               setDescription(biz.description ?? '');
+              setCoverImage(biz.coverImage ?? '');
               setWebsite(biz.website ?? '');
               setContactNumber(biz.contactNumber ?? '');
               setOfficeAddress(biz.officeAddress ?? '');
@@ -127,6 +129,7 @@ export function BusinessForm() {
       categoryId: catIdNum,
       headline: headline.trim() || null,
       description: description.trim() || null,
+      coverImage: coverImage.trim() || null,
       website: website.trim() || null,
       contactNumber: contactNumber.trim() || null,
       officeAddress: officeAddress.trim() || null,
@@ -260,6 +263,42 @@ export function BusinessForm() {
             placeholder="Décrivez vos savoir-faire, votre expérience, vos services…"
             className={`${FIELD_CLASSES} resize-none`}
           />
+        </FormField>
+
+        {/* Photo de couverture (URL) + aperçu */}
+        <FormField
+          label="Photo de couverture"
+          htmlFor="biz-cover"
+          optional
+          error={fieldErrors.coverImage}
+        >
+          <input
+            id="biz-cover"
+            type="url"
+            value={coverImage}
+            onChange={(e) => setCoverImage(e.target.value)}
+            maxLength={255}
+            placeholder="https://… (lien vers une image de votre travail)"
+            className={FIELD_CLASSES}
+          />
+          <p className="mt-1.5 text-xs text-ink-light">
+            Collez le lien d&apos;une image en ligne. Elle s&apos;affichera en haut de votre fiche
+            publique.
+          </p>
+          {coverImage.trim() && (
+            <div className="mt-3 overflow-hidden rounded-xl border border-sand">
+              {/* Aperçu : balise img native (URL arbitraire, hors domaines next/image). */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={coverImage.trim()}
+                alt="Aperçu de la photo de couverture"
+                className="h-40 w-full object-cover"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).style.display = 'none';
+                }}
+              />
+            </div>
+          )}
         </FormField>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
