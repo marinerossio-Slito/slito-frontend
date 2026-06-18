@@ -3,7 +3,9 @@ import Link from 'next/link';
 import { BusinessCard } from '@/components/BusinessCard';
 import { CategoryCard } from '@/components/CategoryCard';
 import { EmptyState } from '@/components/EmptyState';
+import { CategoryAutocomplete } from '@/components/search/CategoryAutocomplete';
 import { fetchCategories, searchBusinesses } from '@/lib/catalog';
+import type { ArtisanCategory } from '@/types/catalog';
 
 // Rendu dynamique : le contenu dépend de l'API (évolue dans le temps) et
 // un prérendu statique échouerait si le back-end n'est pas démarré au build.
@@ -22,7 +24,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-1 flex-col">
-      <Hero />
+      <Hero categories={categories} />
 
       {/* ── Catégories ──────────────────────────────────────────────────────── */}
       <section className="mx-auto w-full max-w-6xl px-8 py-16">
@@ -81,7 +83,7 @@ export default async function Home() {
 
 /* ── Composants de section ─────────────────────────────────────────────────── */
 
-function Hero() {
+function Hero({ categories }: { categories: ArtisanCategory[] }) {
   return (
     <section
       className="relative overflow-hidden px-5 pb-20 pt-16 text-center sm:px-8 sm:pb-24 sm:pt-20"
@@ -115,13 +117,11 @@ function Hero() {
         className="relative mx-auto flex max-w-2xl flex-col gap-2 rounded-2xl bg-warm-white p-2 shadow-[0_8px_40px_rgba(0,0,0,0.25)] sm:flex-row sm:items-center"
         style={{ backgroundColor: '#fdfaf3' }}
       >
-        <input
-          name="category"
-          type="text"
-          aria-label="Métier recherché"
+        <CategoryAutocomplete
+          categories={categories}
           placeholder="Plombier, électricien, menuisier..."
-          className="w-full bg-transparent px-4 py-3 text-sm focus:outline-none sm:flex-1"
-          style={{ color: '#334534' }}
+          wrapperClassName="relative w-full sm:flex-1"
+          inputClassName="w-full bg-transparent px-4 py-3 text-sm text-[#334534] focus:outline-none"
         />
         <div className="hidden h-7 w-px bg-sand sm:block" aria-hidden />
         <input

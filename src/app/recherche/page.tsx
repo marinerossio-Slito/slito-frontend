@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { EmptyState } from '@/components/EmptyState';
 import { RatingBadge } from '@/components/RatingBadge';
+import { CategoryAutocomplete } from '@/components/search/CategoryAutocomplete';
 import { categoryIcon } from '@/lib/categoryIcon';
 import { fetchCategories, parseSearchFilters, searchBusinesses, type RawSearchParams } from '@/lib/catalog';
 import { formatPrice } from '@/lib/format';
@@ -38,14 +39,12 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
           className="flex max-w-2xl flex-col gap-2 rounded-xl border border-sand bg-warm-white p-2 sm:flex-row sm:items-center"
           style={{ backgroundColor: '#fdfaf3' }}
         >
-          <input
-            name="category"
-            type="text"
-            aria-label="Métier recherché"
+          <CategoryAutocomplete
+            categories={categories}
+            defaultSlug={filters.category ?? undefined}
             placeholder="Plombier, électricien..."
-            defaultValue={filters.category ?? ''}
-            className="w-full bg-transparent px-4 py-2.5 text-sm focus:outline-none sm:flex-1"
-            style={{ color: '#334534' }}
+            wrapperClassName="relative w-full sm:flex-1"
+            inputClassName="w-full bg-transparent px-4 py-2.5 text-sm text-[#334534] focus:outline-none"
           />
           <div className="hidden h-6 w-px bg-sand sm:block" aria-hidden />
           <input
