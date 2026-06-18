@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { BusinessCard } from '@/components/BusinessCard';
 import { CategoryCard } from '@/components/CategoryCard';
 import { EmptyState } from '@/components/EmptyState';
+import { RotatingWord } from '@/components/RotatingWord';
 import { CategoryAutocomplete } from '@/components/search/CategoryAutocomplete';
 import { fetchCategories, searchBusinesses } from '@/lib/catalog';
 import type { ArtisanCategory } from '@/types/catalog';
@@ -11,6 +12,19 @@ import type { ArtisanCategory } from '@/types/catalog';
 // un prérendu statique échouerait si le back-end n'est pas démarré au build.
 // Cf. node_modules/next/dist/docs/01-app/02-guides/caching-without-cache-components.md
 export const dynamic = 'force-dynamic';
+
+/** Métiers qui défilent dans le titre de la hero (avec leur article). */
+const HERO_TRADES = [
+  "l'artisan",
+  'le plombier',
+  "l'électricien",
+  'le menuisier',
+  'le maçon',
+  'le serrurier',
+  'le peintre',
+  'le paysagiste',
+  'le pisciniste',
+] as const;
 
 export default async function Home() {
   const [categories, businesses] = await Promise.all([fetchCategories(), searchBusinesses()]);
@@ -95,13 +109,17 @@ function Hero({ categories }: { categories: ArtisanCategory[] }) {
         La plateforme des artisans de confiance
       </div>
 
-      {/* Titre */}
+      {/* Titre — le métier défile en boucle (machine à écrire) */}
       <h1 className="relative mx-auto mb-5 max-w-3xl font-serif text-4xl font-bold leading-[1.15] text-white sm:text-6xl">
-        Trouvez l&apos;artisan
-        <br />
-        <em className="not-italic text-terra-light" style={{ color: '#d8825a' }}>qu&apos;il vous faut</em>,
-        <br />
-        quand vous en avez besoin
+        <span className="sr-only">Trouvez l&apos;artisan qu&apos;il vous faut, quand vous en avez besoin</span>
+        <span aria-hidden>
+          Trouvez{' '}
+          <RotatingWord words={HERO_TRADES} className="text-[#d8825a]" />
+          <br />
+          <em className="not-italic text-terra-light" style={{ color: '#d8825a' }}>qu&apos;il vous faut</em>,
+          <br />
+          quand vous en avez besoin
+        </span>
       </h1>
 
       {/* Sous-titre */}
