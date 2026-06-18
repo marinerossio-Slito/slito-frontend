@@ -10,6 +10,7 @@ const ARTISAN_NAV: SidebarNavItem[] = [
   { icon: '🏠', label: 'Tableau de bord', href: '/artisan/dashboard' },
   { icon: '📋', label: 'Ma présentation',  href: '/artisan/fiche' },
   { icon: '📅', label: 'Agenda',           href: '/artisan/agenda' },
+  { icon: '💬', label: 'Messagerie',       href: '/artisan/messages' },
   { icon: '👥', label: 'Clients',          href: '/artisan/clients', soon: true },
   { icon: '📊', label: 'Analytics',        href: '#', soon: true },
   { icon: '💰', label: 'Facturation',      href: '#', soon: true },

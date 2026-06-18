@@ -30,7 +30,29 @@ import { useAuth } from '@/hooks/useAuth';
 import { ApiError } from '@/lib/api';
 import { formatDateTime } from '@/lib/format';
 import { fetchConversation, fetchConversations, sendMessage } from '@/lib/messaging';
-import type { Conversation, ConversationDetail } from '@/types/messaging';
+import type {
+  Conversation,
+  ConversationBusinessRef,
+  ConversationCustomerRef,
+  ConversationDetail,
+} from '@/types/messaging';
+
+/**
+ * Nom de l'interlocuteur à afficher comme titre d'une conversation, selon le
+ * point de vue : un artisan voit le nom de son client, un client voit le nom
+ * de l'entreprise.
+ */
+function counterpartName(
+  conv: { business: ConversationBusinessRef | null; customer: ConversationCustomerRef | null },
+  viewerIsArtisan: boolean,
+): string {
+  if (viewerIsArtisan) {
+    const name = `${conv.customer?.firstName ?? ''} ${conv.customer?.lastName ?? ''}`.trim();
+    return name || 'Client';
+  }
+
+  return conv.business?.name ?? 'Conversation';
+}
 
 interface MessagingHubProps {
   /**
@@ -47,8 +69,9 @@ interface MessagingHubProps {
 }
 
 export function MessagingHub({ initialBusinessId, initialBusinessName }: MessagingHubProps) {
-  const { token } = useAuth();
+  const { token, hasRole } = useAuth();
   const { showToast } = useToast();
+  const viewerIsArtisan = hasRole(['ROLE_ARTISAN']);
 
   // Liste des conversations (null = en cours de chargement)
   const [conversations, setConversations] = useState<Conversation[] | null>(null);
@@ -220,7 +243,13 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
 
           {conversations !== null && conversations.length === 0 && !isNewConversation && (
             <div className="p-4">
-              <EmptyState message="Pas encore de conversation. Visitez une fiche artisan pour en démarrer une !" />
+              <EmptyState
+                message={
+                  viewerIsArtisan
+                    ? 'Pas encore de conversation. Vos échanges avec vos clients apparaîtront ici.'
+                    : 'Pas encore de conversation. Visitez une fiche artisan pour en démarrer une !'
+                }
+              />
             </div>
           )}
 
@@ -230,6 +259,7 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
                 <ConversationItem
                   key={conv.id}
                   conversation={conv}
+                  viewerIsArtisan={viewerIsArtisan}
                   isSelected={selectedId === conv.id}
                   onClick={() => selectConversation(conv.id)}
                 />
@@ -302,7 +332,7 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
                 {/* En-tête */}
                 <div className="border-b border-sand-light px-5 py-4">
                   <p className="font-semibold text-ink">
-                    {detail.business?.name ?? 'Conversation'}
+                    {counterpartName(detail, viewerIsArtisan)}
                   </p>
                   {detail.isBlocked && (
                     <span className="mt-1 inline-flex items-center rounded-full bg-red-50 px-2.5 py-0.5 text-xs font-medium text-red-700">
@@ -404,14 +434,16 @@ export function MessagingHub({ initialBusinessId, initialBusinessName }: Messagi
 
 function ConversationItem({
   conversation,
+  viewerIsArtisan,
   isSelected,
   onClick,
 }: {
   conversation: Conversation;
+  viewerIsArtisan: boolean;
   isSelected: boolean;
   onClick: () => void;
 }) {
-  const title = conversation.business?.name ?? 'Conversation';
+  const title = counterpartName(conversation, viewerIsArtisan);
   const subtitle = conversation.lastMessage?.content ?? 'Pas encore de message';
 
   return (
