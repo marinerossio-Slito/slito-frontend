@@ -60,6 +60,7 @@ export function parseSearchFilters(searchParams: RawSearchParams): SearchFilters
 
   return {
     category: readString('category'),
+    q: readString('q'),
     city: readString('city'),
     minPrice: readNumber('minPrice'),
     maxPrice: readNumber('maxPrice'),

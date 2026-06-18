@@ -39,6 +39,7 @@ export function BusinessForm() {
   const [name, setName] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [headline, setHeadline] = useState('');
+  const [specialty, setSpecialty] = useState('');
   const [description, setDescription] = useState('');
   const [coverImage, setCoverImage] = useState('');
   const [website, setWebsite] = useState('');
@@ -72,6 +73,7 @@ export function BusinessForm() {
                 id: biz.id,
                 name: biz.name,
                 headline: biz.headline,
+                specialty: biz.specialty ?? null,
                 description: biz.description ?? null,
                 coverImage: biz.coverImage ?? null,
                 website: biz.website ?? null,
@@ -85,6 +87,7 @@ export function BusinessForm() {
               setName(biz.name);
               setCategoryId(String(biz.category?.id ?? cats[0]?.id ?? ''));
               setHeadline(biz.headline ?? '');
+              setSpecialty(biz.specialty ?? '');
               setDescription(biz.description ?? '');
               setCoverImage(biz.coverImage ?? '');
               setWebsite(biz.website ?? '');
@@ -128,6 +131,7 @@ export function BusinessForm() {
       name: name.trim(),
       categoryId: catIdNum,
       headline: headline.trim() || null,
+      specialty: specialty.trim() || null,
       description: description.trim() || null,
       coverImage: coverImage.trim() || null,
       website: website.trim() || null,
@@ -245,6 +249,28 @@ export function BusinessForm() {
             placeholder="Une phrase courte qui présente votre activité"
             className={FIELD_CLASSES}
           />
+        </FormField>
+
+        {/* Spécialité / dénomination libre */}
+        <FormField
+          label="Spécialité"
+          htmlFor="biz-specialty"
+          optional
+          error={fieldErrors.specialty}
+        >
+          <input
+            id="biz-specialty"
+            type="text"
+            value={specialty}
+            onChange={(e) => setSpecialty(e.target.value)}
+            maxLength={255}
+            placeholder="Votre dénomination précise, ex : Ébéniste d'art, Pisciniste…"
+            className={FIELD_CLASSES}
+          />
+          <p className="mt-1.5 text-xs text-ink-light">
+            Au-delà de votre catégorie principale, précisez votre métier exact. Ce terme aide les
+            clients à vous trouver dans la recherche.
+          </p>
         </FormField>
 
         {/* Description */}

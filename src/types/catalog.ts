@@ -59,6 +59,8 @@ export interface BusinessSummary {
   id: number;
   name: string;
   headline: string | null;
+  /** Dénomination libre choisie par l'artisan (ex. « Ébéniste d'art »). */
+  specialty: string | null;
   coverImage: string | null;
   officeAddress: string | null;
   category: ArtisanCategory | null;
@@ -82,6 +84,8 @@ export interface BusinessDetail extends BusinessSummary {
 /** Filtres acceptés par `GET /api/search` (cf. CatalogController::search). */
 export interface SearchFilters {
   category?: string;
+  /** Recherche par mots-clés (nom, accroche, spécialité, catégorie). */
+  q?: string;
   city?: string;
   minPrice?: number;
   maxPrice?: number;

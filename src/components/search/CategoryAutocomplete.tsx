@@ -115,8 +115,11 @@ export function CategoryAutocomplete({
 
   return (
     <div className={wrapperClassName}>
-      {/* Slug réellement soumis avec le formulaire. */}
+      {/* Si le texte correspond à une catégorie, on filtre par son slug ;
+          sinon on soumet le texte comme mot-clé (`q`) — recherche libre sur le
+          nom, l'accroche et la spécialité de l'artisan. */}
       <input type="hidden" name="category" value={submittedSlug} />
+      <input type="hidden" name="q" value={submittedSlug ? '' : query.trim()} />
 
       <input
         type="text"

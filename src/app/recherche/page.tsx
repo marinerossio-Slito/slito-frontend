@@ -291,6 +291,9 @@ function SearchResultCard({ business }: { business: BusinessSummary }) {
               {business.category.name}
             </p>
           )}
+          {business.specialty && (
+            <p className="text-[13px] text-ink-mid">{business.specialty}</p>
+          )}
         </div>
 
         <div className="flex flex-wrap items-center gap-4">

@@ -169,6 +169,11 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
                 >
                   {business.name}
                 </h1>
+                {business.specialty && (
+                  <p className="mt-1 text-sm font-semibold text-terra-light" style={{ color: '#e8b08a' }}>
+                    {business.specialty}
+                  </p>
+                )}
                 <p className="mt-1 text-sm text-white/80">
                   {[business.category?.name, business.officeAddress].filter(Boolean).join(' · ')}
                 </p>

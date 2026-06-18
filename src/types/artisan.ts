@@ -65,6 +65,7 @@ export interface ArtisanBusiness {
   id: number;
   name: string;
   headline: string | null;
+  specialty: string | null;
   description: string | null;
   coverImage: string | null;
   website: string | null;
@@ -81,6 +82,7 @@ export interface UpsertBusinessPayload {
   name: string;
   categoryId: number;
   headline?: string | null;
+  specialty?: string | null;
   description?: string | null;
   coverImage?: string | null;
   website?: string | null;
