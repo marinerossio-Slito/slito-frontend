@@ -21,6 +21,7 @@ const ICON_NAME_TO_EMOJI: Record<string, string> = {
   'paint-roller': '🎨',
   brick: '🧱',
   leaf: '🌿',
+  pool: '🏊',
   key: '🔑',
   scissors: '✂️',
   'spray-can': '🧴',
