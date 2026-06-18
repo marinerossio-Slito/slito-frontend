@@ -6,6 +6,7 @@ import { EmptyState } from '@/components/EmptyState';
 import { RatingBadge } from '@/components/RatingBadge';
 import { BookingPanel } from '@/components/booking/BookingPanel';
 import { ApiError } from '@/lib/api';
+import { categoryIcon } from '@/lib/categoryIcon';
 import { fetchBusiness } from '@/lib/catalog';
 import { formatDuration, formatPrice } from '@/lib/format';
 import type { BusinessDetail, Service, WorkingHours } from '@/types/catalog';
@@ -121,7 +122,7 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
             aria-hidden
             style={{ fontSize: '220px', opacity: 0.09 }}
           >
-            {business.category.icon}
+            {categoryIcon(business.category.icon)}
           </span>
         )}
         <nav aria-label="Fil d'Ariane" className="absolute left-0 top-0 px-8 pt-5 text-sm">
@@ -143,7 +144,7 @@ function BusinessHero({ business }: { business: BusinessDetail }) {
                 style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}
                 aria-hidden
               >
-                {business.category?.icon ?? '🏢'}
+                {categoryIcon(business.category?.icon, '🏢')}
               </div>
 
               {/* Texte aligné en bas avec l'avatar */}

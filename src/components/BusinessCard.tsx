@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { RatingBadge } from '@/components/RatingBadge';
+import { categoryIcon } from '@/lib/categoryIcon';
 import { formatPrice } from '@/lib/format';
 import type { BusinessSummary } from '@/types/catalog';
 
@@ -17,7 +18,7 @@ export function BusinessCard({ business }: { business: BusinessSummary }) {
     >
       {/* Zone de couverture */}
       <div className="relative flex h-36 items-center justify-center bg-sand text-5xl">
-        {business.category?.icon ?? '🔨'}
+        {categoryIcon(business.category?.icon, '🔨')}
         {business.category && (
           <span className="absolute right-3 top-3 rounded-full bg-gold px-2.5 py-1 text-[11px] font-semibold text-white">
             ⭐ Top

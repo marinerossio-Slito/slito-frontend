@@ -14,6 +14,7 @@ import { useToast } from '@/components/Toast';
 import { useAuth } from '@/hooks/useAuth';
 import { ApiError } from '@/lib/api';
 import { createAdminCategory } from '@/lib/admin';
+import { categoryIcon } from '@/lib/categoryIcon';
 import { fetchCategories } from '@/lib/catalog';
 import type { AdminCategory } from '@/types/admin';
 import type { ArtisanCategory } from '@/types/catalog';
@@ -105,7 +106,7 @@ export function CategoryManager() {
                 key={cat.id}
                 className="flex items-center gap-3 rounded-xl border border-sand bg-warm-white px-4 py-3"
               >
-                {cat.icon && <span className="text-lg" aria-hidden>{cat.icon}</span>}
+                {cat.icon && <span className="text-lg" aria-hidden>{categoryIcon(cat.icon)}</span>}
                 <div className="flex flex-col">
                   <span className="text-sm font-medium text-ink">{cat.name}</span>
                   <span className="text-xs text-ink-light">{cat.slug}</span>

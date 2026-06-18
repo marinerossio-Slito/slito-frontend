@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { EmptyState } from '@/components/EmptyState';
 import { RatingBadge } from '@/components/RatingBadge';
+import { categoryIcon } from '@/lib/categoryIcon';
 import { fetchCategories, parseSearchFilters, searchBusinesses, type RawSearchParams } from '@/lib/catalog';
 import { formatPrice } from '@/lib/format';
 import type { ArtisanCategory, BusinessSummary, SearchFilters } from '@/types/catalog';
@@ -279,7 +280,7 @@ function SearchResultCard({ business }: { business: BusinessSummary }) {
         className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-sand text-4xl"
         aria-hidden
       >
-        {business.category?.icon ?? '🔨'}
+        {categoryIcon(business.category?.icon, '🔨')}
       </div>
 
       {/* Info principale */}

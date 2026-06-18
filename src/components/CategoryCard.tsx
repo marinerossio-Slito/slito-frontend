@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 
+import { categoryIcon } from '@/lib/categoryIcon';
 import type { ArtisanCategory } from '@/types/catalog';
 
 /**
@@ -33,7 +34,7 @@ export function CategoryCard({
         (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none';
       }}
     >
-      <span className="block text-5xl leading-none">{category.icon ?? '🛠️'}</span>
+      <span className="block text-5xl leading-none">{categoryIcon(category.icon)}</span>
       <div>
         <p className="text-sm font-semibold" style={{ color: '#334534' }}>
           {category.name}
